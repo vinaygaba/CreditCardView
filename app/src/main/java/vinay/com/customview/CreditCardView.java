@@ -10,7 +10,8 @@ import android.widget.RelativeLayout;
  */
 public class CreditCardView extends RelativeLayout {
 
-    String mCardNumber,mExpiryDate;
+    private String mCardNumber = "0000 0000 0000 0000";
+    private String mExpiryDate = "01/11";
 
     public CreditCardView(Context context) {
         super(context);
@@ -25,8 +26,8 @@ public class CreditCardView extends RelativeLayout {
                 0, 0);
 
         try {
-            mCardNumber = a.getString(R.styleable.CreditCardView_cardNumber);
-            mExpiryDate = a.getString(R.styleable.CreditCardView_expiryDate);
+         //   mCardNumber = a.getString(R.styleable.CreditCardView_cardNumber);
+       //     mExpiryDate = a.getString(R.styleable.CreditCardView_expiryDate);
         } finally {
             a.recycle();
         }
