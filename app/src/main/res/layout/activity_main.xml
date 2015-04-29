@@ -9,18 +9,19 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
-    android:background="@drawable/corners"
-    android:id="@+id/">
+   >
 
 
 
     <vinay.com.customview.CreditCardView2
         android:layout_width="fill_parent"
         android:layout_height="200dp"
-        android:background="#000"
-        custom:cardNumber="1234 5678 9011 1023"
-        custom:cardNumberTextColor="#ff0000"
-        custom:type="mastercard"/>
+        android:background="@drawable/cardbackground"
+        custom:cardNumber="**** **** **** 1234"
+        custom:cardName="John Doe"
+        custom:cardNumberTextColor="#cccccc"
+        custom:cardNameTextColor="#cccccc"
+        custom:type="visa"/>
 
 
 </RelativeLayout>

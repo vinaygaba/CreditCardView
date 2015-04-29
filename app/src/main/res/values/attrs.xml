@@ -3,6 +3,9 @@
         <attr name="cardNumber" format="string" />
         <attr name="cardNumberTextColor" format="color"/>
 
+        <attr name="cardName" format="string" />
+        <attr name="cardNameTextColor" format="color"/>
+
         <attr name="type" format="enum">
             <enum name="visa" value="0"/>
             <enum name="mastercard" value="1"/>
