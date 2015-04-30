@@ -1,5 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:creditcard="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
@@ -17,12 +17,12 @@
         android:layout_width="fill_parent"
         android:layout_height="200dp"
         android:background="@drawable/cardbackgroundtwo"
-        custom:cardNumber="**** **** **** 1234"
-        custom:cardName="John Doe"
-        custom:cardNumberTextColor="#cccccc"
-        custom:cardNameTextColor="#cccccc"
-        custom:type="visa"
-        custom:brandLogo="@drawable/round_rect"/>
+        creditcard:cardNumber="**** **** **** 1234"
+        creditcard:cardName="John Doe"
+        creditcard:cardNumberTextColor="#cccccc"
+        creditcard:cardNameTextColor="#cccccc"
+        creditcard:type="visa"
+        creditcard:brandLogo="@drawable/round_rect"/>
 
 
 </RelativeLayout>
