@@ -23,6 +23,7 @@ public class CreditCardView2 extends RelativeLayout{
     private int mCardNameTextColor = Color.WHITE;
     private int mExpiryDateTextColor = Color.WHITE;
     private int mType = 0;
+    private int mBrandLogo;
 
 
 
@@ -47,6 +48,7 @@ public class CreditCardView2 extends RelativeLayout{
             mCardNameTextColor = a.getColor(R.styleable.CreditCardView2_cardNumberTextColor, Color.WHITE);
             mExpiryDateTextColor = a.getColor(R.styleable.CreditCardView2_expiryDateTextColor, Color.WHITE);
             mType = a.getInt(R.styleable.CreditCardView2_type,0);
+            mBrandLogo = a.getResourceId(R.styleable.CreditCardView2_brandLogo,0);
         } finally {
             a.recycle();
         }
@@ -78,6 +80,9 @@ public class CreditCardView2 extends RelativeLayout{
 
         ImageView type = (ImageView)getChildAt(2);
         type.setBackgroundResource(getLogo(mType));
+
+        ImageView brandLogo = (ImageView)getChildAt(3);
+        brandLogo.setBackgroundResource(mBrandLogo);
 
 
     }
@@ -160,6 +165,18 @@ public class CreditCardView2 extends RelativeLayout{
     public void setType(int type){
 
          mType = type;
+        invalidate();
+        requestLayout();
+    }
+
+    public int getBrandLogo(){
+
+        return mBrandLogo;
+    }
+
+    public void setBrandLogo(int brandLogo){
+
+        mBrandLogo = brandLogo;
         invalidate();
         requestLayout();
     }
