@@ -20,6 +20,7 @@ public class CreditCardView2 extends RelativeLayout{
     private String mCardName = "John Doe";
     private String mExpiryDate = "01/11";
     private int mCardNumberTextColor = Color.WHITE;
+    private int mCardNumberFormat = 0;
     private int mCardNameTextColor = Color.WHITE;
     private int mExpiryDateTextColor = Color.WHITE;
     private int mType = 0;
@@ -45,6 +46,7 @@ public class CreditCardView2 extends RelativeLayout{
             mCardName = a.getString(R.styleable.CreditCardView2_cardName);
             mExpiryDate = a.getString(R.styleable.CreditCardView2_expiryDate);
             mCardNumberTextColor = a.getColor(R.styleable.CreditCardView2_cardNumberTextColor, Color.WHITE);
+            mCardNumberFormat = a.getInt(R.styleable.CreditCardView2_cardNumberFormat, 0);
             mCardNameTextColor = a.getColor(R.styleable.CreditCardView2_cardNumberTextColor, Color.WHITE);
             mExpiryDateTextColor = a.getColor(R.styleable.CreditCardView2_expiryDateTextColor, Color.WHITE);
             mType = a.getInt(R.styleable.CreditCardView2_type,0);
@@ -69,6 +71,7 @@ public class CreditCardView2 extends RelativeLayout{
         Typeface creditCardTypeFace = Typeface.createFromAsset(context.getAssets(), fontPath);
 
         TextView cardNumber = (TextView)getChildAt(0);
+        checkCardNumberFormat(mCardNumber);
         cardNumber.setText(mCardNumber);
         cardNumber.setTextColor(mCardNumberTextColor);
         cardNumber.setTypeface(creditCardTypeFace);
@@ -121,6 +124,17 @@ public class CreditCardView2 extends RelativeLayout{
 
     public void setCardNumberTextColor(int cardNumberTextColor){
         mCardNumberTextColor = cardNumberTextColor;
+        invalidate();
+        requestLayout();
+    }
+
+    public int getCardNumberFormat(){
+
+        return mCardNumberFormat;
+    }
+
+    public void setCardNumberFormat(int cardNumberFormat){
+        mCardNumberFormat = cardNumberFormat;
         invalidate();
         requestLayout();
     }
@@ -196,5 +210,12 @@ public class CreditCardView2 extends RelativeLayout{
         }
 
        return 0;
+    }
+
+    public void checkCardNumberFormat(String cardNumber){
+        if(getCardNumberFormat()==1){
+
+            mCardNumber = "**** **** **** " + cardNumber.substring(cardNumber.length() - 4,19);
+        }
     }
 }

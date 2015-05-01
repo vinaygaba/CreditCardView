@@ -2,6 +2,9 @@
     <declare-styleable name="CreditCardView2">
         <attr name="cardNumber" format="string" />
         <attr name="cardNumberTextColor" format="color"/>
+        <attr name="cardNumberFormat" format="enum">
+            <enum name="last_four_digits" value="1"/>
+        </attr>
 
         <attr name="cardName" format="string" />
         <attr name="cardNameTextColor" format="color"/>
