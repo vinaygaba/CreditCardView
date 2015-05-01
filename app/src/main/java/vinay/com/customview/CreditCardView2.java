@@ -64,7 +64,7 @@ public class CreditCardView2 extends RelativeLayout{
 
 
         // Font path
-        String fontPath = "fonts/creditcard.ttf";
+        String fontPath = "fonts/creditcard2.ttf";
         // Loading Font Face
         Typeface creditCardTypeFace = Typeface.createFromAsset(context.getAssets(), fontPath);
 
@@ -76,6 +76,7 @@ public class CreditCardView2 extends RelativeLayout{
         TextView cardName = (TextView)getChildAt(1);
         cardName.setText(mCardName);
         cardName.setTextColor(mCardNumberTextColor);
+
 
 
         ImageView type = (ImageView)getChildAt(2);
