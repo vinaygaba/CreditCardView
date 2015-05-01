@@ -10,7 +10,7 @@
 
 
 
-    <vinay.com.customview.CreditCardView2
+    <com.example.vinay.library.CreditCardView
         android:id="@+id/card1"
         android:layout_width="fill_parent"
         android:layout_height="225dp"
@@ -23,6 +23,7 @@
         creditcard:type="visa"
         creditcard:brandLogo="@drawable/round_rect"
         creditcard:putChip="true"
+
         />
 
 
