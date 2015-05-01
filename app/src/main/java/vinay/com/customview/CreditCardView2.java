@@ -25,6 +25,7 @@ public class CreditCardView2 extends RelativeLayout{
     private int mExpiryDateTextColor = Color.WHITE;
     private int mType = 0;
     private int mBrandLogo;
+    private boolean mPutChip = false;
 
 
 
@@ -51,6 +52,7 @@ public class CreditCardView2 extends RelativeLayout{
             mExpiryDateTextColor = a.getColor(R.styleable.CreditCardView2_expiryDateTextColor, Color.WHITE);
             mType = a.getInt(R.styleable.CreditCardView2_type,0);
             mBrandLogo = a.getResourceId(R.styleable.CreditCardView2_brandLogo,0);
+            mPutChip = a.getBoolean(R.styleable.CreditCardView2_putChip,false);
         } finally {
             a.recycle();
         }
@@ -85,8 +87,15 @@ public class CreditCardView2 extends RelativeLayout{
         ImageView type = (ImageView)getChildAt(2);
         type.setBackgroundResource(getLogo(mType));
 
+
         ImageView brandLogo = (ImageView)getChildAt(3);
-        brandLogo.setBackgroundResource(mBrandLogo);
+        if(mBrandLogo != 0)
+            brandLogo.setBackgroundResource(mBrandLogo);
+
+        if(mPutChip){
+            ImageView chip = (ImageView)getChildAt(4);
+            chip.setVisibility(View.VISIBLE);
+        }
 
 
     }
@@ -155,6 +164,12 @@ public class CreditCardView2 extends RelativeLayout{
         return mExpiryDate;
     }
 
+    public void setExpiryDate(String expiryDate) {
+        mExpiryDate = expiryDate;
+        invalidate();
+        requestLayout();
+    }
+
     public int getExpiryDateTextColor(){
 
         return mExpiryDateTextColor;
@@ -166,11 +181,7 @@ public class CreditCardView2 extends RelativeLayout{
         requestLayout();
     }
 
-    public void setExpiryDate(String expiryDate) {
-        mExpiryDate = expiryDate;
-        invalidate();
-        requestLayout();
-    }
+
 
     public int getType(){
 
@@ -210,6 +221,12 @@ public class CreditCardView2 extends RelativeLayout{
         }
 
        return 0;
+    }
+
+    public void putChip(){
+        mPutChip = true;
+        invalidate();
+        requestLayout();
     }
 
     public void checkCardNumberFormat(String cardNumber){

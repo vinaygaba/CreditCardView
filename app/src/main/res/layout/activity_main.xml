@@ -21,7 +21,9 @@
         creditcard:cardNumberFormat="last_four_digits"
         creditcard:cardNameTextColor="#cccccc"
         creditcard:type="visa"
-        creditcard:brandLogo="@drawable/round_rect"/>
+        creditcard:brandLogo="@drawable/round_rect"
+        creditcard:putChip="true"
+        />
 
 
 
