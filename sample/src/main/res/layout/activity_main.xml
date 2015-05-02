@@ -23,7 +23,6 @@
         creditcard:type="visa"
         creditcard:brandLogo="@drawable/round_rect"
         creditcard:putChip="true"
-
         />
 
 

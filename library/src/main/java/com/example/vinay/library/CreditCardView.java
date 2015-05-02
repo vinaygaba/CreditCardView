@@ -66,13 +66,17 @@ public class CreditCardView extends RelativeLayout{
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.creditcardview, this, true);
 
-
+        //Set default background
+        if(getBackground()==null){
+            setBackgroundResource(R.drawable.cardbackground_sky);
+        }
         // Font path
         String fontPath = "fonts/creditcard2.ttf";
         // Loading Font Face
         Typeface creditCardTypeFace = Typeface.createFromAsset(context.getAssets(), fontPath);
 
         TextView cardNumber = (TextView)getChildAt(0);
+        //Check card number format and change the value accordingly
         checkCardNumberFormat(mCardNumber);
         cardNumber.setText(mCardNumber);
         cardNumber.setTextColor(mCardNumberTextColor);
@@ -85,13 +89,16 @@ public class CreditCardView extends RelativeLayout{
 
 
         ImageView type = (ImageView)getChildAt(2);
+        //Set the appropriate logo based on the type of card
         type.setBackgroundResource(getLogo(mType));
 
 
         ImageView brandLogo = (ImageView)getChildAt(3);
+        //If background logo attribute is present, set it
         if(mBrandLogo != 0)
             brandLogo.setBackgroundResource(mBrandLogo);
 
+        //If putChip attribute is present, change the visibility of the view and display it
         if(mPutChip){
             ImageView chip = (ImageView)getChildAt(4);
             chip.setVisibility(View.VISIBLE);
