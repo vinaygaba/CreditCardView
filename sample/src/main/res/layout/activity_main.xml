@@ -14,7 +14,7 @@
         android:id="@+id/card1"
         android:layout_width="fill_parent"
         android:layout_height="225dp"
-        android:background="@drawable/credit_card"
+        android:background="@drawable/cardbackgroundthree"
         creditcard:cardNumber="1234 5678 9000 1234"
         creditcard:cardName="John Doe"
         creditcard:cardNumberTextColor="#cccccc"
