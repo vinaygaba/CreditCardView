@@ -1,4 +1,6 @@
 language: android
+before_script:
+    - git update-index --chmod=+x gradlew
 android:
   components:
     # Uncomment the lines below if you want to
@@ -18,6 +20,5 @@ android:
     - extra-android-m2repository
     - addon-google_apis-google-21
 
-  before_script:
-    - git update-index --chmod=+x gradlew
+
 
