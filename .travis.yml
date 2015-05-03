@@ -19,5 +19,5 @@ android:
     - addon-google_apis-google-21
 
   before_script:
-   - chmod +x gradlew
+    - chmod +x gradlew
 
