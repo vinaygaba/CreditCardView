@@ -1,6 +1,6 @@
 language: android
 before_script:
-    - git update-index --chmod=+x gradlew
+    - chmod +x gradlew
 android:
   components:
     # Uncomment the lines below if you want to
