@@ -3,6 +3,7 @@
         <attr name="cardNumber" format="string" />
         <attr name="cardNumberTextColor" format="color"/>
         <attr name="cardNumberFormat" format="enum">
+            <enum name="all_digits" value="0"/>
             <enum name="last_four_digits" value="1"/>
         </attr>
 
@@ -13,6 +14,7 @@
             <enum name="visa" value="0"/>
             <enum name="mastercard" value="1"/>
             <enum name="american_express" value="2"/>
+            <enum name="discover" value="3"/>
         </attr>
 
         <attr name="expiryDate" format="string" />
