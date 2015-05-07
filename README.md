@@ -1,16 +1,7 @@
 CreditCardView
 ==================
 
-![] (http://i.imgur.com/YN1akIe.jpg?1)
-
-CreditCardView is an Android library that allows developers to create the UI which replicates an actual Credit Card. 
-Storing the credit card details inside the app has become a very common use case seen in a lot of different apps, but it is often represented in a not so intuitive manner. I created this library with the aim of making the process of storing the credit cards more visually appealing to the users of your app.
-
-
-
 TODO
-
-
 
 License
 -------
