@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
+    android:orientation="vertical"
    >
 
 
@@ -14,15 +15,30 @@
         android:id="@+id/card1"
         android:layout_width="fill_parent"
         android:layout_height="225dp"
-        android:background="@drawable/cardbackground_sky"
+        android:background="@drawable/cardbackground_world"
         creditcard:cardNumber="1234 5678 9000 1234"
         creditcard:cardName="John Doe"
         creditcard:cardNumberTextColor="#cccccc"
         creditcard:cardNumberFormat="last_four_digits"
         creditcard:cardNameTextColor="#cccccc"
         creditcard:type="visa"
-        creditcard:brandLogo="@drawable/round_rect"
+        creditcard:brandLogo="@mipmap/brandlogo"
         creditcard:putChip="true"
+        />
+
+    <com.example.vinay.library.CreditCardView
+        android:id="@+id/card2"
+        android:layout_width="fill_parent"
+        android:layout_height="225dp"
+        android:background="@drawable/cardbackground_sky"
+        creditcard:cardNumber="1234 5678 9000 1234"
+        creditcard:cardName="Vinay Gaba"
+        creditcard:cardNumberTextColor="#cccccc"
+        creditcard:cardNumberFormat="all_digits"
+        creditcard:cardNameTextColor="#cccccc"
+        creditcard:type="mastercard"
+        creditcard:brandLogo="@mipmap/brandlogo"
+        creditcard:putChip="false"
         />
 
 
