@@ -24,6 +24,9 @@
         creditcard:type="visa"
         creditcard:brandLogo="@mipmap/brandlogo"
         creditcard:putChip="true"
+        creditcard:expiryDate = "2/22"
+        creditcard:expiryDateTextColor="#cccccc"
+
         />
 
     <com.example.vinay.library.CreditCardView

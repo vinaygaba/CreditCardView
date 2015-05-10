@@ -62,6 +62,19 @@
         android:visibility="gone"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/expiryDate"
+        android:layout_weight="1"
+        android:layout_toRightOf="@+id/cardName"
+        android:layout_toLeftOf="@+id/cardLogo"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
+        android:textSize="@dimen/card_name_text_size"
+        />
+
 
 
 </merge>

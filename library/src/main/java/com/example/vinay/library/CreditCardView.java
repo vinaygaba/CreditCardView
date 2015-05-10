@@ -29,6 +29,7 @@ public class CreditCardView extends RelativeLayout{
     private Typeface creditCardTypeFace;
     private TextView cardNumber;
     private TextView cardName;
+    private TextView expiryDate;
     private ImageView type;
     ImageView brandLogo;
     ImageView chip;
@@ -138,6 +139,8 @@ public class CreditCardView extends RelativeLayout{
         brandLogo = (ImageView)getChildAt(3);
 
         chip = (ImageView)getChildAt(4);
+
+        expiryDate = (TextView)getChildAt(5);
     }
 
     private void loadAttributes(AttributeSet attrs) {
@@ -186,6 +189,9 @@ public class CreditCardView extends RelativeLayout{
             chip = (ImageView)getChildAt(4);
             chip.setVisibility(View.VISIBLE);
         }
+
+        expiryDate.setText(mExpiryDate);
+        expiryDate.setTextColor(mExpiryDateTextColor);
 
     }
 
