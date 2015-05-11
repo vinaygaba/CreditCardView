@@ -14,7 +14,7 @@
         android:textSize="@dimen/card_number_text_size"
         />
 
-    <TextView
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cardName"
@@ -25,6 +25,9 @@
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="16dp"
         android:textSize="@dimen/card_name_text_size"
+            android:ellipsize="end"
+        android:maxLength="16"
+        android:singleLine="true"
         />
 
 
@@ -33,11 +36,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cardLogo"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
+
         />
 
     <ImageView
@@ -66,13 +70,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/expiryDate"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:layout_toRightOf="@+id/cardName"
         android:layout_toLeftOf="@+id/cardLogo"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="16dp"
         android:textSize="@dimen/card_name_text_size"
+        android:singleLine="true"
         />
 
 

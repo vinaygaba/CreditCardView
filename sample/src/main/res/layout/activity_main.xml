@@ -17,7 +17,7 @@
         android:layout_height="225dp"
         android:background="@drawable/cardbackground_world"
         creditcard:cardNumber="1234 5678 9000 1234"
-        creditcard:cardName="John Doe"
+        creditcard:cardName="MahendraSingh Rajput"
         creditcard:cardNumberTextColor="#cccccc"
         creditcard:cardNumberFormat="last_four_digits"
         creditcard:cardNameTextColor="#cccccc"

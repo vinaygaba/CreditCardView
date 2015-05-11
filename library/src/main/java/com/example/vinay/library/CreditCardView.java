@@ -29,6 +29,7 @@ public class CreditCardView extends RelativeLayout{
     private Typeface creditCardTypeFace;
     private TextView cardNumber;
     private TextView cardName;
+
     private TextView expiryDate;
     private ImageView type;
     ImageView brandLogo;
