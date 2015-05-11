@@ -175,8 +175,9 @@ public class CreditCardView extends RelativeLayout{
         cardNumber.setTextColor(mCardNumberTextColor);
         cardNumber.setTypeface(creditCardTypeFace);
 
-        cardName.setText(mCardName);
+        cardName.setText(mCardName.toUpperCase());
         cardName.setTextColor(mCardNumberTextColor);
+        cardName.setTypeface(creditCardTypeFace);
 
         //Set the appropriate logo based on the type of card
         type.setBackgroundResource(getLogo(mType));
@@ -193,6 +194,7 @@ public class CreditCardView extends RelativeLayout{
 
         expiryDate.setText(mExpiryDate);
         expiryDate.setTextColor(mExpiryDateTextColor);
+        expiryDate.setTypeface(creditCardTypeFace);
 
     }
 
