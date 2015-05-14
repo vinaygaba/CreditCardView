@@ -40,7 +40,7 @@
         app:cardNumberFormat="all_digits"
         app:cardNameTextColor="#cccccc"
         app:type="mastercard"
-        app:brandLogo="@mipmap/brandlogo"
+        app:brandLogo="@mipmap/citibank"
         app:putChip="false"
         />
 
