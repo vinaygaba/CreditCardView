@@ -306,15 +306,15 @@ public class CreditCardView extends RelativeLayout{
     public int getLogo(int type){
 
         switch(type){
-            case 0: return R.mipmap.visa;
+            case 0: return R.drawable.visa;
 
 
-            case 1: return R.mipmap.mastercard;
+            case 1: return R.drawable.mastercard;
 
 
-            case 2: return R.mipmap.amex;
+            case 2: return R.drawable.amex;
 
-            case 3: return R.mipmap.discover;
+            case 3: return R.drawable.discover;
 
         }
 
