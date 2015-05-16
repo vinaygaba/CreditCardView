@@ -172,8 +172,8 @@ public class CreditCardView extends RelativeLayout{
             setBackgroundResource(R.drawable.cardbackground_sky);
         }
 
-        checkCardNumberFormat(mCardNumber);
-        cardNumber.setText(mCardNumber);
+
+        cardNumber.setText(checkCardNumberFormat(mCardNumber));
         cardNumber.setTextColor(mCardNumberTextColor);
         cardNumber.setTypeface(creditCardTypeFace);
 
@@ -331,11 +331,13 @@ public class CreditCardView extends RelativeLayout{
         requestLayout();
     }
 
-    public void checkCardNumberFormat(String cardNumber){
+    public String checkCardNumberFormat(String cardNumber){
         if(getCardNumberFormat()==1){
 
-            mCardNumber = "**** **** **** " + cardNumber.substring(cardNumber.length() - 4,19);
+            cardNumber = "**** **** **** " + cardNumber.substring(cardNumber.length() - 4,19);
         }
+
+        return cardNumber;
     }
 
     public int findCardType(){
