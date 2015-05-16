@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.regex.Pattern;
+
 /**
  * Created by vgaba on 4/28/2015.
  */
@@ -316,6 +318,8 @@ public class CreditCardView extends RelativeLayout{
 
             case 3: return R.drawable.discover;
 
+            case 4: return findCardType();
+
         }
 
        return 0;
@@ -332,5 +336,26 @@ public class CreditCardView extends RelativeLayout{
 
             mCardNumber = "**** **** **** " + cardNumber.substring(cardNumber.length() - 4,19);
         }
+    }
+
+    public int findCardType(){
+        String cardNumber = getCardNumber();
+        cardNumber = cardNumber.replaceAll("\\s+","");
+        int type = 0;
+
+        if(Pattern.compile("^4[0-9]{12}(?:[0-9]{3})?$^5[1-5][0-9]{14}$").matcher(cardNumber).matches())
+           type = 0;
+        else if(Pattern.compile("^5[1-5][0-9]{14}$").matcher(cardNumber).matches())
+            type = 1;
+        else if(Pattern.compile("^3[47][0-9]{13}$").matcher(cardNumber).matches())
+            type = 2;
+        else if(Pattern.compile("^65[4-9][0-9]{13}|64[4-9][0-9]{13}|6011[0-9]{12}|(622(?:12[6-9]|1[3-9][0-9]|[2-8][0-9][0-9]|9[01][0-9]|92[0-5])[0-9]{10})$").matcher(cardNumber).matches())
+            type = 3;
+        else
+            type = 0;
+
+        setType(type);
+
+        return getLogo(type);
     }
 }

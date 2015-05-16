@@ -15,6 +15,7 @@
             <enum name="mastercard" value="1"/>
             <enum name="american_express" value="2"/>
             <enum name="discover" value="3"/>
+            <enum name="auto" value="4"/>
         </attr>
 
         <attr name="expiryDate" format="string" />
@@ -27,6 +28,7 @@
         </attr>
 
         <attr name="putChip" format = "boolean"/>
+
     </declare-styleable>
 
 
