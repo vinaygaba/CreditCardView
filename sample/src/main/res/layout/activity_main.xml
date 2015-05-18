@@ -68,7 +68,7 @@
         app:cardNameTextColor="#ffffff"
         app:type="mastercard"
         app:brandLogo="@mipmap/citibank"
-        app:putChip="true"
+        app:putChip="false"
 
         />
         </LinearLayout>
