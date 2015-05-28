@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    >
 
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cardNumber"
         android:layout_weight="1"
-        android:layout_above="@+id/cardName"
+        android:layout_above="@+id/validTill"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="25dp"
         android:textSize="@dimen/card_number_text_size"
         android:maxLength="20"
+        android:background="#00000000"
+        android:inputType="number"
+        android:hint="@string/card_number_hint"
         />
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cardName"
@@ -30,6 +34,8 @@
         android:ellipsize="end"
         android:maxLength="18"
         android:singleLine="true"
+        android:background="#00000000"
+        android:hint="@string/card_name_hint"
         />
 
 
@@ -43,6 +49,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
+
 
         />
 
@@ -69,18 +76,37 @@
         />
 
     <TextView
+        android:id="@+id/validTill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cardName"
+        android:text="@string/valid_till"
+        android:textSize="10sp"
+        android:layout_marginBottom="16dp"
+        android:layout_toLeftOf="@+id/expiryDate"
+        />
+
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/expiryDate"
         android:layout_weight="1"
-        android:layout_toRightOf="@+id/cardName"
-        android:layout_toLeftOf="@+id/cardLogo"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="16dp"
+        android:layout_above="@id/cardName"
         android:layout_marginBottom="16dp"
         android:textSize="@dimen/expiry_date_text_size"
         android:singleLine="true"
+        android:background="#00000000"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/expiry_date_hint"
+        android:maxLength="7"
         />
+
+    <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+    <LinearLayout
+        android:focusable="true" android:focusableInTouchMode="true"
+        android:layout_width="0px" android:layout_height="0px"/>
 
 
 

@@ -23,23 +23,25 @@
             android:orientation="vertical"
             >
 
-    <com.example.vinay.library.CreditCardView
+    <com.example.vinay.library.CreditCardView2
         android:id="@+id/card1"
         android:layout_width="fill_parent"
         android:layout_height="225dp"
         android:background="@drawable/cardbackground_world"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         app:cardNumber="5500 0055 5555 5559"
-        app:cardName="John Doe"
+        app:cardName="Vinay Gaba"
         app:cardNumberTextColor="#cccccc"
         app:cardNumberFormat="last_four_digits"
         app:cardNameTextColor="#cccccc"
         app:type="auto"
         app:brandLogo="@mipmap/brandlogo"
         app:putChip="true"
-        app:expiryDate = "2/22"
+        app:expiryDate = "02/22"
         app:expiryDateTextColor="#cccccc"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
+        app:isEditable="true"
+        app:validTillTextColor="#cccccc"
         />
 
     <com.example.vinay.library.CreditCardView
@@ -73,6 +75,10 @@
         app:putChip="false"
 
         />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/test"/>
         </LinearLayout>
     </ScrollView>
 

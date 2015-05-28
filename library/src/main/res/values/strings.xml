@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Library</string>
+    <string name="valid_till">VALID TILL</string>
+    <string name="card_number_hint">ENTER CARD NUMBER</string>
+    <string name="expiry_date_hint">ENTER EXPIRY DATE</string>
+    <string name="card_name_hint">ENTER CARD NAME</string>
+
 </resources>

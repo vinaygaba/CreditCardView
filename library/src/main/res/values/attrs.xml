@@ -28,6 +28,8 @@
         </attr>
 
         <attr name="putChip" format = "boolean"/>
+        <attr name="isEditable" format = "boolean"/>
+        <attr name="validTillTextColor" format="color"/>
 
     </declare-styleable>
 
