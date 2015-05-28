@@ -4,9 +4,14 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,14 +30,16 @@ public class CreditCardView extends RelativeLayout{
     private int mCardNumberFormat = 0;
     private int mCardNameTextColor = Color.WHITE;
     private int mExpiryDateTextColor = Color.WHITE;
+    private int mValidTillTextColor = Color.WHITE;
     private int mType = 0;
     private int mBrandLogo;
     private boolean mPutChip = false;
+    private boolean mIsEditable=false;
     private Typeface creditCardTypeFace;
-    private TextView cardNumber;
-    private TextView cardName;
-
-    private TextView expiryDate;
+    private EditText cardNumber;
+    private EditText cardName;
+    private EditText expiryDate;
+    private TextView validTill;
     private ImageView type;
     ImageView brandLogo;
     ImageView chip;
@@ -124,7 +131,7 @@ public class CreditCardView extends RelativeLayout{
     private void init() {
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.creditcardview, this, true);
+        View view = inflater.inflate(R.layout.creditcardview2, this, true);
 
 
 
@@ -133,9 +140,9 @@ public class CreditCardView extends RelativeLayout{
         // Loading Font Face
         creditCardTypeFace = Typeface.createFromAsset(getContext().getAssets(), fontPath);
 
-        cardNumber = (TextView)getChildAt(0);
+        cardNumber = (EditText)getChildAt(0);
 
-        cardName = (TextView)getChildAt(1);
+        cardName = (EditText)getChildAt(1);
 
         type = (ImageView)getChildAt(2);
 
@@ -143,7 +150,9 @@ public class CreditCardView extends RelativeLayout{
 
         chip = (ImageView)getChildAt(4);
 
-        expiryDate = (TextView)getChildAt(5);
+        validTill = (TextView)getChildAt(5);
+
+        expiryDate = (EditText)getChildAt(6);
     }
 
     private void loadAttributes(AttributeSet attrs) {
@@ -160,9 +169,11 @@ public class CreditCardView extends RelativeLayout{
             mCardNumberFormat = a.getInt(R.styleable.CreditCardView2_cardNumberFormat, 0);
             mCardNameTextColor = a.getColor(R.styleable.CreditCardView2_cardNumberTextColor, Color.WHITE);
             mExpiryDateTextColor = a.getColor(R.styleable.CreditCardView2_expiryDateTextColor, Color.WHITE);
-            mType = a.getInt(R.styleable.CreditCardView2_type,0);
-            mBrandLogo = a.getResourceId(R.styleable.CreditCardView2_brandLogo,0);
-            mPutChip = a.getBoolean(R.styleable.CreditCardView2_putChip,false);
+            mValidTillTextColor = a.getColor(R.styleable.CreditCardView2_validTillTextColor, Color.WHITE);
+            mType = a.getInt(R.styleable.CreditCardView2_type, 0);
+            mBrandLogo = a.getResourceId(R.styleable.CreditCardView2_brandLogo, 0);
+            mPutChip = a.getBoolean(R.styleable.CreditCardView2_putChip, false);
+            mIsEditable = a.getBoolean(R.styleable.CreditCardView2_isEditable,false);
         } finally {
             a.recycle();
         }
@@ -172,6 +183,20 @@ public class CreditCardView extends RelativeLayout{
             setBackgroundResource(R.drawable.cardbackground_sky);
         }
 
+        if(!mIsEditable){
+
+            cardNumber.setEnabled(false);
+            cardName.setEnabled(false);
+            expiryDate.setEnabled(false);
+
+            /*
+            cardNumber.setKeyListener(null);
+            cardName.setKeyListener(null);
+            expiryDate.setKeyListener(null);
+
+            cardNumber.setFocusableInTouchMode(false);
+            cardNumber.setFocusable(false);*/
+        }
 
         cardNumber.setText(checkCardNumberFormat(mCardNumber));
         cardNumber.setTextColor(mCardNumberTextColor);
@@ -197,6 +222,78 @@ public class CreditCardView extends RelativeLayout{
         expiryDate.setText(mExpiryDate);
         expiryDate.setTextColor(mExpiryDateTextColor);
         expiryDate.setTypeface(creditCardTypeFace);
+
+        validTill.setTextColor(mValidTillTextColor);
+
+
+
+        cardNumber.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                mType =4;
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+
+                mCardNumber = cardNumber.getText().toString();
+                if(mType ==4){
+                    type.setBackgroundResource(getLogo(mType));
+                }
+            }
+
+
+        });
+
+
+        cardName.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                mCardName = cardName.getText().toString();
+
+            }
+
+        });
+
+        expiryDate.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                mExpiryDate = expiryDate.getText().toString();
+
+            }
+
+        });
 
     }
 
@@ -279,6 +376,17 @@ public class CreditCardView extends RelativeLayout{
         requestLayout();
     }
 
+    public int getValidTillTextColor(){
+
+        return mValidTillTextColor;
+    }
+
+    public void setValidTillTextColor(int validTillTextColor){
+        mValidTillTextColor = validTillTextColor;
+        invalidate();
+        requestLayout();
+    }
+
 
 
     public int getType(){
@@ -288,7 +396,19 @@ public class CreditCardView extends RelativeLayout{
 
     public void setType(int type){
 
-         mType = type;
+        mType = type;
+        invalidate();
+        requestLayout();
+    }
+
+    public boolean getIsEditable(){
+
+        return mIsEditable;
+    }
+
+    public void setIsEditable(boolean isEditable){
+
+        mIsEditable = isEditable;
         invalidate();
         requestLayout();
     }
@@ -322,7 +442,7 @@ public class CreditCardView extends RelativeLayout{
 
         }
 
-       return 0;
+        return 0;
     }
 
     public void putChip(){
@@ -346,7 +466,7 @@ public class CreditCardView extends RelativeLayout{
         int type = 0;
 
         if(Pattern.compile("^4[0-9]{12}(?:[0-9]{3})?$^5[1-5][0-9]{14}$").matcher(cardNumber).matches())
-           type = 0;
+            type = 0;
         else if(Pattern.compile("^5[1-5][0-9]{14}$").matcher(cardNumber).matches())
             type = 1;
         else if(Pattern.compile("^3[47][0-9]{13}$").matcher(cardNumber).matches())
