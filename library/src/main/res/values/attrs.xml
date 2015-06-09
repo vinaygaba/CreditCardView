@@ -16,6 +16,7 @@
             <enum name="american_express" value="2"/>
             <enum name="discover" value="3"/>
             <enum name="auto" value="4"/>
+            <enum name="none" value="5"/>
         </attr>
 
         <attr name="expiryDate" format="string" />
@@ -30,6 +31,7 @@
         <attr name="putChip" format = "boolean"/>
         <attr name="isEditable" format = "boolean"/>
         <attr name="validTillTextColor" format="color"/>
+        <attr name="hintTextColor" format="color"/>
 
     </declare-styleable>
 
