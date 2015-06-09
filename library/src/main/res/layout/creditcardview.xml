@@ -17,7 +17,8 @@
         android:maxLength="20"
         android:background="#00000000"
         android:inputType="number"
-        android:hint="@string/card_number_hint"
+
+
         />
 
     <EditText
@@ -35,7 +36,7 @@
         android:maxLength="18"
         android:singleLine="true"
         android:background="#00000000"
-        android:hint="@string/card_name_hint"
+
         />
 
 
@@ -99,7 +100,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
         android:layout_centerHorizontal="true"
-        android:hint="@string/expiry_date_hint"
+
         android:maxLength="7"
         />
 
