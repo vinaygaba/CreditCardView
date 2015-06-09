@@ -57,76 +57,6 @@ public class CreditCardView extends RelativeLayout{
         super(context, attrs);
         init();
         loadAttributes(attrs);
-        /*
-        TypedArray a = context.getTheme().obtainStyledAttributes(
-                attrs,
-                R.styleable.CreditCardView2,
-                0, 0);
-
-        try {
-            mCardNumber = a.getString(R.styleable.CreditCardView2_cardNumber);
-            mCardName = a.getString(R.styleable.CreditCardView2_cardName);
-            mExpiryDate = a.getString(R.styleable.CreditCardView2_expiryDate);
-            mCardNumberTextColor = a.getColor(R.styleable.CreditCardView2_cardNumberTextColor, Color.WHITE);
-            mCardNumberFormat = a.getInt(R.styleable.CreditCardView2_cardNumberFormat, 0);
-            mCardNameTextColor = a.getColor(R.styleable.CreditCardView2_cardNumberTextColor, Color.WHITE);
-            mExpiryDateTextColor = a.getColor(R.styleable.CreditCardView2_expiryDateTextColor, Color.WHITE);
-            mType = a.getInt(R.styleable.CreditCardView2_type,0);
-            mBrandLogo = a.getResourceId(R.styleable.CreditCardView2_brandLogo,0);
-            mPutChip = a.getBoolean(R.styleable.CreditCardView2_putChip,false);
-        } finally {
-            a.recycle();
-        }
-
-        /*PaintDrawable pd = new PaintDrawable();
-        pd.setCornerRadius(20);
-        setBackgroundDrawable(pd);*/
-
-        /*
-
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.creditcardview, this, true);
-
-        //Set default background
-        if(getBackground()==null){
-            setBackgroundResource(R.drawable.cardbackground_sky);
-        }
-        // Font path
-        String fontPath = "fonts/creditcard2.ttf";
-        // Loading Font Face
-        creditCardTypeFace = Typeface.createFromAsset(context.getAssets(), fontPath);
-
-        cardNumber = (TextView)getChildAt(0);
-        //Check card number format and change the value accordingly
-        checkCardNumberFormat(mCardNumber);
-        cardNumber.setText(mCardNumber);
-        cardNumber.setTextColor(mCardNumberTextColor);
-        cardNumber.setTypeface(creditCardTypeFace);
-
-        cardName = (TextView)getChildAt(1);
-        cardName.setText(mCardName);
-        cardName.setTextColor(mCardNumberTextColor);
-
-
-
-        type = (ImageView)getChildAt(2);
-        //Set the appropriate logo based on the type of card
-        type.setBackgroundResource(getLogo(mType));
-
-
-        brandLogo = (ImageView)getChildAt(3);
-        //If background logo attribute is present, set it
-        if(mBrandLogo != 0)
-            brandLogo.setBackgroundResource(mBrandLogo);
-
-        //If putChip attribute is present, change the visibility of the view and display it
-        if(mPutChip){
-            chip = (ImageView)getChildAt(4);
-            chip.setVisibility(View.VISIBLE);
-        }
-*/
-
     }
 
     private void init() {
@@ -190,15 +120,6 @@ public class CreditCardView extends RelativeLayout{
             cardNumber.setEnabled(false);
             cardName.setEnabled(false);
             expiryDate.setEnabled(false);
-
-
-            /*
-            cardNumber.setKeyListener(null);
-            cardName.setKeyListener(null);
-            expiryDate.setKeyListener(null);
-
-            cardNumber.setFocusableInTouchMode(false);
-            cardNumber.setFocusable(false);*/
         }
 
         cardNumber.setText(checkCardNumberFormat(mCardNumber));
