@@ -35,6 +35,7 @@ public class CreditCardView extends RelativeLayout{
     private int mBrandLogo;
     private boolean mPutChip = false;
     private boolean mIsEditable=false;
+    private int mHintTextColor = Color.WHITE;
     private Typeface creditCardTypeFace;
     private EditText cardNumber;
     private EditText cardName;
@@ -174,6 +175,7 @@ public class CreditCardView extends RelativeLayout{
             mBrandLogo = a.getResourceId(R.styleable.CreditCardView2_brandLogo, 0);
             mPutChip = a.getBoolean(R.styleable.CreditCardView2_putChip, false);
             mIsEditable = a.getBoolean(R.styleable.CreditCardView2_isEditable,false);
+            mHintTextColor = a.getColor(R.styleable.CreditCardView2_hintTextColor, Color.WHITE);
         } finally {
             a.recycle();
         }
@@ -189,6 +191,7 @@ public class CreditCardView extends RelativeLayout{
             cardName.setEnabled(false);
             expiryDate.setEnabled(false);
 
+
             /*
             cardNumber.setKeyListener(null);
             cardName.setKeyListener(null);
@@ -201,10 +204,12 @@ public class CreditCardView extends RelativeLayout{
         cardNumber.setText(checkCardNumberFormat(mCardNumber));
         cardNumber.setTextColor(mCardNumberTextColor);
         cardNumber.setTypeface(creditCardTypeFace);
+        cardNumber.setHintTextColor(mHintTextColor);
 
         cardName.setText(mCardName.toUpperCase());
         cardName.setTextColor(mCardNumberTextColor);
         cardName.setTypeface(creditCardTypeFace);
+        cardName.setHintTextColor(mHintTextColor);
 
         //Set the appropriate logo based on the type of card
         type.setBackgroundResource(getLogo(mType));
@@ -222,6 +227,7 @@ public class CreditCardView extends RelativeLayout{
         expiryDate.setText(mExpiryDate);
         expiryDate.setTextColor(mExpiryDateTextColor);
         expiryDate.setTypeface(creditCardTypeFace);
+        expiryDate.setHintTextColor(mHintTextColor);
 
         validTill.setTextColor(mValidTillTextColor);
 
@@ -409,6 +415,17 @@ public class CreditCardView extends RelativeLayout{
     public void setIsEditable(boolean isEditable){
 
         mIsEditable = isEditable;
+        invalidate();
+        requestLayout();
+    }
+
+    public int getHintTextColor(){
+
+        return mHintTextColor;
+    }
+
+    public void setHintTextColor(int hintTextColor){
+        mHintTextColor = hintTextColor;
         invalidate();
         requestLayout();
     }
