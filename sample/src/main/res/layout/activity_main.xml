@@ -23,25 +23,26 @@
             android:orientation="vertical"
             >
 
-    <com.example.vinay.library.CreditCardView2
+    <com.example.vinay.library.CreditCardView
         android:id="@+id/card1"
         android:layout_width="fill_parent"
         android:layout_height="225dp"
         android:background="@drawable/cardbackground_world"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
-        app:cardNumber="5500 0055 5555 5559"
+        app:cardNumber="1234567890123456"
         app:cardName="Vinay Gaba"
         app:cardNumberTextColor="#cccccc"
-        app:cardNumberFormat="last_four_digits"
+        app:cardNumberFormat="masked_all_but_last_four"
         app:cardNameTextColor="#cccccc"
-        app:type="auto"
+        app:type="visa"
         app:brandLogo="@mipmap/brandlogo"
         app:putChip="true"
         app:expiryDate = "02/22"
         app:expiryDateTextColor="#cccccc"
         app:isEditable="true"
         app:validTillTextColor="#cccccc"
+        app:hintTextColor = "#cccccc"
         />
 
     <com.example.vinay.library.CreditCardView
@@ -49,14 +50,16 @@
         android:layout_width="fill_parent"
         android:layout_height="225dp"
         android:background="@drawable/cardbackground_sky"
-        app:cardNumber="1234 5678 9000 1234"
+        app:cardNumber="1234567890001234"
         app:cardName="Vinay Gaba"
-        app:cardNumberTextColor="#cccccc"
-        app:cardNumberFormat="all_digits"
-        app:cardNameTextColor="#cccccc"
+        app:cardNumberTextColor="#ffffff"
+        app:cardNumberFormat="only_last_four"
+        app:cardNameTextColor="#ffffff"
         app:type="mastercard"
         app:brandLogo="@mipmap/citibank"
         app:putChip="false"
+        app:validTillTextColor="#ffffff"
+        app:expiryDate = "11/15"
         android:layout_marginBottom="16dp"
         />
 
@@ -65,14 +68,15 @@
         android:layout_width="fill_parent"
         android:layout_height="225dp"
         android:background="@drawable/credit_card"
-        app:cardNumber="1234 5678 9000 1234"
+        app:cardNumber="6011111111111117"
         app:cardName="Vinay Gaba"
         app:cardNumberTextColor="#ffffff"
-        app:cardNumberFormat="all_digits"
+        app:cardNumberFormat="masked_all"
         app:cardNameTextColor="#ffffff"
-        app:type="mastercard"
-        app:brandLogo="@mipmap/citibank"
+        app:type="auto"
+        app:brandLogo="@mipmap/standard_chartered"
         app:putChip="false"
+        app:expiryDate="01/22"
 
         />
             <TextView

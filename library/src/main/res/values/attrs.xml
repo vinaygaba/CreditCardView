@@ -4,7 +4,9 @@
         <attr name="cardNumberTextColor" format="color"/>
         <attr name="cardNumberFormat" format="enum">
             <enum name="all_digits" value="0"/>
-            <enum name="last_four_digits" value="1"/>
+            <enum name="masked_all_but_last_four" value="1"/>
+            <enum name="only_last_four" value="2"/>
+            <enum name="masked_all" value="3"/>
         </attr>
 
         <attr name="cardName" format="string" />

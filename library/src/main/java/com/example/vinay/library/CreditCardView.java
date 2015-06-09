@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -23,9 +24,9 @@ import java.util.regex.Pattern;
  */
 public class CreditCardView extends RelativeLayout{
 
-    private String mCardNumber = "0000 0000 0000 0000";
-    private String mCardName = "John Doe";
-    private String mExpiryDate = "01/11";
+    private String mCardNumber = "";
+    private String mCardName = "";
+    private String mExpiryDate = "";
     private int mCardNumberTextColor = Color.WHITE;
     private int mCardNumberFormat = 0;
     private int mCardNameTextColor = Color.WHITE;
@@ -121,16 +122,27 @@ public class CreditCardView extends RelativeLayout{
             cardName.setEnabled(false);
             expiryDate.setEnabled(false);
         }
+        else{
+            cardNumber.setHint(R.string.card_number_hint);
+            cardNumber.setHintTextColor(mHintTextColor);
 
-        cardNumber.setText(checkCardNumberFormat(mCardNumber));
+            cardName.setHint(R.string.card_name_hint);
+            cardName.setHintTextColor(mHintTextColor);
+
+            expiryDate.setHint(R.string.expiry_date_hint);
+            expiryDate.setHintTextColor(mHintTextColor);
+        }
+
+        cardNumber.setText(checkCardNumberFormat(addSpaceToCardNumber(mCardNumber)));
         cardNumber.setTextColor(mCardNumberTextColor);
         cardNumber.setTypeface(creditCardTypeFace);
-        cardNumber.setHintTextColor(mHintTextColor);
+
 
         cardName.setText(mCardName.toUpperCase());
+        cardName.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         cardName.setTextColor(mCardNumberTextColor);
         cardName.setTypeface(creditCardTypeFace);
-        cardName.setHintTextColor(mHintTextColor);
+
 
         //Set the appropriate logo based on the type of card
         type.setBackgroundResource(getLogo(mType));
@@ -148,7 +160,7 @@ public class CreditCardView extends RelativeLayout{
         expiryDate.setText(mExpiryDate);
         expiryDate.setTextColor(mExpiryDateTextColor);
         expiryDate.setTypeface(creditCardTypeFace);
-        expiryDate.setHintTextColor(mHintTextColor);
+
 
         validTill.setTextColor(mValidTillTextColor);
 
@@ -195,7 +207,7 @@ public class CreditCardView extends RelativeLayout{
 
             @Override
             public void afterTextChanged(Editable arg0) {
-                mCardName = cardName.getText().toString();
+                mCardName = cardName.getText().toString().toUpperCase();
 
             }
 
@@ -243,7 +255,7 @@ public class CreditCardView extends RelativeLayout{
     }
 
     public void setCardName(String cardName){
-        mCardName = cardName;
+        mCardName = cardName.toUpperCase();
         invalidate();
         requestLayout();
     }
@@ -390,9 +402,19 @@ public class CreditCardView extends RelativeLayout{
     }
 
     public String checkCardNumberFormat(String cardNumber){
+        Log.e("Card Number",cardNumber);
         if(getCardNumberFormat()==1){
 
-            cardNumber = "**** **** **** " + cardNumber.substring(cardNumber.length() - 4,19);
+            cardNumber = "**** **** **** " + cardNumber.substring(cardNumber.length() - 4,cardNumber.length());
+        }
+        else if(getCardNumberFormat()==2){
+
+            cardNumber = cardNumber.substring(cardNumber.length() - 4,cardNumber.length());
+        }
+
+        else if(getCardNumberFormat()==3){
+
+            cardNumber = "**** **** **** ****";
         }
 
         return cardNumber;
@@ -417,5 +439,25 @@ public class CreditCardView extends RelativeLayout{
         setType(type);
 
         return getLogo(type);
+    }
+
+    public String addSpaceToCardNumber(String cardNumber){
+
+        if(cardNumber.length()<6){
+
+            return cardNumber;
+        }
+        else {
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < cardNumber.length(); i++) {
+                if (i % 4 == 0 && i != 0 && i!= cardNumber.length()-1) {
+                    result.append(" ");
+                }
+
+                result.append(cardNumber.charAt(i));
+            }
+
+            return result.toString();
+        }
     }
 }
