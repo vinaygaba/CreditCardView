@@ -132,7 +132,7 @@ public class CreditCardView extends RelativeLayout{
     private void init() {
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.creditcardview2, this, true);
+        View view = inflater.inflate(R.layout.creditcardview, this, true);
 
 
 
