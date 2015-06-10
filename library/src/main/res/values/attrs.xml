@@ -25,10 +25,10 @@
         <attr name="expiryDateTextColor" format="color"/>
 
         <attr name="brandLogo" format="reference" />
-        <attr name="brandLogoPosition" format="enum" >
+        <!--<attr name="brandLogoPosition" format="enum" >
             <enum name="left" value="0"/>
             <enum name="right" value="1"/>
-        </attr>
+        </attr>-->
 
         <attr name="putChip" format = "boolean"/>
         <attr name="isEditable" format = "boolean"/>
