@@ -38,6 +38,8 @@
         app:putChip="true"
         app:expiryDateTextColor="#cccccc"
         app:isEditable = "true"
+        app:validTillTextColor="#cccccc"
+        app:hintTextColor="#ffffff"
         />
 
    <!-- <com.example.vinay.library.CreditCardView
