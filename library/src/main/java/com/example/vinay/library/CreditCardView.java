@@ -34,6 +34,7 @@ public class CreditCardView extends RelativeLayout{
     private int mValidTillTextColor = Color.WHITE;
     private int mType = 0;
     private int mBrandLogo;
+    private int mBrandLogoPosition = 1;
     private boolean mPutChip = false;
     private boolean mIsEditable=false;
     private int mHintTextColor = Color.WHITE;
@@ -104,6 +105,7 @@ public class CreditCardView extends RelativeLayout{
             mValidTillTextColor = a.getColor(R.styleable.CreditCardView2_validTillTextColor, Color.WHITE);
             mType = a.getInt(R.styleable.CreditCardView2_type, 0);
             mBrandLogo = a.getResourceId(R.styleable.CreditCardView2_brandLogo, 0);
+          //  mBrandLogoPosition = a.getInt(R.styleable.CreditCardView2_brandLogoPosition, 1);
             mPutChip = a.getBoolean(R.styleable.CreditCardView2_putChip, false);
             mIsEditable = a.getBoolean(R.styleable.CreditCardView2_isEditable,false);
             mHintTextColor = a.getColor(R.styleable.CreditCardView2_hintTextColor, Color.WHITE);
@@ -133,12 +135,13 @@ public class CreditCardView extends RelativeLayout{
             expiryDate.setHintTextColor(mHintTextColor);
         }
 
-        cardNumber.setText(checkCardNumberFormat(addSpaceToCardNumber(mCardNumber)));
+        if(mCardNumber!= null)
+            cardNumber.setText(checkCardNumberFormat(addSpaceToCardNumber(mCardNumber)));
         cardNumber.setTextColor(mCardNumberTextColor);
         cardNumber.setTypeface(creditCardTypeFace);
 
-
-        cardName.setText(mCardName.toUpperCase());
+        if(mCardName!= null)
+            cardName.setText(mCardName.toUpperCase());
         cardName.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         cardName.setTextColor(mCardNumberTextColor);
         cardName.setTypeface(creditCardTypeFace);
@@ -147,9 +150,20 @@ public class CreditCardView extends RelativeLayout{
         //Set the appropriate logo based on the type of card
         type.setBackgroundResource(getLogo(mType));
 
+        //Set Brand Logo Position
+      /*  RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)brandLogo.getLayoutParams();
+        if(mBrandLogoPosition==0){
+            params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        }
+        else if(mBrandLogoPosition==1){
+            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        }*/
+
         //If background logo attribute is present, set it
-        if(mBrandLogo != 0)
+        if(mBrandLogo != 0) {
             brandLogo.setBackgroundResource(mBrandLogo);
+           // brandLogo.setLayoutParams(params);
+        }
 
         //If putChip attribute is present, change the visibility of the view and display it
         if(mPutChip){
@@ -157,7 +171,8 @@ public class CreditCardView extends RelativeLayout{
             chip.setVisibility(View.VISIBLE);
         }
 
-        expiryDate.setText(mExpiryDate);
+        if(mExpiryDate!= null)
+            expiryDate.setText(mExpiryDate);
         expiryDate.setTextColor(mExpiryDateTextColor);
         expiryDate.setTypeface(creditCardTypeFace);
 
@@ -182,13 +197,30 @@ public class CreditCardView extends RelativeLayout{
             @Override
             public void afterTextChanged(Editable arg0) {
 
-                mCardNumber = cardNumber.getText().toString();
-                if(mType ==4){
-                    type.setBackgroundResource(getLogo(mType));
-                }
+                mCardNumber = cardNumber.getText().toString().replaceAll("\\s+","");
+               /* if(mCardNumber.length()>12) {
+                    cardNumber.setText(checkCardNumberFormat(addSpaceToCardNumber(mCardNumber)));
+                    if (mType == 4) {
+                        type.setBackgroundResource(getLogo(mType));
+                    }
+                }*/
             }
 
 
+        });
+
+        cardNumber.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (mCardNumber.length() > 12) {
+                        cardNumber.setText(checkCardNumberFormat(addSpaceToCardNumber(mCardNumber)));
+                        if (mType == 4) {
+                            type.setBackgroundResource(getLogo(mType));
+                        }
+                    }
+                }
+            }
         });
 
 
@@ -244,7 +276,7 @@ public class CreditCardView extends RelativeLayout{
     }
 
     public void setCardNumber(String cardNumber){
-        mCardNumber = cardNumber;
+        mCardNumber = cardNumber.replaceAll("\\s+","");
         invalidate();
         requestLayout();
     }
@@ -375,6 +407,18 @@ public class CreditCardView extends RelativeLayout{
         requestLayout();
     }
 
+    public int getBrandLogoPosition(){
+
+        return mBrandLogo;
+    }
+
+    public void setBrandLogoposition(int brandLogoPosition){
+
+        mBrandLogoPosition = brandLogoPosition;
+        invalidate();
+        requestLayout();
+    }
+
     public int getLogo(int type){
 
         switch(type){
@@ -443,7 +487,7 @@ public class CreditCardView extends RelativeLayout{
 
     public String addSpaceToCardNumber(String cardNumber){
 
-        if(cardNumber.length()<6){
+        if(cardNumber.length()%4 !=0){
 
             return cardNumber;
         }

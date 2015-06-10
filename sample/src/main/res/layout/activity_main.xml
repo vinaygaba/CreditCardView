@@ -30,22 +30,22 @@
         android:background="@drawable/cardbackground_world"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
-        app:cardNumber="1234567890123456"
-        app:cardName="Vinay Gaba"
+
         app:cardNumberTextColor="#cccccc"
-        app:cardNumberFormat="masked_all_but_last_four"
+        app:cardNumberFormat="all_digits"
         app:cardNameTextColor="#cccccc"
         app:type="visa"
         app:brandLogo="@mipmap/brandlogo"
+
         app:putChip="true"
-        app:expiryDate = "02/22"
+
         app:expiryDateTextColor="#cccccc"
         app:isEditable="true"
         app:validTillTextColor="#cccccc"
         app:hintTextColor = "#cccccc"
         />
 
-    <com.example.vinay.library.CreditCardView
+   <!-- <com.example.vinay.library.CreditCardView
         android:id="@+id/card2"
         android:layout_width="fill_parent"
         android:layout_height="225dp"
@@ -78,7 +78,7 @@
         app:putChip="false"
         app:expiryDate="01/22"
 
-        />
+        />-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
