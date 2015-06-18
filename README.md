@@ -75,6 +75,50 @@ OR
 CreditCardView creditCardView= (CreditCardView)findViewById(R.id.ID_OF_CARD);
 ```
 
+Attribute Description
+-----------------
+
+###### android:background
+
+Use this attribute to set the background of the card. This library includes 3 background by default which you can use, but feel free to put any drawable and use it as the card background as you please. If you do not want to use your own drawable and want to use the drawables available in the screenshots, do the following:
+
+1)Sky Background
+
+![Sky](images/cardbackground_sky.png)
+
+To use this background,simply use the line:
+```
+android:background = "@drawable/cardbackground_sky"
+```
+
+2)World Background
+
+![World](images/cardbackground_world.png)
+
+To use this background,simply use the following line:
+```
+android:background = "@drawable/cardbackground_world"
+```
+3) Plain Background
+
+![Plain](images/cardbackground_plain.png)
+
+This is a customizable plain background where you can change the background color, radius and border color of the card. To use this, add the folowing line:
+```
+android:background = "@drawable/credit_card"
+```
+
+To customize the corner radius of the card, add the following attribute to your dimen.xml file with the attribute name "card_corner_radius":
+```
+<dimen name="card_corner_radius">size_in_dip(Example: 10dip)</dimen>
+```
+
+To customize the background color and the border color of this card, add the following attributes to your color.xml file:
+```
+<color name="card_background">color_value</color>
+<color name="card_border">color_value</color>
+```
+
 Contributing
 -----------------
 Please use the issue tracker to report any bugs or file feature requests. There are a few features that I plan to work on based on the response the library gets, some of them being:
