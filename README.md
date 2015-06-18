@@ -216,6 +216,25 @@ creditCardView.setCardNameTextColor(Color.WHITE);
 int color = crediCardView.getCardNamerTextColor();
 ```
 
+##### VII) app:expiryDate
+
+Use this attribute to set the expiry date of the card in MM/YY or MM/YYYY format. 
+
+You can set the value in xml using:
+```
+app:expiryDate="01/15"
+```
+
+You can set and get the value of this attribute programmatically using:
+```java
+//Set Expiry Date
+crediCardView.setExpiryDate("01/15");
+
+//Get Card Number
+String expiryDate = crediCardView.ExpiryDate();
+```
+
+
 Contributing
 -----------------
 Please use the issue tracker to report any bugs or file feature requests. There are a few features that I plan to work on based on the response the library gets, some of them being:
