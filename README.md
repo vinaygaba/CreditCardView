@@ -121,6 +121,20 @@ To customize the background color and the border color of this card, add the fol
 <color name="card_border">color_value</color>            //Default value is #ffffff
 ```
 
+4)Custom Background
+
+You can essentaially set any background you want as the card background.
+You can set the value in xml using:
+```
+android:background="@drawable/drawable_name"
+```
+
+You can set the value of this attribute programmatically using:
+```java
+//Set Card Background
+creditCardView.setBackgroundResource(R.drawable.drawable_name);
+```
+
 ##### II) app:isEditable
 
 Use this attribute if you want to make the card number, card name and the expiry date field editable to the user.
