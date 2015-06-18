@@ -15,8 +15,9 @@ Screenshots
 Features
 ---------
 
-* Pre-built templates 
-* Auto selection of drawables based on the credit card type i.e. Visa, Mastercard,American Express & Discover. Will be adding more soon based on the requests I get
+* Pre-built card backgrounds to help you get started quickly
+* Fully Customizable
+* Auto selection of drawables based on the credit card number pattern i.e. Visa, Mastercard,American Express & Discover. Will be adding more soon based on the requests I get
 * Auto selection of logo drawable based on the credit card type i.e. Visa, Mastercard and American Express
 * Editable and non-editable mode
 
@@ -42,7 +43,7 @@ Using CreditCardView is extremely easy, this is how you would declare it in the 
         android:background="@drawable/cardbackground_world"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
-        app:cardNumber="5500 0055 5555 5559"
+        app:cardNumber="5500005555555559"
         app:cardName="Vinay Gaba"
         app:cardNumberTextColor="#cccccc"
         app:cardNumberFormat="last_four_digits"
@@ -78,9 +79,9 @@ CreditCardView creditCardView= (CreditCardView)findViewById(R.id.ID_OF_CARD);
 Attribute Description
 -----------------
 
-###### android:background
+##### I) android:background
 
-Use this attribute to set the background of the card. This library includes 3 background by default which you can use, but feel free to put any drawable and use it as the card background as you please. If you do not want to use your own drawable and want to use the drawables available in the screenshots, do the following:
+Use this attribute to set the background of the card. This library includes 3 background by default which you can use, but **feel free to put any drawable and use it as the card background as you please**. If you do not want to use your own drawable and want to use the drawables available in the screenshots, do the following:
 
 1)Sky Background
 
@@ -118,6 +119,66 @@ To customize the background color and the border color of this card, add the fol
 <color name="card_background">color_value</color>
 <color name="card_border">color_value</color>
 ```
+
+##### II) app:cardNumber
+
+Use this attribute to set the card number of the card. 
+
+You can set the value in xml using:
+```
+app:cardNumber="1234567890123456"
+```
+
+You can set and get the value of this attribute programmatically using:
+```java
+//Set Card Number
+crediCardView.setCardNumber("1234567890123456");
+
+//Get Card Number
+String cardNumber = crediCardView.getCardNumber();
+```
+
+##### III) app:cardNumberTextColor
+
+Use this attribute to set the text color of card number attribute. 
+
+You can set the value in xml using:
+```
+app:cardNumberTextColor="#ffffff"
+```
+
+You can set and get the value of this attribute programmatically using:
+```java
+//Set Card Number Text Color
+creditCardView.setCardNumberTextColor(Color.WHITE);
+
+//Get Card Number
+int color = crediCardView.getCardNumberTextColor();
+```
+
+##### IV) app:cardNumberFormat
+
+Use this attribute to set the card number format of card number. There are four different formats supported by the library:
+
+1. all_digits - This will display all the numbers of the card number. Example - 1234567890123456
+2. masked_all_but_last_four - This will mask all the digits except the last four of the card number. Example - ************3456
+3. only_last_four - This will display only the last four digits of the card number. Example - 3456
+4. masked_all - This will mask all the digits of the card number. Example - ****************
+
+You can set the value in xml using:
+```
+app:cardNumberFormat="all_digits/masked_all_but_last_four/only_last_four/masked_all"    //Use any one format type
+```
+
+You can set and get the value of this attribute programmatically using:
+```java
+//Set Card Number Format. Chooose any one format
+creditCardView.setCardNumberFormat(CardNumberFormat.ALL_DIGITS/CardNumberFormat.MASKED_ALL_BUT_LAST_FOUR/CardNumberFormat.ONLY_LAST_FOUR/CardNumberFormat.MASKED_ALL);
+
+//Get Card Number Format
+int cardFormat = crediCardView.getCardNumberFormat();
+```
+Default value is all_digits
 
 Contributing
 -----------------
