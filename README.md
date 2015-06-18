@@ -253,7 +253,7 @@ creditCardView.setExpiryDateTextColor(Color.WHITE);
 int color = crediCardView.getExpiryDateTextColor();
 ```
 
-##### VIII) app:putChip
+##### IX) app:putChip
 
 Use this attribute if you want the card to display the chip on the card. 
 
