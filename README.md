@@ -47,7 +47,7 @@ Using CreditCardView is extremely easy, this is how you would declare it in the 
         app:cardNumber="5500005555555559"
         app:cardName="Vinay Gaba"
         app:cardNumberTextColor="#cccccc"
-        app:cardNumberFormat="last_four_digits"
+        app:cardNumberFormat="masked_all_but_last_four"
         app:cardNameTextColor="#cccccc"
         app:type="auto"
         app:brandLogo="@mipmap/brandlogo"
