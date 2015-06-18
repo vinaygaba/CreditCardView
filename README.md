@@ -79,7 +79,7 @@ CreditCardView creditCardView= (CreditCardView)findViewById(R.id.ID_OF_CARD);
 Attribute Description
 -----------------
 
-##### android:background
+##### I) android:background
 
 Use this attribute to set the background of the card. This library includes 3 background by default which you can use, but **feel free to put any drawable and use it as the card background as you please**. If you do not want to use your own drawable and want to use the drawables available in the screenshots, do the following:
 
@@ -120,7 +120,7 @@ To customize the background color and the border color of this card, add the fol
 <color name="card_border">color_value</color>
 ```
 
-#####app:cardNumber
+##### II) app:cardNumber
 
 Use this attribute to set the card number of the card. 
 
@@ -138,7 +138,7 @@ crediCardView.setCardNumber("1234567890123456");
 String cardNumber = crediCardView.getCardNumber();
 ```
 
-#####app:cardNumberTextColor
+##### III) app:cardNumberTextColor
 
 Use this attribute to set the text color of card number attribute. 
 
@@ -156,8 +156,29 @@ creditCardView.setCardNumberTextColor(Color.WHITE);
 int color = crediCardView.getCardNumberTextColor();
 ```
 
-#####app:cardNumberFormat
+##### IV) app:cardNumberFormat
 
+Use this attribute to set the card number format of card number. There are four different formats supported by the library:
+
+1. all_digits - This will display all the numbers of the card number. Example - 1234567890123456
+2. masked_all_but_last_four - This will mask all the digits except the last four of the card number. Example - ************3456
+3. only_last_four - This will display only the last four digits of the card number. Example - 3456
+4. masked_all - This will mask all the digits of the card number. Example - ****************
+
+You can set the value in xml using:
+```
+app:cardNumberFormat="all_digits/masked_all_but_last_four/only_last_four/masked_all"    //Use any one format type
+```
+
+You can set and get the value of this attribute programmatically using:
+```java
+//Set Card Number Format. Chooose any one format
+creditCardView.setCardNumberFormat(CardNumberFormat.ALL_DIGITS/CardNumberFormat.MASKED_ALL_BUT_LAST_FOUR/CardNumberFormat.ONLY_LAST_FOUR/CardNumberFormat.MASKED_ALL);
+
+//Get Card Number Format
+int cardFormat = crediCardView.getCardNumberFormat();
+```
+Default value is all_digits
 
 Contributing
 -----------------
