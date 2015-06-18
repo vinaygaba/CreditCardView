@@ -76,7 +76,7 @@ OR
 CreditCardView creditCardView= (CreditCardView)findViewById(R.id.ID_OF_CARD);
 ```
 
-Attribute Description
+Attribute Usage & Documentation
 -----------------
 
 ##### I) android:background
