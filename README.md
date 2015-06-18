@@ -20,6 +20,7 @@ Features
 * Auto selection of drawables based on the credit card number pattern i.e. Visa, Mastercard,American Express & Discover. Will be adding more soon based on the requests I get
 * Auto selection of logo drawable based on the credit card type i.e. Visa, Mastercard and American Express
 * Editable and non-editable mode
+* 4 different card number formats 
 
 
 
