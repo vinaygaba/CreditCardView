@@ -253,6 +253,24 @@ creditCardView.setExpiryDateTextColor(Color.WHITE);
 int color = crediCardView.getExpiryDateTextColor();
 ```
 
+##### VIII) app:putChip
+
+Use this attribute if you want the card to display the chip on the card. 
+
+![Put Chip](images/putChip.png)
+
+You can set the value in xml using:
+```
+app:putChip="true/false"
+```
+
+You can set the value of this attribute programmatically using:
+```java
+//Set Put Chip Value
+creditCardView.putChip(true/false);
+```
+
+
 Contributing
 -----------------
 Please use the issue tracker to report any bugs or file feature requests. There are a few features that I plan to work on based on the response the library gets, some of them being:
