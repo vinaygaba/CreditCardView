@@ -20,6 +20,7 @@ Features
 * Auto selection of drawables based on the credit card number pattern i.e. Visa, Mastercard,American Express & Discover. Will be adding more soon based on the requests I get
 * Auto selection of logo drawable based on the credit card type i.e. Visa, Mastercard and American Express
 * Editable and non-editable mode
+* 4 different card number formats 
 
 
 
@@ -251,6 +252,47 @@ creditCardView.setExpiryDateTextColor(Color.WHITE);
 
 //Get Expiry Date Text Color
 int color = crediCardView.getExpiryDateTextColor();
+```
+
+##### IX) app:putChip
+
+Use this attribute if you want the card to display the chip on the card. 
+
+![Put Chip](images/putChip.png)
+
+You can set the value in xml using:
+```
+app:putChip="true/false"
+```
+
+You can set the value of this attribute programmatically using:
+```java
+//Set Put Chip Value
+creditCardView.putChip(true/false);
+```
+
+##### IX) app:type
+
+Use this attribute to set the type of the credit card. The library automatically places the corresponding drawable in the bottom right corner based on the type you have selected. Currectly there are 5 different types supported:
+
+1. visa
+2. mastercard
+3. american_express
+4. discover
+5. auto - Use auto if u want the library to automatically choose the card type based on the card number you have entered. To know more about the patterns for identifying the card type from the card number, see this [link](http://www.regular-expressions.info/creditcard.html)
+
+You can set the value in xml using:
+```
+app:type="visa/mastercard/americann_express/discover/auto"
+```
+
+You can set the value of this attribute programmatically using:
+```java
+//Set Card Type.Choose any one card tpe from the following
+creditCardView.setType(CardType.VISA/CardType.MASTERCARD/CardType.AMERICAN_EXPRESS/CardType.DISCOVER/CardType.AUTO);
+
+//Get Card Type. 
+int type = crediCardView.getType();
 ```
 
 Contributing
