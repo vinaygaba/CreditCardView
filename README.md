@@ -152,7 +152,7 @@ You can set and get the value of this attribute programmatically using:
 //Set Card Number Text Color
 creditCardView.setCardNumberTextColor(Color.WHITE);
 
-//Get Card Number
+//Get Card Number Text Color
 int color = crediCardView.getCardNumberTextColor();
 ```
 
@@ -178,7 +178,43 @@ creditCardView.setCardNumberFormat(CardNumberFormat.ALL_DIGITS/CardNumberFormat.
 //Get Card Number Format
 int cardFormat = crediCardView.getCardNumberFormat();
 ```
-Default value is all_digits
+*Note: Default value is all_digits*
+
+##### V) app:cardName
+
+Use this attribute to set the card name of the card. 
+
+You can set the value in xml using:
+```
+app:cardName="John Doe"
+```
+
+You can set and get the value of this attribute programmatically using:
+```java
+//Set Card Number
+crediCardView.setCardName("John Doe");
+
+//Get Card Number
+String cardNumber = crediCardView.getCardName();
+```
+
+##### VI) app:cardNameTextColor
+
+Use this attribute to set the text color of card name attribute. 
+
+You can set the value in xml using:
+```
+app:cardNameTextColor="#ffffff"
+```
+
+You can set and get the value of this attribute programmatically using:
+```java
+//Set Card Name Text Color
+creditCardView.setCardNameTextColor(Color.WHITE);
+
+//Get Card Name Text Color
+int color = crediCardView.getCardNamerTextColor();
+```
 
 Contributing
 -----------------
