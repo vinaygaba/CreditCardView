@@ -10,7 +10,7 @@ Storing the credit card details inside the app has become a very common use case
 
 Screenshots
 ------------
-
+![Screenshots](images/screenshots.png)
 
 Features
 ---------
@@ -28,7 +28,7 @@ Setup
 The library is pushed to Maven Central as an AAR, so you just need to add the followings to your build.gradle file:
 ```java
 dependencies {
-    compile ‘com.vinaygaba:creditcardview:1.0.0’
+    compile ‘com.vinaygaba:creditcardview:1.0.1’
 }
 ```
 
