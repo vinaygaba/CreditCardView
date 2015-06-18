@@ -25,7 +25,7 @@ Features
 
 Setup
 ------
-The library is pushed to Maven Central as an AAR, so you just need to add the followings to your build.gradle file:
+The library is pushed to Maven Central as an AAR, so you just need to add the following to your build.gradle file:
 ```java
 dependencies {
     compile ‘com.vinaygaba:creditcardview:1.0.1’
@@ -58,7 +58,7 @@ Using CreditCardView is extremely easy, this is how you would declare it in the 
         app:hintTextColor = "#cccccc"
         />
 ```
-Remember put this for custom attribute usage
+Remember to put this for custom attribute usage:
 
 ```java
 
