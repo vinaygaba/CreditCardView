@@ -15,8 +15,9 @@ Screenshots
 Features
 ---------
 
-* Pre-built templates 
-* Auto selection of drawables based on the credit card type i.e. Visa, Mastercard,American Express & Discover. Will be adding more soon based on the requests I get
+* Pre-built card backgrounds to help you get started quickly
+* Fully Customizable
+* Auto selection of drawables based on the credit card number pattern i.e. Visa, Mastercard,American Express & Discover. Will be adding more soon based on the requests I get
 * Auto selection of logo drawable based on the credit card type i.e. Visa, Mastercard and American Express
 * Editable and non-editable mode
 
