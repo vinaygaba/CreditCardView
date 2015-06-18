@@ -315,6 +315,8 @@ creditCardView.setIsEditable(true/false);
 boolean isEditable= crediCardView.getIsEditable();
 ```
 
+*Note: The card type auto detection and space after every 4 letters is added as soon as the focus is shifted from the edit field*
+
 Contributing
 -----------------
 Please use the issue tracker to report any bugs or file feature requests. There are a few features that I plan to work on based on the response the library gets, some of them being:
