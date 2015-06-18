@@ -332,6 +332,27 @@ creditCardView.setType(CardType.VISA/CardType.MASTERCARD/CardType.AMERICAN_EXPRE
 int type = crediCardView.getType();
 ```
 
+##### XII) app:brandLogo
+
+Use this attribute to set the brand logo drawable that you see in the upper right corner. 
+
+You can set the value in xml using:
+```
+app:brandLogo="@drawable/drawable_name"
+```
+
+You can set and get the value of this attribute programmatically using:
+```java
+//Set Brand Logo
+crediCardView.setBrandLogo(R.drawable.drawable_name);
+```
+
+To customize the dimensions of the brand logo, add the following attribute to your dimen.xml file:
+```
+<dimen name="brand_logo_width">size_in_dp</dimen>    //Default value is 60dp
+<dimen name="brand_logo_height">size_in_dp</dimen>   //Default value is 30dp
+```
+
 Contributing
 -----------------
 Please use the issue tracker to report any bugs or file feature requests. There are a few features that I plan to work on based on the response the library gets, some of them being:
