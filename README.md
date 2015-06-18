@@ -160,10 +160,12 @@ int color = crediCardView.getCardNumberTextColor();
 
 Use this attribute to set the card number format of card number. There are four different formats supported by the library:
 
-1. all_digits - This will display all the numbers of the card number. Example - 1234567890123456
-2. masked_all_but_last_four - This will mask all the digits except the last four of the card number. Example - ************3456
-3. only_last_four - This will display only the last four digits of the card number. Example - 3456
-4. masked_all - This will mask all the digits of the card number. Example - ****************
+![Card number Format Image](images/cardNumberFormat_Example.png)
+
+1. all_digits - This will display all the numbers of the card number. 
+2. masked_all_but_last_four - This will mask all the digits except the last four of the card number. 
+3. only_last_four - This will display only the last four digits of the card number.
+4. masked_all - This will mask all the digits of the card number. 
 
 You can set the value in xml using:
 ```
