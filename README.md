@@ -112,13 +112,13 @@ android:background = "@drawable/credit_card"
 
 To customize the corner radius of the card, add the following attribute to your dimen.xml file with the attribute name "card_corner_radius":
 ```
-<dimen name="card_corner_radius">size_in_dip(Example: 10dip)</dimen>
+<dimen name="card_corner_radius">size_in_dip</dimen>      //Default value is 10dip
 ```
 
 To customize the background color and the border color of this card, add the following attributes to your color.xml file:
 ```
-<color name="card_background">color_value</color>
-<color name="card_border">color_value</color>
+<color name="card_background">color_value</color>        //Default value is #e5e5e5
+<color name="card_border">color_value</color>            //Default value is #ffffff
 ```
 
 ##### II) app:cardNumber
