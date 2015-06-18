@@ -50,7 +50,7 @@ Using CreditCardView is extremely easy, this is how you would declare it in the 
         app:cardNumberFormat="masked_all_but_last_four"
         app:cardNameTextColor="#cccccc"
         app:type="auto"
-        app:brandLogo="@mipmap/brandlogo"
+        app:brandLogo="@drawable/brandlogo"
         app:putChip="true"
         app:expiryDate = "02/22"
         app:expiryDateTextColor="#cccccc"
@@ -107,7 +107,7 @@ android:background = "@drawable/cardbackground_world"
 
 This is a customizable plain background where you can change the background color, radius and border color of the card. To use this, add the folowing line:
 ```
-android:background = "@drawable/credit_card"
+android:background = "@drawable/cardbackground_plain"
 ```
 
 To customize the corner radius of the card, add the following attribute to your dimen.xml file with the attribute name "card_corner_radius":
