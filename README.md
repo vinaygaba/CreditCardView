@@ -43,7 +43,7 @@ Using CreditCardView is extremely easy, this is how you would declare it in the 
         android:background="@drawable/cardbackground_world"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
-        app:cardNumber="5500 0055 5555 5559"
+        app:cardNumber="5500005555555559"
         app:cardName="Vinay Gaba"
         app:cardNumberTextColor="#cccccc"
         app:cardNumberFormat="last_four_digits"
@@ -79,9 +79,9 @@ CreditCardView creditCardView= (CreditCardView)findViewById(R.id.ID_OF_CARD);
 Attribute Description
 -----------------
 
-###### android:background
+##### android:background
 
-Use this attribute to set the background of the card. This library includes 3 background by default which you can use, but feel free to put any drawable and use it as the card background as you please. If you do not want to use your own drawable and want to use the drawables available in the screenshots, do the following:
+Use this attribute to set the background of the card. This library includes 3 background by default which you can use, but **feel free to put any drawable and use it as the card background as you please**. If you do not want to use your own drawable and want to use the drawables available in the screenshots, do the following:
 
 1)Sky Background
 
@@ -119,6 +119,45 @@ To customize the background color and the border color of this card, add the fol
 <color name="card_background">color_value</color>
 <color name="card_border">color_value</color>
 ```
+
+#####app:cardNumber
+
+Use this attribute to set the card number of the card. 
+
+You can set the value in xml using:
+```
+app:cardNumber="1234567890123456"
+```
+
+You can set and get the value of this attribute programmatically using:
+```java
+//Set Card Number
+crediCardView.setCardNumber("1234567890123456");
+
+//Get Card Number
+String cardNumber = crediCardView.getCardNumber();
+```
+
+#####app:cardNumberTextColor
+
+Use this attribute to set the text color of card number attribute. 
+
+You can set the value in xml using:
+```
+app:cardNumberTextColor="#ffffff"
+```
+
+You can set and get the value of this attribute programmatically using:
+```java
+//Set Card Number Text Color
+creditCardView.setCardNumberTextColor(Color.WHITE);
+
+//Get Card Number
+int color = crediCardView.getCardNumberTextColor();
+```
+
+#####app:cardNumberFormat
+
 
 Contributing
 -----------------
