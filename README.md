@@ -10,7 +10,7 @@ Storing the credit card details inside the app has become a very common use case
 
 Screenshots
 ------------
-
+![Screenshots](images/screenshots.png)
 
 Features
 ---------
@@ -25,10 +25,10 @@ Features
 
 Setup
 ------
-The library is pushed to Maven Central as an AAR, so you just need to add the followings to your build.gradle file:
+The library is pushed to Maven Central as an AAR, so you just need to add the following to your build.gradle file:
 ```java
 dependencies {
-    compile ‘com.vinaygaba:creditcardview:1.0.0’
+    compile ‘com.vinaygaba:creditcardview:1.0.1’
 }
 ```
 
@@ -58,7 +58,7 @@ Using CreditCardView is extremely easy, this is how you would declare it in the 
         app:hintTextColor = "#cccccc"
         />
 ```
-Remember put this for custom attribute usage
+Remember to put this for custom attribute usage:
 
 ```java
 
@@ -76,7 +76,7 @@ OR
 CreditCardView creditCardView= (CreditCardView)findViewById(R.id.ID_OF_CARD);
 ```
 
-Attribute Description
+Attribute Usage & Documentation
 -----------------
 
 ##### I) android:background
@@ -215,6 +215,25 @@ creditCardView.setCardNameTextColor(Color.WHITE);
 //Get Card Name Text Color
 int color = crediCardView.getCardNamerTextColor();
 ```
+
+##### VII) app:expiryDate
+
+Use this attribute to set the expiry date of the card in MM/YY or MM/YYYY format. 
+
+You can set the value in xml using:
+```
+app:expiryDate="01/15"
+```
+
+You can set and get the value of this attribute programmatically using:
+```java
+//Set Expiry Date
+crediCardView.setExpiryDate("01/15");
+
+//Get Card Number
+String expiryDate = crediCardView.ExpiryDate();
+```
+
 
 Contributing
 -----------------
