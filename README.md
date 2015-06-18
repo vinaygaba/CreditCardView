@@ -47,7 +47,7 @@ Using CreditCardView is extremely easy, this is how you would declare it in the 
         app:cardNumber="5500005555555559"
         app:cardName="Vinay Gaba"
         app:cardNumberTextColor="#cccccc"
-        app:cardNumberFormat="last_four_digits"
+        app:cardNumberFormat="masked_all_but_last_four"
         app:cardNameTextColor="#cccccc"
         app:type="auto"
         app:brandLogo="@mipmap/brandlogo"
@@ -112,13 +112,13 @@ android:background = "@drawable/credit_card"
 
 To customize the corner radius of the card, add the following attribute to your dimen.xml file with the attribute name "card_corner_radius":
 ```
-<dimen name="card_corner_radius">size_in_dip(Example: 10dip)</dimen>
+<dimen name="card_corner_radius">size_in_dip</dimen>      //Default value is 10dip
 ```
 
 To customize the background color and the border color of this card, add the following attributes to your color.xml file:
 ```
-<color name="card_background">color_value</color>
-<color name="card_border">color_value</color>
+<color name="card_background">color_value</color>        //Default value is #e5e5e5
+<color name="card_border">color_value</color>            //Default value is #ffffff
 ```
 
 ##### II) app:cardNumber
@@ -271,7 +271,7 @@ You can set the value of this attribute programmatically using:
 creditCardView.putChip(true/false);
 ```
 
-##### IX) app:type
+##### X) app:type
 
 Use this attribute to set the type of the credit card. The library automatically places the corresponding drawable in the bottom right corner based on the type you have selected. Currectly there are 5 different types supported:
 
@@ -294,6 +294,28 @@ creditCardView.setType(CardType.VISA/CardType.MASTERCARD/CardType.AMERICAN_EXPRE
 //Get Card Type. 
 int type = crediCardView.getType();
 ```
+
+##### XI) app:isEditable
+
+Use this attribute if you want to make the card number, card name and the expiry date field editable to the user.
+
+![Editable Gif](images/editableCardView.gif)
+
+You can set the value in xml using:
+```
+app:isEditable="true/false"
+```
+
+You can set the value of this attribute programmatically using:
+```java
+//Set Is Editable Value
+creditCardView.setIsEditable(true/false);
+
+//Get Is Editable Value 
+boolean isEditable= crediCardView.getIsEditable();
+```
+
+*Note: The card type auto detection and space after every 4 letters is added as soon as the focus is shifted from the edit field*
 
 Contributing
 -----------------
