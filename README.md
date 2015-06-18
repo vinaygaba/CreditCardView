@@ -353,6 +353,24 @@ If you wish to modify the default dimensions of the brand logo, add the followin
 <dimen name="brand_logo_height">size_in_dp</dimen>   //Default value is 30dp
 ```
 
+##### XIII) app:hintTextColor
+
+Use this attribute to set the hint text color that is visible when card name, card number and expiry date fields are editable and blank 
+
+You can set the value in xml using:
+```
+app:hintTextColor="color_value"    //Default is White
+```
+
+You can set and get the value of this attribute programmatically using:
+```java
+//Set Hint Text Color
+crediCardView.setHintTextColor(color_value);
+
+//Get Hint Text Color
+int color = crediCardView.geHintTextColor();
+```
+
 Contributing
 -----------------
 Please use the issue tracker to report any bugs or file feature requests. There are a few features that I plan to work on based on the response the library gets, some of them being:
