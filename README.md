@@ -233,7 +233,23 @@ crediCardView.setExpiryDate("01/15");
 //Get Card Number
 String expiryDate = crediCardView.ExpiryDate();
 ```
+##### VIII) app:expiryDateTextColor
 
+Use this attribute to set the text color of expiry date attribute. 
+
+You can set the value in xml using:
+```
+app:expiryDateTextColor="#ffffff"
+```
+
+You can set and get the value of this attribute programmatically using:
+```java
+//Set Expiry Date Text Color
+creditCardView.setExpiryDateTextColor(Color.WHITE);
+
+//Get Expiry Date Text Color
+int color = crediCardView.getExpiryDateTextColor();
+```
 
 Contributing
 -----------------
