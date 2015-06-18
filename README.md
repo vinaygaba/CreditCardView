@@ -271,6 +271,29 @@ You can set the value of this attribute programmatically using:
 creditCardView.putChip(true/false);
 ```
 
+##### IX) app:type
+
+Use this attribute to set the type of the credit card. The library automatically places the corresponding drawable in the bottom right corner based on the type you have selected. Currectly there are 5 different types supported:
+
+1. visa
+2. mastercard
+3. american_express
+4. discover
+5. auto - Use auto if u want the library to automatically choose the card type based on the card number you have entered. To know the patterns for the card numbers, see this [link](http://stackoverflow.com/questions/72768/how-do-you-detect-credit-card-type-based-on-number)
+
+You can set the value in xml using:
+```
+app:type="visa/mastercard/americann_express/discover/auto"
+```
+
+You can set the value of this attribute programmatically using:
+```java
+//Set Card Type.Choose any one card tpe from the following
+creditCardView.setType(CardType.VISA/CardType.MASTERCARD/CardType.AMERICAN_EXPRESS/CardType.DISCOVER/CardType.AUTO);
+
+//Get Card Type. 
+int type = crediCardView.getType();
+```
 
 Contributing
 -----------------
