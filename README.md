@@ -279,7 +279,7 @@ Use this attribute to set the type of the credit card. The library automatically
 2. mastercard
 3. american_express
 4. discover
-5. auto - Use auto if u want the library to automatically choose the card type based on the card number you have entered. To know the patterns for the card numbers, see this [link](http://stackoverflow.com/questions/72768/how-do-you-detect-credit-card-type-based-on-number)
+5. auto - Use auto if u want the library to automatically choose the card type based on the card number you have entered. To know more about the patterns for identifying the card type from the card number, see this [link](http://www.regular-expressions.info/creditcard.html)
 
 You can set the value in xml using:
 ```
