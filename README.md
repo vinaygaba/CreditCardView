@@ -1,5 +1,6 @@
 CreditCard View
 ==================
+######WORK IN PROGRESS
 
 ![Feature Image](images/Feature Image.png)
 
@@ -90,7 +91,6 @@ Credits
 -----------------
 Author: Vinay Gaba (vinaygaba@gmail.com)
 
-######WORK IN PROGRESS
 
 License
 -------
