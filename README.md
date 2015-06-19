@@ -5,7 +5,7 @@ CreditCard View
 
 CreditCardView is an Android library that allows developers to create the UI which replicates an actual Credit Card.
 
-Storing the credit card details inside the app has become a very common use case seen in a lot of different apps, but it is often represented in a not so intuitive manner. With Android Pay being announced at the recent Google I/O 2015, more apps would require users to input their credit card details. I created this library with the aim of making the process of storing and entering the credit card details more visually appealing to the users of your app.
+Displaying and entering the credit card details inside the app has become a very common use case seen in a lot of different apps, but it is often represented in a not so intuitive manner. With Android Pay being announced at the recent Google I/O 2015, more apps would require users to input their credit card details. I created this library with the aim of making the process of displaying and entering the credit card details more visually appealing to the users of your app.
 
 Screenshots
 ------------
