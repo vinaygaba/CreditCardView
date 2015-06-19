@@ -80,6 +80,8 @@ CreditCardView creditCardView= (CreditCardView)findViewById(R.id.ID_OF_CARD);
 Attribute Usage & Documentation
 -----------------
 
+![Attribute Description](images/attributeDescription.png)
+
 ##### I) android:background
 
 Use this attribute to set the background of the card. This library includes 3 background by default which you can use, but **feel free to put any drawable and use it as the card background as you please**. If you do not want to use your own drawable and want to use the drawables available in the screenshots, do the following:
