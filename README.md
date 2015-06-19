@@ -389,6 +389,19 @@ Credits
 -----------------
 Author: Vinay Gaba (vinaygaba@gmail.com)
 
+<a href="https://plus.google.com/+Vinaygaba">
+  <img alt="Follow me on Google+"
+       src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/g+64.png" />
+</a>
+<a href="https://twitter.com/vinaygaba">
+  <img alt="Follow me on Twitter"
+       src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/twitter64.png" />
+</a>
+<a href="https://www.linkedin.com/in/vinaygaba">
+  <img alt="Follow me on LinkedIn"
+       src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/linkedin.png" />
+</a>
+
 
 License
 -------
