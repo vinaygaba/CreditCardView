@@ -379,27 +379,33 @@ Additional Customizations
 
 My aim with this library was to cover as many use cases as possible and so I have tried to make it extremely customizable. There are some additional customizations possible like:
 
-##### I) Hint Text
+##### I) Modify String Resources
 
 You can modify the hints which are displayed when the fields are empty and the card is editable. You can modify those by adding these attributes in the strings.xml file:
 
 ```
-<string name="card_number_hint">hint</string>        //Defaul value: "ENTER CARD NUMBER"
-<string name="expiry_date_hint">hint</string>        //Defaul value:"MM/YY"
-<string name="card_name_hint">hint</string>          //Defaul value: "ENTER CARD NAME"
+<string name="card_number_hint">hint</string>        //Default value: "ENTER CARD NUMBER"
+<string name="expiry_date_hint">hint</string>        //Default value:"MM/YY"
+<string name="card_name_hint">hint</string>          //Default value: "ENTER CARD NAME"
+```
+You can also modify some other additional string resources like:
+
+```
+<string name="valid_till">string</string>           //Default value: "VALID TILL"
 ```
 The important thing to note is that the name of these items should remain the same. 
+**Please make sure the string resources are in caps to be displayed correctly as the font does not support lower case**
 
 ##### II) Modify Dimensions
 
 You can modify the dimensions of some of the attributes by adding these attributes to your dimens.xml file:
 
 ```
-<dimen name="card_number_text_size">size</dimen>        //Defaul value:18sp
-<dimen name="card_name_text_size">size</dimen>          //Defaul value:18sp
-<dimen name="expiry_date_text_size">size</dimen>        //Defaul value:14sp
-<dimen name="brand_logo_width">size</dimen>             //Defaul value:60dp
-<dimen name="brand_logo_height">size</dimen>            //Defaul value:30dp
+<dimen name="card_number_text_size">size</dimen>        //Default value:18sp
+<dimen name="card_name_text_size">size</dimen>          //Default value:18sp
+<dimen name="expiry_date_text_size">size</dimen>        //Default value:14sp
+<dimen name="brand_logo_width">size</dimen>             //Default value:60dp
+<dimen name="brand_logo_height">size</dimen>            //Default value:30dp
 ```
 The important thing to note is that the name of these items should remain the same.
 
