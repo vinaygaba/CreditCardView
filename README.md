@@ -1,4 +1,4 @@
-CreditCard View ![Build](https://travis-ci.org/vinaygaba/CreditCardView.svg?branch=master)
+CreditCard View ![Build](https://travis-ci.org/vinaygaba/CreditCardView.svg?branch=master) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.vinaygaba/creditcardview/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.vinaygaba/creditcardview)
 ==================
 
 ![Feature Image](images/Feature Image.png)
