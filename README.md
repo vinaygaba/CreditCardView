@@ -1,6 +1,5 @@
 CreditCard View
 ==================
-######WORK IN PROGRESS
 
 ![Feature Image](images/Feature Image.png)
 
