@@ -1,4 +1,4 @@
-CreditCard View
+CreditCard View ![Build](https://travis-ci.org/vinaygaba/CreditCardView.svg?branch=master)
 ==================
 
 ![Feature Image](images/Feature Image.png)
