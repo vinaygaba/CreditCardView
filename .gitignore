@@ -2,5 +2,7 @@
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
+/.idea/dictionaries
+CreditCardView.iml
 .DS_Store
 /build
