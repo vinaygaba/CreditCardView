@@ -16,7 +16,8 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity"
         android:paddingLeft="5dp"
-        android:paddingRight="5dp">
+        android:paddingRight="5dp"
+        android:background="#ffffff">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -42,44 +43,41 @@
         app:hintTextColor="#ffffff"
         />
 
-   <!-- <com.example.vinay.library.CreditCardView
-        android:id="@+id/card2"
-        android:layout_width="fill_parent"
-        android:layout_height="225dp"
-        android:background="@drawable/cardbackground_sky"
-        app:cardNumber="1234567890001234"
-        app:cardName="Vinay Gaba"
-        app:cardNumberTextColor="#ffffff"
-        app:cardNumberFormat="only_last_four"
-        app:cardNameTextColor="#ffffff"
-        app:type="mastercard"
-        app:brandLogo="@mipmap/citibank"
-        app:putChip="false"
-        app:validTillTextColor="#ffffff"
-        app:expiryDate = "11/15"
-        android:layout_marginBottom="16dp"
-        />
+            <com.example.vinay.library.CreditCardView
+                  android:id="@+id/card2"
+                  android:layout_width="fill_parent"
+                  android:layout_height="225dp"
+                  android:background="@drawable/cardbackground_sky"
+                  app:cardNumber="1234567890001234"
+                  app:cardName="Vinay Gaba"
+                  app:cardNumberTextColor="#ffffff"
+                  app:cardNumberFormat="all_digits"
+                  app:cardNameTextColor="#ffffff"
+                  app:type="mastercard"
+                  app:brandLogo="@mipmap/citibank"
+                  app:putChip="false"
+                  app:validTillTextColor="#ffffff"
+                  app:expiryDate = "01/15"
+                  android:layout_marginTop="16dp"
+                  />
 
     <com.example.vinay.library.CreditCardView
         android:id="@+id/card3"
         android:layout_width="fill_parent"
         android:layout_height="225dp"
-        android:background="@drawable/credit_card"
+        android:background="@drawable/cardbackground_plain"
         app:cardNumber="6011111111111117"
-        app:cardName="Vinay Gaba"
+        app:cardName="John Doe"
         app:cardNumberTextColor="#ffffff"
-        app:cardNumberFormat="masked_all"
+        app:cardNumberFormat="masked_all_but_last_four"
         app:cardNameTextColor="#ffffff"
         app:type="auto"
         app:brandLogo="@mipmap/standard_chartered"
         app:putChip="false"
         app:expiryDate="01/22"
+        android:layout_marginTop="16dp"
+        />
 
-        />-->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/test"/>
         </LinearLayout>
     </ScrollView>
 
