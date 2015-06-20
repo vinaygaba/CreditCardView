@@ -1,4 +1,4 @@
-CreditCard View ![Build](https://travis-ci.org/vinaygaba/CreditCardView.svg?branch=master) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.vinaygaba/creditcardview/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.vinaygaba/creditcardview)
+CreditCard View ![Build](https://travis-ci.org/vinaygaba/CreditCardView.svg?branch=master) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.vinaygaba/creditcardview/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.vinaygaba/creditcardview) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CreditCardView-green.svg?style=flat)](https://android-arsenal.com/details/1/2005)
 ==================
 
 ![Feature Image](images/Feature Image.png)
