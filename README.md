@@ -1,12 +1,11 @@
-CreditCard View
+CreditCard View ![Build](https://travis-ci.org/vinaygaba/CreditCardView.svg?branch=master) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.vinaygaba/creditcardview/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.vinaygaba/creditcardview)
 ==================
-######WORK IN PROGRESS
 
 ![Feature Image](images/Feature Image.png)
 
 CreditCardView is an Android library that allows developers to create the UI which replicates an actual Credit Card.
 
-Storing the credit card details inside the app has become a very common use case seen in a lot of different apps, but it is often represented in a not so intuitive manner. With Android Pay being announced at the recent Google I/O 2015, more apps would require users to input their credit card details. I created this library with the aim of making the process of storing and entering the credit card details more visually appealing to the users of your app.
+Displaying and entering the credit card details inside the app has become a very common use case seen in a lot of different apps, but it is often represented in a not so intuitive manner. With Android Pay being announced at the recent Google I/O 2015, more apps would require users to input their credit card details. I created this library with the aim of making the process of displaying and entering the credit card details more visually appealing to the users of your app.
 
 Screenshots
 ------------
@@ -80,6 +79,8 @@ CreditCardView creditCardView= (CreditCardView)findViewById(R.id.ID_OF_CARD);
 Attribute Usage & Documentation
 -----------------
 
+![Attribute Description](images/attributeDescription.png)
+
 ##### I) android:background
 
 Use this attribute to set the background of the card. This library includes 3 background by default which you can use, but **feel free to put any drawable and use it as the card background as you please**. If you do not want to use your own drawable and want to use the drawables available in the screenshots, do the following:
@@ -120,6 +121,7 @@ To customize the background color and the border color of this card, add the fol
 <color name="card_background">color_value</color>        //Default value is #e5e5e5
 <color name="card_border">color_value</color>            //Default value is #ffffff
 ```
+The important thing to note is that the name of these items should remain the same.
 
 4)Custom Background
 
@@ -352,6 +354,7 @@ If you wish to modify the default dimensions of the brand logo, add the followin
 <dimen name="brand_logo_width">size_in_dp</dimen>    //Default value is 60dp
 <dimen name="brand_logo_height">size_in_dp</dimen>   //Default value is 30dp
 ```
+The important thing to note is that the name of these items should remain the same.
 
 ##### XIII) app:hintTextColor
 
@@ -371,6 +374,41 @@ crediCardView.setHintTextColor(color_value);
 int color = crediCardView.geHintTextColor();
 ```
 
+Additional Customizations
+-----------------
+
+My aim with this library was to cover as many use cases as possible and so I have tried to make it extremely customizable. There are some additional customizations possible like:
+
+##### I) Modify String Resources
+
+You can modify the hints which are displayed when the fields are empty and the card is editable. You can modify those by adding these attributes in the strings.xml file:
+
+```
+<string name="card_number_hint">hint</string>        //Default value: "ENTER CARD NUMBER"
+<string name="expiry_date_hint">hint</string>        //Default value:"MM/YY"
+<string name="card_name_hint">hint</string>          //Default value: "ENTER CARD NAME"
+```
+You can also modify some other additional string resources like:
+
+```
+<string name="valid_till">string</string>           //Default value: "VALID TILL"
+```
+The important thing to note is that the name of these items should remain the same. 
+**Please make sure the string resources are in caps to be displayed correctly as the font does not support lower case**
+
+##### II) Modify Dimensions
+
+You can modify the dimensions of some of the attributes by adding these attributes to your dimens.xml file:
+
+```
+<dimen name="card_number_text_size">size</dimen>        //Default value:18sp
+<dimen name="card_name_text_size">size</dimen>          //Default value:18sp
+<dimen name="expiry_date_text_size">size</dimen>        //Default value:14sp
+<dimen name="brand_logo_width">size</dimen>             //Default value:60dp
+<dimen name="brand_logo_height">size</dimen>            //Default value:30dp
+```
+The important thing to note is that the name of these items should remain the same.
+
 Contributing
 -----------------
 Please use the issue tracker to report any bugs or file feature requests. There are a few features that I plan to work on based on the response the library gets, some of them being:
@@ -386,6 +424,19 @@ I would love to get more people involved in the development of this library. A l
 Credits
 -----------------
 Author: Vinay Gaba (vinaygaba@gmail.com)
+
+<a href="https://plus.google.com/+Vinaygaba">
+  <img alt="Follow me on Google+"
+       src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/g+64.png" />
+</a>
+<a href="https://twitter.com/vinaygaba">
+  <img alt="Follow me on Twitter"
+       src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/twitter64.png" />
+</a>
+<a href="https://www.linkedin.com/in/vinaygaba">
+  <img alt="Follow me on LinkedIn"
+       src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/linkedin.png" />
+</a>
 
 
 License
