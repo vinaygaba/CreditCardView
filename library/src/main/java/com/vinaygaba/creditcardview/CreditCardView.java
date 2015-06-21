@@ -1,4 +1,4 @@
-package com.vinaygaba.creditcardview.library;
+package com.vinaygaba.creditcardview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
