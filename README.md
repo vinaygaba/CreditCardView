@@ -1,4 +1,4 @@
-CreditCard View ![Build](https://travis-ci.org/vinaygaba/CreditCardView.svg?branch=master) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.vinaygaba/creditcardview/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.vinaygaba/creditcardview) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CreditCardView-green.svg?style=flat)](https://android-arsenal.com/details/1/2005)
+CreditCard View ![Build](https://travis-ci.org/vinaygaba/CreditCardView.svg?branch=master) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.vinaygaba/creditcardview/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.vinaygaba/creditcardview) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CreditCardView-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/2005)
 ==================
 
 ![Feature Image](images/Feature Image.png)
@@ -36,7 +36,7 @@ Usage
 ------
 Using CreditCardView is extremely easy, this is how you would declare it in the layout xml:
 ```java
-<com.example.vinay.library.CreditCardView
+<com.vinaygaba.creditcardview.CreditCardView
         android:id="@+id/card1"
         android:layout_width="fill_parent"
         android:layout_height="225dp"

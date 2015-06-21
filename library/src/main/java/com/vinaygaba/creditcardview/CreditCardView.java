@@ -1,4 +1,4 @@
-package com.example.vinay.library;
+package com.vinaygaba.creditcardview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.InputFilter;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -91,24 +90,24 @@ public class CreditCardView extends RelativeLayout{
     private void loadAttributes(AttributeSet attrs) {
         TypedArray a = getContext().getTheme().obtainStyledAttributes(
                 attrs,
-                R.styleable.CreditCardView2,
+                R.styleable.CreditCardView,
                 0, 0);
 
         try {
-            mCardNumber = a.getString(R.styleable.CreditCardView2_cardNumber);
-            mCardName = a.getString(R.styleable.CreditCardView2_cardName);
-            mExpiryDate = a.getString(R.styleable.CreditCardView2_expiryDate);
-            mCardNumberTextColor = a.getColor(R.styleable.CreditCardView2_cardNumberTextColor, Color.WHITE);
-            mCardNumberFormat = a.getInt(R.styleable.CreditCardView2_cardNumberFormat, 0);
-            mCardNameTextColor = a.getColor(R.styleable.CreditCardView2_cardNumberTextColor, Color.WHITE);
-            mExpiryDateTextColor = a.getColor(R.styleable.CreditCardView2_expiryDateTextColor, Color.WHITE);
-            mValidTillTextColor = a.getColor(R.styleable.CreditCardView2_validTillTextColor, Color.WHITE);
-            mType = a.getInt(R.styleable.CreditCardView2_type, 0);
-            mBrandLogo = a.getResourceId(R.styleable.CreditCardView2_brandLogo, 0);
-          //  mBrandLogoPosition = a.getInt(R.styleable.CreditCardView2_brandLogoPosition, 1);
-            mPutChip = a.getBoolean(R.styleable.CreditCardView2_putChip, false);
-            mIsEditable = a.getBoolean(R.styleable.CreditCardView2_isEditable,false);
-            mHintTextColor = a.getColor(R.styleable.CreditCardView2_hintTextColor, Color.WHITE);
+            mCardNumber = a.getString(R.styleable.CreditCardView_cardNumber);
+            mCardName = a.getString(R.styleable.CreditCardView_cardName);
+            mExpiryDate = a.getString(R.styleable.CreditCardView_expiryDate);
+            mCardNumberTextColor = a.getColor(R.styleable.CreditCardView_cardNumberTextColor, Color.WHITE);
+            mCardNumberFormat = a.getInt(R.styleable.CreditCardView_cardNumberFormat, 0);
+            mCardNameTextColor = a.getColor(R.styleable.CreditCardView_cardNumberTextColor, Color.WHITE);
+            mExpiryDateTextColor = a.getColor(R.styleable.CreditCardView_expiryDateTextColor, Color.WHITE);
+            mValidTillTextColor = a.getColor(R.styleable.CreditCardView_validTillTextColor, Color.WHITE);
+            mType = a.getInt(R.styleable.CreditCardView_type, 0);
+            mBrandLogo = a.getResourceId(R.styleable.CreditCardView_brandLogo, 0);
+          //  mBrandLogoPosition = a.getInt(R.styleable.CreditCardView_brandLogoPosition, 1);
+            mPutChip = a.getBoolean(R.styleable.CreditCardView_putChip, false);
+            mIsEditable = a.getBoolean(R.styleable.CreditCardView_isEditable,false);
+            mHintTextColor = a.getColor(R.styleable.CreditCardView_hintTextColor, Color.WHITE);
         } finally {
             a.recycle();
         }
