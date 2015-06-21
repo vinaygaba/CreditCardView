@@ -1,8 +1,15 @@
 .gradle
 /local.properties
+/.idea/.name
+/.idea/compiler.xml
+/.idea/gradle.xml
+/.idea/misc.xml
+/.idea/vcs.xml
 /.idea/workspace.xml
 /.idea/libraries
 /.idea/dictionaries
+/.idea/copyright/
+/.idea/modules.xml
 CreditCardView.iml
 .DS_Store
 /build
