@@ -23,7 +23,7 @@
             android:orientation="vertical"
             >
 
-    <com.example.vinay.library.CreditCardView
+    <com.vinaygaba.creditcardview.library.CreditCardView
         android:id="@+id/card1"
         android:layout_width="fill_parent"
         android:layout_height="225dp"
@@ -39,10 +39,9 @@
         app:expiryDateTextColor="#cccccc"
         app:isEditable = "true"
         app:validTillTextColor="#cccccc"
-        app:hintTextColor="#ffffff"
-        />
+        app:hintTextColor="#ffffff"/>
 
-   <!-- <com.example.vinay.library.CreditCardView
+   <!-- <com.vinaygaba.creditcardview.library.CreditCardView
         android:id="@+id/card2"
         android:layout_width="fill_parent"
         android:layout_height="225dp"
@@ -60,7 +59,7 @@
         android:layout_marginBottom="16dp"
         />
 
-    <com.example.vinay.library.CreditCardView
+    <com.vinaygaba.creditcardview.library.CreditCardView
         android:id="@+id/card3"
         android:layout_width="fill_parent"
         android:layout_height="225dp"

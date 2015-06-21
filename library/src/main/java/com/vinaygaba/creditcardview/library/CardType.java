@@ -1,4 +1,4 @@
-package com.example.vinay.library;
+package com.vinaygaba.creditcardview.library;
 
 /**
  * Created by vinay on 6/18/2015.
