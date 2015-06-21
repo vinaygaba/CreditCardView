@@ -14,7 +14,7 @@
             android:orientation="vertical"
             >
 
-    <com.vinaygaba.creditcardview.library.CreditCardView
+    <com.vinaygaba.creditcardview.CreditCardView
         android:id="@+id/card1"
         android:layout_width="fill_parent"
         android:layout_height="225dp"
@@ -32,7 +32,7 @@
         app:validTillTextColor="#cccccc"
         app:hintTextColor="#ffffff"/>
 
-            <com.vinaygaba.creditcardview.library.CreditCardView
+            <com.vinaygaba.creditcardview.CreditCardView
                   android:id="@+id/card2"
                   android:layout_width="fill_parent"
                   android:layout_height="225dp"
@@ -50,7 +50,7 @@
                   android:layout_marginTop="16dp"
                   />
 
-    <com.vinaygaba.creditcardview.library.CreditCardView
+    <com.vinaygaba.creditcardview.CreditCardView
         android:id="@+id/card3"
         android:layout_width="fill_parent"
         android:layout_height="225dp"

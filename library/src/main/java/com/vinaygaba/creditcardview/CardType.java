@@ -1,4 +1,4 @@
-package com.vinaygaba.creditcardview.library;
+package com.vinaygaba.creditcardview;
 
 /**
  * Created by vinay on 6/18/2015.
