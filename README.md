@@ -36,6 +36,8 @@ Usage
 ------
 Using CreditCardView is extremely easy, this is how you would declare it in the layout xml:
 ```java
+<!-- Use <com.example.vinay.library.CreditCardView/> if you are using v1.0.1 of the library-->
+
 <com.vinaygaba.creditcardview.CreditCardView
         android:id="@+id/card1"
         android:layout_width="fill_parent"
