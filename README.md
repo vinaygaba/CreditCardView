@@ -36,7 +36,7 @@ Usage
 ------
 Using CreditCardView is extremely easy, this is how you would declare it in the layout xml:
 ```java
-<com.vinaygaba.creditcardview.CreditCardView
+<com.vinaygaba.creditcardview.library.CreditCardView
         android:id="@+id/card1"
         android:layout_width="fill_parent"
         android:layout_height="225dp"
@@ -233,11 +233,11 @@ app:cardName="John Doe"
 
 You can set and get the value of this attribute programmatically using:
 ```java
-//Set Card Number
+//Set Card Name
 crediCardView.setCardName("John Doe");
 
-//Get Card Number
-String cardNumber = crediCardView.getCardName();
+//Get Card Name
+String cardName = crediCardView.getCardName();
 ```
 
 ##### VII) app:cardNameTextColor
@@ -327,7 +327,7 @@ app:type="visa/mastercard/americann_express/discover/auto"
 
 You can set the value of this attribute programmatically using:
 ```java
-//Set Card Type.Choose any one card tpe from the following
+//Set Card Type.Choose any one card type from the following
 creditCardView.setType(CardType.VISA/CardType.MASTERCARD/CardType.AMERICAN_EXPRESS/CardType.DISCOVER/CardType.AUTO);
 
 //Get Card Type. 
