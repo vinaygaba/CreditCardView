@@ -1,4 +1,4 @@
-package com.example.vinay.library;
+package com.vinaygaba.creditcardview.library;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
