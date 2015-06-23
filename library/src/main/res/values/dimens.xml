@@ -2,9 +2,9 @@
 <resources>
     <dimen name="card_border_width">2dip</dimen>
     <dimen name="card_corner_radius">10dip</dimen>
-    <dimen name="card_number_text_size">18sp</dimen>
-    <dimen name="card_name_text_size">18sp</dimen>
+    <dimen name="card_number_text_size">16sp</dimen>
+    <dimen name="card_name_text_size">14sp</dimen>
     <dimen name="expiry_date_text_size">14sp</dimen>
-    <dimen name="brand_logo_width">60dp</dimen>
-    <dimen name="brand_logo_height">30dp</dimen>
+    <dimen name="brand_logo_width">120dp</dimen>
+    <dimen name="brand_logo_height">40dp</dimen>
 </resources>
