@@ -353,8 +353,8 @@ crediCardView.setBrandLogo(R.drawable.drawable_name);
 
 If you wish to modify the default dimensions of the brand logo, add the following attribute to your dimen.xml file:
 ```
-<dimen name="brand_logo_width">size_in_dp</dimen>    //Default value is 60dp
-<dimen name="brand_logo_height">size_in_dp</dimen>   //Default value is 30dp
+<dimen name="brand_logo_width">size_in_dp</dimen>    //Default value is 120dp
+<dimen name="brand_logo_height">size_in_dp</dimen>   //Default value is 40dp
 ```
 The important thing to note is that the name of these items should remain the same.
 
@@ -403,11 +403,11 @@ The important thing to note is that the name of these items should remain the sa
 You can modify the dimensions of some of the attributes by adding these attributes to your dimens.xml file:
 
 ```
-<dimen name="card_number_text_size">size</dimen>        //Default value:18sp
-<dimen name="card_name_text_size">size</dimen>          //Default value:18sp
+<dimen name="card_number_text_size">size</dimen>        //Default value:16sp
+<dimen name="card_name_text_size">size</dimen>          //Default value:14sp
 <dimen name="expiry_date_text_size">size</dimen>        //Default value:14sp
-<dimen name="brand_logo_width">size</dimen>             //Default value:60dp
-<dimen name="brand_logo_height">size</dimen>            //Default value:30dp
+<dimen name="brand_logo_width">size</dimen>             //Default value:120dp
+<dimen name="brand_logo_height">size</dimen>            //Default value:40dp
 ```
 The important thing to note is that the name of these items should remain the same.
 
