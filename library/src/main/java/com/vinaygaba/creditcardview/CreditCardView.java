@@ -66,12 +66,13 @@ public class CreditCardView extends RelativeLayout{
         View view = inflater.inflate(R.layout.creditcardview, this, true);
 
 
+        if(!isInEditMode()) {
+            // Font path
+            String fontPath = "fonts/halter.ttf";
+            // Loading Font Face
+            creditCardTypeFace = Typeface.createFromAsset(getContext().getAssets(), fontPath);
 
-        // Font path
-        String fontPath = "fonts/halter.ttf";
-        // Loading Font Face
-        creditCardTypeFace = Typeface.createFromAsset(getContext().getAssets(), fontPath);
-
+        }
         cardNumber = (EditText)getChildAt(0);
 
         cardName = (EditText)getChildAt(1);
@@ -137,14 +138,17 @@ public class CreditCardView extends RelativeLayout{
         if(mCardNumber!= null)
             cardNumber.setText(checkCardNumberFormat(addSpaceToCardNumber(mCardNumber)));
         cardNumber.setTextColor(mCardNumberTextColor);
-        cardNumber.setTypeface(creditCardTypeFace);
+        if(!isInEditMode()) {
+            cardNumber.setTypeface(creditCardTypeFace);
+        }
 
         if(mCardName!= null)
             cardName.setText(mCardName.toUpperCase());
         cardName.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         cardName.setTextColor(mCardNumberTextColor);
-        cardName.setTypeface(creditCardTypeFace);
-
+        if(!isInEditMode()) {
+            cardName.setTypeface(creditCardTypeFace);
+        }
 
         //Set the appropriate logo based on the type of card
         type.setBackgroundResource(getLogo(mType));
@@ -173,8 +177,9 @@ public class CreditCardView extends RelativeLayout{
         if(mExpiryDate!= null)
             expiryDate.setText(mExpiryDate);
         expiryDate.setTextColor(mExpiryDateTextColor);
-        expiryDate.setTypeface(creditCardTypeFace);
-
+        if(!isInEditMode()) {
+            expiryDate.setTypeface(creditCardTypeFace);
+        }
 
         validTill.setTextColor(mValidTillTextColor);
 
