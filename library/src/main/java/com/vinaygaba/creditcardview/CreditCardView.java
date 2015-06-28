@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2015 Vinay Gaba
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
 package com.vinaygaba.creditcardview;
 
 import android.content.Context;
@@ -18,9 +35,7 @@ import android.widget.TextView;
 
 import java.util.regex.Pattern;
 
-/**
- * Created by vgaba on 4/28/2015.
- */
+
 public class CreditCardView extends RelativeLayout{
 
     private String mCardNumber = "";
@@ -60,12 +75,15 @@ public class CreditCardView extends RelativeLayout{
         loadAttributes(attrs);
     }
 
+    /**
+     * Initialize various views and variables
+     */
     private void init() {
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.creditcardview, this, true);
 
-
+        //Added this check to fix the issue of custom view not rendering correctly in the layout preview.
         if(!isInEditMode()) {
             // Font path
             String fontPath = "fonts/halter.ttf";
@@ -105,7 +123,7 @@ public class CreditCardView extends RelativeLayout{
             mValidTillTextColor = a.getColor(R.styleable.CreditCardView_validTillTextColor, Color.WHITE);
             mType = a.getInt(R.styleable.CreditCardView_type, 0);
             mBrandLogo = a.getResourceId(R.styleable.CreditCardView_brandLogo, 0);
-          //  mBrandLogoPosition = a.getInt(R.styleable.CreditCardView_brandLogoPosition, 1);
+          //mBrandLogoPosition = a.getInt(R.styleable.CreditCardView_brandLogoPosition, 1);
             mPutChip = a.getBoolean(R.styleable.CreditCardView_putChip, false);
             mIsEditable = a.getBoolean(R.styleable.CreditCardView_isEditable,false);
             mHintTextColor = a.getColor(R.styleable.CreditCardView_hintTextColor, Color.WHITE);
@@ -113,18 +131,20 @@ public class CreditCardView extends RelativeLayout{
             a.recycle();
         }
 
-        //Set default background
+        //Set default background if background attribute was not entered in the xml
         if(getBackground()==null){
             setBackgroundResource(R.drawable.cardbackground_sky);
         }
 
-        if(!mIsEditable){
 
+        if(!mIsEditable){
+            //If card is not set to be editable, disable the edit texts
             cardNumber.setEnabled(false);
             cardName.setEnabled(false);
             expiryDate.setEnabled(false);
         }
         else{
+            //If the card is editable, set the hin text and hint values which will be displayed when the edit text is blank
             cardNumber.setHint(R.string.card_number_hint);
             cardNumber.setHintTextColor(mHintTextColor);
 
@@ -135,17 +155,29 @@ public class CreditCardView extends RelativeLayout{
             expiryDate.setHintTextColor(mHintTextColor);
         }
 
+        //If card number is not null, add space every 4 characters and format it in the appropriate format
         if(mCardNumber!= null)
             cardNumber.setText(checkCardNumberFormat(addSpaceToCardNumber(mCardNumber)));
+
+        //Set the user entered card number color to card number field
         cardNumber.setTextColor(mCardNumberTextColor);
+
+        //Added this check to fix the issue of custom view not rendering correctly in the layout preview.
         if(!isInEditMode()) {
             cardNumber.setTypeface(creditCardTypeFace);
         }
 
+        //If card name is not null, convert the text to upper case
         if(mCardName!= null)
             cardName.setText(mCardName.toUpperCase());
+
+        //This filter will ensure the text entered is in uppercase when the user manually enters the card name
         cardName.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
+
+        //Set the user entered card name color to card name field
         cardName.setTextColor(mCardNumberTextColor);
+
+        //Added this check to fix the issue of custom view not rendering correctly in the layout preview.
         if(!isInEditMode()) {
             cardName.setTypeface(creditCardTypeFace);
         }
@@ -153,42 +185,39 @@ public class CreditCardView extends RelativeLayout{
         //Set the appropriate logo based on the type of card
         type.setBackgroundResource(getLogo(mType));
 
-        //Set Brand Logo Position
-      /*  RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)brandLogo.getLayoutParams();
-        if(mBrandLogoPosition==0){
-            params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        }
-        else if(mBrandLogoPosition==1){
-            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        }*/
-
-        //If background logo attribute is present, set it
+        //If background logo attribute is present, set it as the brand logo background resource
         if(mBrandLogo != 0) {
             brandLogo.setBackgroundResource(mBrandLogo);
            // brandLogo.setLayoutParams(params);
         }
 
-        //If putChip attribute is present, change the visibility of the view and display it
+        //If putChip attribute is present, change the visibility of the putChip view and display it
         if(mPutChip){
             chip = (ImageView)getChildAt(4);
             chip.setVisibility(View.VISIBLE);
         }
 
+        //If expiry date is not null, set it to the expiryDate TextView
         if(mExpiryDate!= null)
             expiryDate.setText(mExpiryDate);
+
+        //Set the user entered expiry date color to expiry date field
         expiryDate.setTextColor(mExpiryDateTextColor);
+
+        //Added this check to fix the issue of custom view not rendering correctly in the layout preview.
         if(!isInEditMode()) {
             expiryDate.setTypeface(creditCardTypeFace);
         }
 
+        //Set the appropriate text color to the validTill TextView
         validTill.setTextColor(mValidTillTextColor);
 
-
-
+        //Add text change listener
         cardNumber.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                //Change card type to auto to dynamically detect the card type based on the card number
                 mType =4;
             }
 
@@ -200,25 +229,25 @@ public class CreditCardView extends RelativeLayout{
 
             @Override
             public void afterTextChanged(Editable arg0) {
-
+                //Delete any spaces the user might have entered manually. The library automatically adds spaces after every 4 characters to the view.
                 mCardNumber = cardNumber.getText().toString().replaceAll("\\s+","");
-               /* if(mCardNumber.length()>12) {
-                    cardNumber.setText(checkCardNumberFormat(addSpaceToCardNumber(mCardNumber)));
-                    if (mType == 4) {
-                        type.setBackgroundResource(getLogo(mType));
-                    }
-                }*/
+
             }
 
 
         });
 
+        //Add focus change listener to detect focus being shifted from the cardNumber EditText
         cardNumber.setOnFocusChangeListener(new OnFocusChangeListener() {
 
             public void onFocusChange(View v, boolean hasFocus) {
+                //If the field just lost focus
                 if (!hasFocus) {
                     if (mCardNumber.length() > 12) {
+                        //If the length of card is >12, add space every 4 characters and format it in the appropriate format
                         cardNumber.setText(checkCardNumberFormat(addSpaceToCardNumber(mCardNumber)));
+
+                        //If card type is "auto",find the appropriate logo
                         if (mType == 4) {
                             type.setBackgroundResource(getLogo(mType));
                         }
@@ -243,6 +272,7 @@ public class CreditCardView extends RelativeLayout{
 
             @Override
             public void afterTextChanged(Editable arg0) {
+                //Set the mCardName attribute the user entered value in the Card Name field
                 mCardName = cardName.getText().toString().toUpperCase();
 
             }
@@ -264,6 +294,7 @@ public class CreditCardView extends RelativeLayout{
 
             @Override
             public void afterTextChanged(Editable arg0) {
+                //Set the mExpiryDate attribute the user entered value in the Expiry Date field
                 mExpiryDate = expiryDate.getText().toString();
 
             }
@@ -423,6 +454,17 @@ public class CreditCardView extends RelativeLayout{
         requestLayout();
     }
 
+    public void putChip(boolean flag){
+        mPutChip = flag;
+        invalidate();
+        requestLayout();
+    }
+
+    /**
+     *Return the appropriate drawable resource based on the card type
+     *
+     * @param type
+     */
     public int getLogo(int type){
 
         switch(type){
@@ -443,12 +485,11 @@ public class CreditCardView extends RelativeLayout{
         return 0;
     }
 
-    public void putChip(){
-        mPutChip = true;
-        invalidate();
-        requestLayout();
-    }
-
+    /**
+     * Returns the formatted card number based on the user entered value for card number format
+     *
+     * @param cardNumber
+     */
     public String checkCardNumberFormat(String cardNumber){
         Log.e("Card Number",cardNumber);
         if(getCardNumberFormat()==1){
@@ -468,6 +509,9 @@ public class CreditCardView extends RelativeLayout{
         return cardNumber;
     }
 
+    /**
+     * Returns the appropriate card type drawable resource based on the regex pattern of the card number
+     */
     public int findCardType(){
 
         int type = 0;
@@ -491,6 +535,11 @@ public class CreditCardView extends RelativeLayout{
         return getLogo(type);
     }
 
+    /**
+     * Adds space after every 4 characters to the card number if the card number is divisible by 4
+     *
+     * @param cardNumber
+     */
     public String addSpaceToCardNumber(String cardNumber){
 
         if(cardNumber.length()%4 !=0){
