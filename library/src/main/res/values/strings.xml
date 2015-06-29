@@ -1,8 +1,15 @@
 <resources>
-    <string name="app_name">Library</string>
+
+    <string name="app_name">CreditCardView Library</string>
     <string name="valid_till">VALID TILL</string>
     <string name="card_number_hint">ENTER CARD NUMBER</string>
     <string name="expiry_date_hint">MM/YY</string>
     <string name="card_name_hint">ENTER CARD NAME</string>
+    <string name="card_logo">Card Logo</string>
+    <string name="brand_logo">Brand Logo</string>
+    <string name="chip_visible">Chip Visible</string>
+
+    <!-- Font Path starts after `assets/` -->
+    <string name="font_path">fonts/halter.ttf</string>
 
 </resources>
