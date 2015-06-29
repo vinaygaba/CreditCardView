@@ -316,10 +316,10 @@ creditCardView.putChip(true/false);
 
 Use this attribute to set the type of the credit card. The library automatically places the corresponding drawable in the bottom right corner based on the type you have selected. Currectly there are 5 different types supported:
 
-1. visa
-2. mastercard
-3. american_express
-4. discover
+1. visa  <img src ="images/visa.png" height =20 width = 40 />
+2. mastercard   <img src ="images/mastercard.png" height =20 width = 40 />
+3. american_express   <img src ="images/amex.png" height =20 width = 40 />
+4. discover   <img src ="images/discover.png" height =20 width = 40 />
 5. auto - Use auto if u want the library to automatically choose the card type based on the card number you have entered. To know more about the patterns for identifying the card type from the card number, see this [link](http://www.regular-expressions.info/creditcard.html)
 
 You can set the value in xml using:
