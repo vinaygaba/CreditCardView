@@ -21,6 +21,10 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.IntDef;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -33,8 +37,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.regex.Pattern;
 
+import static com.vinaygaba.creditcardview.CardNumberFormat.ALL_DIGITS;
+import static com.vinaygaba.creditcardview.CardNumberFormat.MASKED_ALL;
+import static com.vinaygaba.creditcardview.CardNumberFormat.MASKED_ALL_BUT_LAST_FOUR;
+import static com.vinaygaba.creditcardview.CardNumberFormat.ONLY_LAST_FOUR;
 import static com.vinaygaba.creditcardview.CardType.AMERICAN_EXPRESS;
 import static com.vinaygaba.creditcardview.CardType.AUTO;
 import static com.vinaygaba.creditcardview.CardType.DISCOVER;
@@ -47,15 +57,27 @@ import static com.vinaygaba.creditcardview.CardType.VISA;
 @SuppressLint("DefaultLocale")
 public class CreditCardView extends RelativeLayout {
 
+    @IntDef({VISA, MASTERCARD, AMERICAN_EXPRESS, DISCOVER, AUTO})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface CreditCardType {
+    }
+
+    @IntDef({ALL_DIGITS, MASKED_ALL_BUT_LAST_FOUR, ONLY_LAST_FOUR, MASKED_ALL})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface CreditCardFormat {
+    }
+
+    private static final boolean DEBUG = false;
+    private Context mContext;
     private String mCardNumber = "";
     private String mCardName = "";
     private String mExpiryDate = "";
     private int mCardNumberTextColor = Color.WHITE;
-    private int mCardNumberFormat = 0;
+    private int mCardNumberFormat = ALL_DIGITS;
     private int mCardNameTextColor = Color.WHITE;
     private int mExpiryDateTextColor = Color.WHITE;
     private int mValidTillTextColor = Color.WHITE;
-    private int mType = 0;
+    private int mType = VISA;
     private int mBrandLogo;
     private boolean mPutChip = false;
     private boolean mIsEditable = false;
@@ -66,7 +88,6 @@ public class CreditCardView extends RelativeLayout {
     private EditText expiryDate;
     private TextView validTill;
     private ImageView type;
-    private Context mContext;
     private ImageView brandLogo;
     private ImageView chip;
 
@@ -74,18 +95,25 @@ public class CreditCardView extends RelativeLayout {
         this(context, null);
     }
 
-    public CreditCardView(Context context, AttributeSet attrs) {
+    public CreditCardView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        this.mContext = context;
+        if (context != null) {
+            this.mContext = context;
+        } else {
+            this.mContext = getContext();
+        }
+
         init();
         loadAttributes(attrs);
+        initDefaults();
+        addListeners();
     }
 
     /**
      * Initialize various views and variables
      */
     private void init() {
-        final LayoutInflater inflater = (LayoutInflater) getContext()
+        final LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.creditcardview, this, true);
 
@@ -95,30 +123,21 @@ public class CreditCardView extends RelativeLayout {
             // Font path
             final String fontPath = mContext.getString(R.string.font_path);
             // Loading Font Face
-            creditCardTypeFace = Typeface.createFromAsset(getContext().getAssets(), fontPath);
-
+            creditCardTypeFace = Typeface.createFromAsset(mContext.getAssets(), fontPath);
         }
-        cardNumber = (EditText) getChildAt(0);
 
-        cardName = (EditText) getChildAt(1);
-
-        type = (ImageView) getChildAt(2);
-
-        brandLogo = (ImageView) getChildAt(3);
-
-        chip = (ImageView) getChildAt(4);
-
-        validTill = (TextView) getChildAt(5);
-
-        expiryDate = (EditText) getChildAt(6);
+        cardNumber = (EditText) findViewById(R.id.card_number);
+        cardName = (EditText) findViewById(R.id.card_name);
+        type = (ImageView) findViewById(R.id.card_logo);
+        brandLogo = (ImageView) findViewById(R.id.brand_logo);
+        chip = (ImageView) findViewById(R.id.chip);
+        validTill = (TextView) findViewById(R.id.valid_till);
+        expiryDate = (EditText) findViewById(R.id.expiry_date);
     }
 
-    private void loadAttributes(AttributeSet attrs) {
-        if (attrs == null) {
-            return;
-        }
+    private void loadAttributes(@Nullable AttributeSet attrs) {
 
-        final TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs,
+        final TypedArray a = mContext.getTheme().obtainStyledAttributes(attrs,
                 R.styleable.CreditCardView, 0, 0);
 
         try {
@@ -143,6 +162,9 @@ public class CreditCardView extends RelativeLayout {
         } finally {
             a.recycle();
         }
+    }
+
+    private void initDefaults() {
 
         // Set default background if background attribute was not entered in the xml
         if (getBackground() == null) {
@@ -213,7 +235,6 @@ public class CreditCardView extends RelativeLayout {
 
         // If putChip attribute is present, change the visibility of the putChip view and display it
         if (mPutChip) {
-            chip = (ImageView) getChildAt(4);
             chip.setVisibility(View.VISIBLE);
         }
 
@@ -233,9 +254,11 @@ public class CreditCardView extends RelativeLayout {
 
         // Set the appropriate text color to the validTill TextView
         validTill.setTextColor(mValidTillTextColor);
+    }
+
+    private void addListeners() {
 
         // Add text change listener
-
         cardNumber.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -271,7 +294,7 @@ public class CreditCardView extends RelativeLayout {
                                 .setText(checkCardNumberFormat(addSpaceToCardNumber(mCardNumber)));
 
                         // If card type is "auto",find the appropriate logo
-                        if (mType == 4) {
+                        if (mType == AUTO) {
                             type.setBackgroundResource(getLogo(mType));
                         }
                     }
@@ -312,7 +335,11 @@ public class CreditCardView extends RelativeLayout {
                 mExpiryDate = s.toString();
             }
         });
+    }
 
+    private void redrawViews() {
+        invalidate();
+        requestLayout();
     }
 
     public String getCardNumber() {
@@ -321,8 +348,7 @@ public class CreditCardView extends RelativeLayout {
 
     public void setCardNumber(String cardNumber) {
         mCardNumber = cardNumber.replaceAll("\\s+", "");
-        invalidate();
-        requestLayout();
+        redrawViews();
     }
 
     public String getCardName() {
@@ -331,38 +357,42 @@ public class CreditCardView extends RelativeLayout {
 
     public void setCardName(String cardName) {
         mCardName = cardName.toUpperCase();
-        invalidate();
-        requestLayout();
+        redrawViews();
     }
 
+    @ColorInt
     public int getCardNumberTextColor() {
         return mCardNumberTextColor;
     }
 
-    public void setCardNumberTextColor(int cardNumberTextColor) {
+    public void setCardNumberTextColor(@ColorInt int cardNumberTextColor) {
         mCardNumberTextColor = cardNumberTextColor;
-        invalidate();
-        requestLayout();
+        redrawViews();
     }
 
+    @CreditCardFormat
     public int getCardNumberFormat() {
         return mCardNumberFormat;
     }
 
-    public void setCardNumberFormat(int cardNumberFormat) {
+    public void setCardNumberFormat(@CreditCardFormat int cardNumberFormat) {
+        if (cardNumberFormat < 0 | cardNumberFormat > 3) {
+            throw new UnsupportedOperationException("CardNumberFormat: " + cardNumberFormat + "  " +
+                    "is not supported. Use `CardNumberFormat.*` or `CardType.ALL_DIGITS` if " +
+                    "unknown");
+        }
         mCardNumberFormat = cardNumberFormat;
-        invalidate();
-        requestLayout();
+        redrawViews();
     }
 
+    @ColorInt
     public int getCardNameTextColor() {
         return mCardNameTextColor;
     }
 
-    public void setCardNameTextColor(int cardNameTextColor) {
+    public void setCardNameTextColor(@ColorInt int cardNameTextColor) {
         mCardNameTextColor = cardNameTextColor;
-        invalidate();
-        requestLayout();
+        redrawViews();
     }
 
     public String getExpiryDate() {
@@ -371,38 +401,41 @@ public class CreditCardView extends RelativeLayout {
 
     public void setExpiryDate(String expiryDate) {
         mExpiryDate = expiryDate;
-        invalidate();
-        requestLayout();
+        redrawViews();
     }
 
+    @ColorInt
     public int getExpiryDateTextColor() {
         return mExpiryDateTextColor;
     }
 
-    public void setExpiryDateTextColor(int expiryDateTextColor) {
+    public void setExpiryDateTextColor(@ColorInt int expiryDateTextColor) {
         mExpiryDateTextColor = expiryDateTextColor;
-        invalidate();
-        requestLayout();
+        redrawViews();
     }
 
+    @ColorInt
     public int getValidTillTextColor() {
         return mValidTillTextColor;
     }
 
-    public void setValidTillTextColor(int validTillTextColor) {
+    public void setValidTillTextColor(@ColorInt int validTillTextColor) {
         mValidTillTextColor = validTillTextColor;
-        invalidate();
-        requestLayout();
+        redrawViews();
     }
 
+    @CreditCardType
     public int getType() {
         return mType;
     }
 
-    public void setType(int type) {
+    public void setType(@CreditCardType int type) {
+        if (type < 0 | type > 4) {
+            throw new UnsupportedOperationException("CardType: " + type + "  is not supported. " +
+                    "Use `CardType.*` or `CardType.AUTO` if unknown");
+        }
         mType = type;
-        invalidate();
-        requestLayout();
+        redrawViews();
     }
 
     public boolean getIsEditable() {
@@ -411,43 +444,40 @@ public class CreditCardView extends RelativeLayout {
 
     public void setIsEditable(boolean isEditable) {
         mIsEditable = isEditable;
-        invalidate();
-        requestLayout();
+        redrawViews();
     }
 
+    @ColorInt
     public int getHintTextColor() {
         return mHintTextColor;
     }
 
-    public void setHintTextColor(int hintTextColor) {
+    public void setHintTextColor(@ColorInt int hintTextColor) {
         mHintTextColor = hintTextColor;
-        invalidate();
-        requestLayout();
+        redrawViews();
     }
 
+    @DrawableRes
     public int getBrandLogo() {
         return mBrandLogo;
     }
 
-    public void setBrandLogo(int brandLogo) {
+    public void setBrandLogo(@DrawableRes int brandLogo) {
         mBrandLogo = brandLogo;
-        invalidate();
-        requestLayout();
+        redrawViews();
     }
 
     public int getBrandLogoPosition() {
         return mBrandLogo;
     }
 
-    public void setBrandLogoposition(int brandLogoPosition) {
-        invalidate();
-        requestLayout();
+    public void setBrandLogoPosition(int brandLogoPosition) {
+        redrawViews();
     }
 
     public void putChip(boolean flag) {
         mPutChip = flag;
-        invalidate();
-        requestLayout();
+        redrawViews();
     }
 
     /**
@@ -455,7 +485,8 @@ public class CreditCardView extends RelativeLayout {
      *
      * @param type type of card.
      */
-    public int getLogo(int type) {
+    @DrawableRes
+    private int getLogo(@CreditCardType int type) {
 
         switch (type) {
             case VISA:
@@ -473,29 +504,38 @@ public class CreditCardView extends RelativeLayout {
             case AUTO:
                 return findCardType();
 
+            default:
+                throw new UnsupportedOperationException("CardType: " + type + "  is not supported" +
+                        ". Use `CardType.*` or `CardType.AUTO` if unknown");
         }
 
-        return 0;
     }
 
     /**
      * Returns the formatted card number based on the user entered value for card number format
      *
-     * @param cardNumber
+     * @param cardNumber Card Number.
      */
-    public String checkCardNumberFormat(String cardNumber) {
-        Log.e("Card Number", cardNumber);
+    private String checkCardNumberFormat(String cardNumber) {
+
+        if (DEBUG) {
+            Log.e("Card Number", cardNumber);
+        }
 
         switch (getCardNumberFormat()) {
-            case MASTERCARD:
+            case MASKED_ALL_BUT_LAST_FOUR:
                 cardNumber = "**** **** **** "
                         + cardNumber.substring(cardNumber.length() - 4, cardNumber.length());
                 break;
-            case AMERICAN_EXPRESS:
+            case ONLY_LAST_FOUR:
                 cardNumber = cardNumber.substring(cardNumber.length() - 4, cardNumber.length());
                 break;
-            case DISCOVER:
+            case MASKED_ALL:
                 cardNumber = "**** **** **** ****";
+                break;
+            default:
+                //do nothing.
+                break;
         }
         return cardNumber;
     }
@@ -504,7 +544,8 @@ public class CreditCardView extends RelativeLayout {
      * Returns the appropriate card type drawable resource based on the regex pattern of the card
      * number
      */
-    public int findCardType() {
+    @DrawableRes
+    private int findCardType() {
 
         int type = VISA;
         if (cardNumber.length() > 0) {
@@ -528,9 +569,9 @@ public class CreditCardView extends RelativeLayout {
     /**
      * Adds space after every 4 characters to the card number if the card number is divisible by 4
      *
-     * @param cardNumber
+     * @param cardNumber Card Number.
      */
-    public String addSpaceToCardNumber(String cardNumber) {
+    private String addSpaceToCardNumber(String cardNumber) {
 
         if (cardNumber.length() % 4 != 0) {
             return cardNumber;
