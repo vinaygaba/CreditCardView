@@ -1,115 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="RtlHardcoded">
 
     <EditText
+        android:id="@+id/card_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cardNumber"
-        android:layout_weight="1"
-        android:layout_above="@+id/validTill"
+        android:layout_above="@+id/valid_till"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="25dp"
-        android:textSize="@dimen/card_number_text_size"
-        android:maxLength="20"
-        android:background="#00000000"
+        android:layout_marginBottom="@dimen/card_number_margin_bottom"
+        android:layout_marginLeft="@dimen/card_common_margin"
+        android:layout_marginRight="@dimen/card_common_margin"
+        android:layout_weight="1"
+        android:background="@color/card_text_background"
         android:inputType="number"
-
-
-        />
+        android:maxLength="@integer/card_number_max_length"
+        android:textSize="@dimen/card_number_text_size" />
 
     <EditText
+        android:id="@+id/card_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cardName"
-        android:layout_weight="1"
-
-        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="16dp"
-        android:textSize="@dimen/card_name_text_size"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="@dimen/card_common_margin"
+        android:layout_marginLeft="@dimen/card_common_margin"
+        android:layout_weight="1"
+        android:background="@color/card_text_background"
         android:ellipsize="end"
-        android:maxLength="18"
+        android:inputType="textCapCharacters"
+        android:maxLength="@integer/card_name_max_length"
         android:singleLine="true"
-        android:background="#00000000"
-
-        />
-
-
+        android:textAllCaps="true"
+        android:textSize="@dimen/card_name_text_size"
+        tools:ignore="UnusedAttribute" />
 
     <ImageView
+        android:id="@+id/card_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cardLogo"
-        android:layout_weight="1"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-
-
-        />
+        android:layout_marginBottom="@dimen/card_common_margin"
+        android:layout_marginRight="@dimen/card_common_margin"
+        android:layout_weight="1"
+        android:contentDescription="@string/card_logo" />
 
     <ImageView
+        android:id="@+id/brand_logo"
         android:layout_width="@dimen/brand_logo_width"
         android:layout_height="@dimen/brand_logo_height"
-        android:id="@+id/brandLogo"
-        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/card_common_margin"
+        android:layout_marginRight="@dimen/card_common_margin"
+        android:layout_marginTop="@dimen/card_common_margin"
+        android:contentDescription="@string/brand_logo" />
 
-        />
     <ImageView
+        android:id="@+id/chip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/chip"
-        android:layout_above="@+id/cardNumber"
+        android:layout_above="@+id/card_number"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/card_common_margin"
+        android:layout_marginLeft="@dimen/card_common_margin"
         android:background="@drawable/card_chip"
-        android:visibility="gone"
-        />
+        android:contentDescription="@string/chip_visible"
+        android:visibility="gone" />
 
     <TextView
-        android:id="@+id/validTill"
+        android:id="@+id/valid_till"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/cardName"
+        android:layout_above="@+id/card_name"
+        android:layout_marginBottom="@dimen/card_common_margin"
+        android:layout_toLeftOf="@+id/expiry_date"
         android:text="@string/valid_till"
-        android:textSize="10sp"
-        android:layout_marginBottom="16dp"
-        android:layout_toLeftOf="@+id/expiryDate"
-        />
+        android:textSize="@dimen/valid_till_text_size"
+        tools:ignore="SmallSp" />
 
     <EditText
+        android:id="@+id/expiry_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/expiryDate"
-        android:layout_weight="1"
-        android:layout_above="@id/cardName"
-        android:layout_marginBottom="16dp"
-        android:textSize="@dimen/expiry_date_text_size"
-        android:singleLine="true"
-        android:background="#00000000"
-        android:layout_marginLeft="5dp"
-        android:layout_marginStart="5dp"
+        android:layout_above="@id/card_name"
         android:layout_centerHorizontal="true"
-
-        android:maxLength="7"
-        />
+        android:layout_marginBottom="@dimen/card_common_margin"
+        android:layout_marginLeft="@dimen/expiry_date_margin_left"
+        android:layout_marginStart="@dimen/expiry_date_margin_left"
+        android:layout_weight="1"
+        android:background="@color/card_text_background"
+        android:inputType="date"
+        android:maxLength="@integer/expiry_date_max_length"
+        android:singleLine="true"
+        android:textSize="@dimen/expiry_date_text_size" />
 
     <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
-    <LinearLayout
-        android:focusable="true" android:focusableInTouchMode="true"
-        android:layout_width="0px" android:layout_height="0px"/>
 
-
+    <View
+        android:layout_width="@dimen/dummy_view_params"
+        android:layout_height="@dimen/dummy_view_params"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
 
 </merge>
