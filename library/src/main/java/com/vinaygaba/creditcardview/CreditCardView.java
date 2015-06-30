@@ -201,45 +201,43 @@ public class CreditCardView extends RelativeLayout {
             //If the mIsCardNameEditable is different than mIsEditable field, the granular
             //precedence comes into picture and the value needs to be checked and modified
             //accordingly
-            if(!mIsCardNameEditable){
-                cardName.setEnabled(false);
-                cardName.setHint("");
-            }
-            else{
-                cardName.setEnabled(true);
+            if(mIsCardNameEditable){
                 cardName.setHint(R.string.card_name_hint);
                 cardName.setHintTextColor(mHintTextColor);
             }
+            else{
+                cardName.setHint("");
+            }
+
+            cardName.setEnabled(mIsCardNameEditable);
         }
 
         if(mIsCardNumberEditable!=mIsEditable){
             //If the mIsCardNumberEditable is different than mIsEditable field, the granular
             //precedence comes into picture and the value needs to be checked and modified
             //accordingly
-            if(!mIsCardNumberEditable){
-                cardNumber.setEnabled(false);
-                cardNumber.setHint("");
-            }
-            else{
-                cardNumber.setEnabled(true);
+            if(mIsCardNumberEditable){
                 cardNumber.setHint(R.string.card_number_hint);
                 cardNumber.setHintTextColor(mHintTextColor);
             }
+            else{
+                cardNumber.setHint("");
+            }
+            cardNumber.setEnabled(mIsCardNumberEditable);
         }
 
         if(mIsExpiryDateEditable!=mIsEditable){
             //If the mIsExpiryDateEditable is different than mIsEditable field, the granular
             //precedence comes into picture and the value needs to be checked and modified
             //accordingly
-            if(!mIsExpiryDateEditable){
-                expiryDate.setEnabled(false);
-                expiryDate.setHint("");
-            }
-            else{
-                expiryDate.setEnabled(true);
+            if(mIsExpiryDateEditable){
                 expiryDate.setHint(R.string.expiry_date_hint);
                 expiryDate.setHintTextColor(mHintTextColor);
             }
+            else{
+                expiryDate.setHint("");
+            }
+            expiryDate.setEnabled(mIsExpiryDateEditable);
         }
 
         // If card number is not null, add space every 4 characters and format it in the appropriate
