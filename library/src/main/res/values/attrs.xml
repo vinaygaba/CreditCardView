@@ -34,6 +34,7 @@
         <attr name="isEditable" format = "boolean"/>
         <attr name="validTillTextColor" format="color"/>
         <attr name="hintTextColor" format="color"/>
+        <attr name="isFlippable" format="boolean"/>
 
     </declare-styleable>
 </resources>
