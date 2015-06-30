@@ -287,15 +287,18 @@ public class CreditCardView extends RelativeLayout {
             public void onFocusChange(View v, boolean hasFocus) {
                 // If the field just lost focus
                 if (!hasFocus) {
-                    if (mCardNumber.length() > 12) {
-                        // If the length of card is >12, add space every 4 characters and format it
-                        // in the appropriate format
-                        cardNumber
-                                .setText(checkCardNumberFormat(addSpaceToCardNumber(mCardNumber)));
+                    //Fix for NPE. Issue #6
+                    if(mCardNumber != null) {
+                        if (mCardNumber.length() > 12) {
+                            // If the length of card is >12, add space every 4 characters and format it
+                            // in the appropriate format
+                            cardNumber
+                                    .setText(checkCardNumberFormat(addSpaceToCardNumber(mCardNumber)));
 
-                        // If card type is "auto",find the appropriate logo
-                        if (mType == AUTO) {
-                            type.setBackgroundResource(getLogo(mType));
+                            // If card type is "auto",find the appropriate logo
+                            if (mType == AUTO) {
+                                type.setBackgroundResource(getLogo(mType));
+                            }
                         }
                     }
                 }
