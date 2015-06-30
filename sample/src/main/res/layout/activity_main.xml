@@ -1,68 +1,71 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    tools:context=".MainActivity">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:background="#ffffff">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-            <com.vinaygaba.creditcardview.CreditCardView
-                android:id="@+id/card1"
-                android:layout_width="fill_parent"
-                android:layout_height="225dp"
-                android:background="@drawable/cardbackground_world"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"
-                app:cardNumberTextColor="#cccccc"
-                app:cardNumberFormat="all_digits"
-                app:cardNameTextColor="#cccccc"
-                app:type="visa"
-                app:brandLogo="@mipmap/brandlogo"
-                app:putChip="true"
-                app:expiryDateTextColor="#cccccc"
-                app:isEditable = "true"
-                app:validTillTextColor="#cccccc"
-                app:hintTextColor="#ffffff"/>
+        <com.vinaygaba.creditcardview.CreditCardView
+            android:id="@+id/card1"
+            android:layout_width="fill_parent"
+            android:layout_height="225dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/cardbackground_world"
+            app:brandLogo="@mipmap/brandlogo"
+            app:cardName="John Doe"
+            app:cardNameTextColor="#cccccc"
+            app:cardNumberFormat="all_digits"
+            app:cardNumberTextColor="#cccccc"
+            app:expiryDate="11/15"
+            app:expiryDateTextColor="#cccccc"
+            app:hintTextColor="#ffffff"
+            app:isEditable="false"
+            app:isCardNumberEditable="true"
+            app:putChip="true"
+            app:type="visa"
+            app:validTillTextColor="#cccccc" />
 
-            <com.vinaygaba.creditcardview.CreditCardView
-                  android:id="@+id/card2"
-                  android:layout_width="fill_parent"
-                  android:layout_height="225dp"
-                  android:background="@drawable/cardbackground_sky"
-                  app:cardNumber="1234567890001234"
-                  app:cardName="Vinay Gaba"
-                  app:cardNumberTextColor="#ffffff"
-                  app:cardNumberFormat="all_digits"
-                  app:cardNameTextColor="#ffffff"
-                  app:type="mastercard"
-                  app:brandLogo="@mipmap/citibank"
-                  app:putChip="false"
-                  app:validTillTextColor="#ffffff"
-                  app:expiryDate = "01/15"
-                  android:layout_marginTop="16dp"/>
+        <com.vinaygaba.creditcardview.CreditCardView
+            android:id="@+id/card2"
+            android:layout_width="fill_parent"
+            android:layout_height="225dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/cardbackground_sky"
+            app:brandLogo="@mipmap/citibank"
+            app:cardName="Vinay Gaba"
+            app:cardNameTextColor="#ffffff"
+            app:cardNumber="1234567890001234"
+            app:cardNumberFormat="all_digits"
+            app:cardNumberTextColor="#ffffff"
+            app:expiryDate="01/15"
+            app:putChip="false"
+            app:type="mastercard"
+            app:validTillTextColor="#ffffff" />
 
-            <com.vinaygaba.creditcardview.CreditCardView
-                android:id="@+id/card3"
-                android:layout_width="fill_parent"
-                android:layout_height="225dp"
-                android:background="@drawable/cardbackground_plain"
-                app:cardNumber="6011111111111117"
-                app:cardName="John Doe"
-                app:cardNumberTextColor="#ffffff"
-                app:cardNumberFormat="masked_all_but_last_four"
-                app:cardNameTextColor="#ffffff"
-                app:type="auto"
-                app:brandLogo="@mipmap/standard_chartered"
-                app:putChip="false"
-                app:expiryDate="01/22"
-                android:layout_marginTop="16dp"/>
+        <com.vinaygaba.creditcardview.CreditCardView
+            android:id="@+id/card3"
+            android:layout_width="fill_parent"
+            android:layout_height="225dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/cardbackground_plain"
+            app:brandLogo="@mipmap/standard_chartered"
+            app:cardName="John Doe"
+            app:cardNameTextColor="#ffffff"
+            app:cardNumber="6011111111111117"
+            app:cardNumberFormat="masked_all_but_last_four"
+            app:cardNumberTextColor="#ffffff"
+            app:expiryDate="01/22"
+            app:putChip="false"
+            app:type="auto" />
 
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
+</ScrollView>
