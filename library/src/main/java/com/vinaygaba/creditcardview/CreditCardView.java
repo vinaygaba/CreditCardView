@@ -81,6 +81,9 @@ public class CreditCardView extends RelativeLayout {
     private int mBrandLogo;
     private boolean mPutChip = false;
     private boolean mIsEditable = false;
+    private boolean mIsCardNumberEditable = false;
+    private boolean mIsCardNameEditable = false;
+    private boolean mIsExpiryDateEditable = false;
     private int mHintTextColor = Color.WHITE;
     private Typeface creditCardTypeFace;
     private EditText cardNumber;
@@ -158,6 +161,10 @@ public class CreditCardView extends RelativeLayout {
             // mBrandLogoPosition = a.getInt(R.styleable.CreditCardView_brandLogoPosition, 1);
             mPutChip = a.getBoolean(R.styleable.CreditCardView_putChip, false);
             mIsEditable = a.getBoolean(R.styleable.CreditCardView_isEditable, false);
+            //For more granular control to the fields. Issue #7
+            mIsCardNameEditable = a.getBoolean(R.styleable.CreditCardView_isCardNameEditable, mIsEditable);
+            mIsCardNumberEditable = a.getBoolean(R.styleable.CreditCardView_isCardNumberEditable, mIsEditable);
+            mIsExpiryDateEditable = a.getBoolean(R.styleable.CreditCardView_isExpiryDateEditable, mIsEditable);
             mHintTextColor = a.getColor(R.styleable.CreditCardView_hintTextColor, Color.WHITE);
         } finally {
             a.recycle();
@@ -177,7 +184,7 @@ public class CreditCardView extends RelativeLayout {
             cardName.setEnabled(false);
             expiryDate.setEnabled(false);
         } else {
-            // If the card is editable, set the hin text and hint values which will be displayed
+            // If the card is editable, set the hint text and hint values which will be displayed
             // when the edit text is blank
             cardNumber.setHint(R.string.card_number_hint);
             cardNumber.setHintTextColor(mHintTextColor);
@@ -187,6 +194,49 @@ public class CreditCardView extends RelativeLayout {
 
             expiryDate.setHint(R.string.expiry_date_hint);
             expiryDate.setHintTextColor(mHintTextColor);
+        }
+
+        //For more granular control of the editable fields. Issue #7
+        if(mIsCardNameEditable!=mIsEditable){
+            //If the mIsCardNameEditable is different than mIsEditable field, the granular
+            //precedence comes into picture and the value needs to be checked and modified
+            //accordingly
+            if(!mIsCardNameEditable){
+                cardName.setEnabled(false);
+            }
+            else{
+                cardName.setEnabled(true);
+                cardName.setHint(R.string.card_name_hint);
+                cardName.setHintTextColor(mHintTextColor);
+            }
+        }
+
+        if(mIsCardNumberEditable!=mIsEditable){
+            //If the mIsCardNumberEditable is different than mIsEditable field, the granular
+            //precedence comes into picture and the value needs to be checked and modified
+            //accordingly
+            if(!mIsCardNumberEditable){
+                cardNumber.setEnabled(false);
+            }
+            else{
+                cardNumber.setEnabled(true);
+                cardNumber.setHint(R.string.card_number_hint);
+                cardNumber.setHintTextColor(mHintTextColor);
+            }
+        }
+
+        if(mIsExpiryDateEditable!=mIsEditable){
+            //If the mIsExpiryDateEditable is different than mIsEditable field, the granular
+            //precedence comes into picture and the value needs to be checked and modified
+            //accordingly
+            if(!mIsExpiryDateEditable){
+                expiryDate.setEnabled(false);
+            }
+            else{
+                cardNumber.setEnabled(true);
+                expiryDate.setHint(R.string.expiry_date_hint);
+                expiryDate.setHintTextColor(mHintTextColor);
+            }
         }
 
         // If card number is not null, add space every 4 characters and format it in the appropriate
@@ -447,6 +497,33 @@ public class CreditCardView extends RelativeLayout {
 
     public void setIsEditable(boolean isEditable) {
         mIsEditable = isEditable;
+        redrawViews();
+    }
+
+    public boolean getIsCardNameEditable() {
+        return mIsCardNameEditable;
+    }
+
+    public void setIsCardNameEditable(boolean isCardNameEditable) {
+        mIsCardNameEditable = isCardNameEditable;
+        redrawViews();
+    }
+
+    public boolean getIsCardNumberEditable() {
+        return mIsCardNumberEditable;
+    }
+
+    public void setIsCardNumberEditable(boolean isCardNumberEditable) {
+        mIsCardNumberEditable = isCardNumberEditable;
+        redrawViews();
+    }
+
+    public boolean getIsExpiryDateEditable() {
+        return mIsExpiryDateEditable;
+    }
+
+    public void setIsExpiryDateEditable(boolean isExpiryDateEditable) {
+        mIsExpiryDateEditable = isExpiryDateEditable;
         redrawViews();
     }
 

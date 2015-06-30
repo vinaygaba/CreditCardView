@@ -31,7 +31,12 @@
         </attr>-->
 
         <attr name="putChip" format="boolean" />
+
         <attr name="isEditable" format="boolean" />
+        <attr name="isCardNumberEditable" format="boolean" />
+        <attr name="isCardNameEditable" format="boolean" />
+        <attr name="isExpiryDateEditable" format="boolean" />
+
         <attr name="validTillTextColor" format="color" />
         <attr name="hintTextColor" format="color" />
 
