@@ -83,7 +83,7 @@ Attribute Usage & Documentation
 
 ![Attribute Description](images/attributeDescription.png)
 
-##### I) android:background
+##### I) `android:background`
 
 Use this attribute to set the background of the card. This library includes 3 background by default which you can use, but **feel free to put any drawable and use it as the card background as you please**. If you do not want to use your own drawable and want to use the drawables available in the screenshots, do the following:
 
@@ -139,7 +139,7 @@ You can set the value of this attribute programmatically using:
 creditCardView.setBackgroundResource(R.drawable.drawable_name);
 ```
 
-##### II) app:isEditable
+##### II) `app:isEditable`
 
 Use this attribute if you want to make the card number, card name and the expiry date field editable to the user.
 
@@ -162,7 +162,7 @@ boolean isEditable= crediCardView.getIsEditable();
 *Note: The card type auto detection and space after every 4 letters is added as soon as the focus is shifted from the edit field*
 
 
-##### III) app:cardNumber
+##### III) `app:cardNumber`
 
 Use this attribute to set the card number of the card. 
 
@@ -180,7 +180,7 @@ crediCardView.setCardNumber("1234567890123456");
 String cardNumber = crediCardView.getCardNumber();
 ```
 
-##### IV) app:cardNumberTextColor
+##### IV)  `app:cardNumberTextColor`
 
 Use this attribute to set the text color of card number attribute. 
 
@@ -198,7 +198,7 @@ creditCardView.setCardNumberTextColor(Color.WHITE);
 int color = crediCardView.getCardNumberTextColor();
 ```
 
-##### V) app:cardNumberFormat
+##### V) `app:cardNumberFormat`
 
 Use this attribute to set the card number format of card number. There are four different formats supported by the library:
 
@@ -224,7 +224,7 @@ int cardFormat = crediCardView.getCardNumberFormat();
 ```
 *Note: Default value is all_digits*
 
-##### VI) app:cardName
+##### VI) `app:cardName`
 
 Use this attribute to set the card name of the card. 
 
@@ -242,7 +242,7 @@ crediCardView.setCardName("John Doe");
 String cardName = crediCardView.getCardName();
 ```
 
-##### VII) app:cardNameTextColor
+##### VII) `app:cardNameTextColor`
 
 Use this attribute to set the text color of card name attribute. 
 
@@ -260,7 +260,7 @@ creditCardView.setCardNameTextColor(Color.WHITE);
 int color = crediCardView.getCardNamerTextColor();
 ```
 
-##### VIII) app:expiryDate
+##### VIII) `app:expiryDate`
 
 Use this attribute to set the expiry date of the card in MM/YY or MM/YYYY format. 
 
@@ -277,7 +277,7 @@ crediCardView.setExpiryDate("01/15");
 //Get Card Number
 String expiryDate = crediCardView.ExpiryDate();
 ```
-##### IX) app:expiryDateTextColor
+##### IX) `app:expiryDateTextColor`
 
 Use this attribute to set the text color of expiry date attribute. 
 
@@ -295,7 +295,7 @@ creditCardView.setExpiryDateTextColor(Color.WHITE);
 int color = crediCardView.getExpiryDateTextColor();
 ```
 
-##### X) app:putChip
+##### X) `app:putChip`
 
 Use this attribute if you want the card to display the chip on the card. 
 
@@ -312,14 +312,14 @@ You can set the value of this attribute programmatically using:
 creditCardView.putChip(true/false);
 ```
 
-##### XI) app:type
+##### XI) `app:type`
 
 Use this attribute to set the type of the credit card. The library automatically places the corresponding drawable in the bottom right corner based on the type you have selected. Currectly there are 5 different types supported:
 
-1. visa
-2. mastercard
-3. american_express
-4. discover
+1. visa  <img src ="images/visa.png" height =20 width = 40 />
+2. mastercard   <img src ="images/mastercard.png" height =20 width = 40 />
+3. american_express   <img src ="images/amex.png" height =20 width = 40 />
+4. discover   <img src ="images/discover.png" height =20 width = 40 />
 5. auto - Use auto if u want the library to automatically choose the card type based on the card number you have entered. To know more about the patterns for identifying the card type from the card number, see this [link](http://www.regular-expressions.info/creditcard.html)
 
 You can set the value in xml using:
@@ -336,7 +336,7 @@ creditCardView.setType(CardType.VISA/CardType.MASTERCARD/CardType.AMERICAN_EXPRE
 int type = crediCardView.getType();
 ```
 
-##### XII) app:brandLogo
+##### XII) `app:brandLogo`
 
 Use this attribute to set the brand logo drawable that you see in the upper right corner. 
 
@@ -358,7 +358,7 @@ If you wish to modify the default dimensions of the brand logo, add the followin
 ```
 The important thing to note is that the name of these items should remain the same.
 
-##### XIII) app:hintTextColor
+##### XIII) `app:hintTextColor`
 
 Use this attribute to set the hint text color that is visible when card name, card number and expiry date fields are editable and blank 
 
