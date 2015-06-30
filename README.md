@@ -324,7 +324,7 @@ Use this attribute to set the type of the credit card. The library automatically
 
 You can set the value in xml using:
 ```
-app:type="visa/mastercard/americann_express/discover/auto"
+app:type="visa/mastercard/american_express/discover/auto"
 ```
 
 You can set the value of this attribute programmatically using:
