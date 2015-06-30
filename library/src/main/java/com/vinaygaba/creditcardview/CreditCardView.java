@@ -203,6 +203,7 @@ public class CreditCardView extends RelativeLayout {
             //accordingly
             if(!mIsCardNameEditable){
                 cardName.setEnabled(false);
+                cardName.setHint("");
             }
             else{
                 cardName.setEnabled(true);
@@ -217,6 +218,7 @@ public class CreditCardView extends RelativeLayout {
             //accordingly
             if(!mIsCardNumberEditable){
                 cardNumber.setEnabled(false);
+                cardNumber.setHint("");
             }
             else{
                 cardNumber.setEnabled(true);
@@ -231,9 +233,10 @@ public class CreditCardView extends RelativeLayout {
             //accordingly
             if(!mIsExpiryDateEditable){
                 expiryDate.setEnabled(false);
+                expiryDate.setHint("");
             }
             else{
-                cardNumber.setEnabled(true);
+                expiryDate.setEnabled(true);
                 expiryDate.setHint(R.string.expiry_date_hint);
                 expiryDate.setHintTextColor(mHintTextColor);
             }
