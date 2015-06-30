@@ -105,6 +105,17 @@
         android:maxLength="7"
         />
 
+    <ImageButton
+        android:id="@+id/flip_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_flip"/>
+
     <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
     <LinearLayout
         android:focusable="true" android:focusableInTouchMode="true"

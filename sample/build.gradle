@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.vinaygaba.creditcardview.sample"
-        minSdkVersion 15
+        minSdkVersion 8
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
