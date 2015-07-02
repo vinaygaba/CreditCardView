@@ -103,10 +103,50 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/ic_flip"/>
+
+    <View
+        android:id="@+id/stripe"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/cardbackground_stripe"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/authorized_sig_tv"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/stripe"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="12sp"
+        android:textColor="@android:color/white"
+        android:text="@string/authorized_signature"
+        android:visibility="gone"/>
+
+    <View
+        android:id="@+id/signature"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/card_background_signature"
+        android:layout_below="@id/authorized_sig_tv"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:visibility="gone"/>
+
+    <EditText
+        android:id="@+id/cvv_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/signature"
+        android:layout_alignTop="@id/signature"
+        android:visibility="gone"/>
 
     <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
 
