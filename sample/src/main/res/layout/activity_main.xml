@@ -34,7 +34,7 @@
             app:type="visa"
             app:validTillTextColor="#cccccc" />
 
-        <com.vinaygaba.creditcardview.CreditCardView
+        <!--com.vinaygaba.creditcardview.CreditCardView
             android:id="@+id/card2"
             android:layout_width="fill_parent"
             android:layout_height="225dp"
@@ -65,7 +65,7 @@
             app:cardNumberTextColor="#ffffff"
             app:expiryDate="01/22"
             app:putChip="false"
-            app:type="auto" />
+            app:type="auto" /-->
 
     </LinearLayout>
 </ScrollView>

@@ -95,17 +95,22 @@ public class CreditCardView extends RelativeLayout {
     private boolean mIsCardNumberEditable = false;
     private boolean mIsCardNameEditable = false;
     private boolean mIsExpiryDateEditable = false;
+    private boolean mCvvEditable = false;
     private int mHintTextColor = Color.WHITE;
+    private int mCvvHintColor = Color.WHITE;
     private boolean mIsFlippable = true;
+    private String mCvv = "";
     private Typeface creditCardTypeFace;
     private ImageButton mFlipBtn;
     private EditText cardNumber;
     private EditText cardName;
     private EditText expiryDate;
+    private EditText cvv;
     private TextView validTill;
     private ImageView type;
     private ImageView brandLogo;
     private ImageView chip;
+    private View stripe, authorized_sig_tv, signature;
 
     public CreditCardView(Context context) {
         this(context, null);
@@ -150,6 +155,10 @@ public class CreditCardView extends RelativeLayout {
         validTill = (TextView) findViewById(R.id.valid_till);
         expiryDate = (EditText) findViewById(R.id.expiry_date);
         mFlipBtn = (ImageButton)findViewById(R.id.flip_btn);
+        stripe = findViewById(R.id.stripe);
+        authorized_sig_tv = findViewById(R.id.authorized_sig_tv);
+        signature = findViewById(R.id.signature);
+        cvv = (EditText)findViewById(R.id.cvv_et);
     }
 
     private void loadAttributes(@Nullable AttributeSet attrs) {
@@ -181,6 +190,7 @@ public class CreditCardView extends RelativeLayout {
             mIsExpiryDateEditable = a.getBoolean(R.styleable.CreditCardView_isExpiryDateEditable, mIsEditable);
             mHintTextColor = a.getColor(R.styleable.CreditCardView_hintTextColor, Color.WHITE);
             mIsFlippable = a.getBoolean(R.styleable.CreditCardView_isFlippable, mIsFlippable);
+            mCvv = a.getString(R.styleable.CreditCardView_cvv);
         } finally {
             a.recycle();
         }
@@ -198,6 +208,7 @@ public class CreditCardView extends RelativeLayout {
             cardNumber.setEnabled(false);
             cardName.setEnabled(false);
             expiryDate.setEnabled(false);
+            cvv.setEnabled(false);
         } else {
             // If the card is editable, set the hint text and hint values which will be displayed
             // when the edit text is blank
@@ -209,6 +220,8 @@ public class CreditCardView extends RelativeLayout {
 
             expiryDate.setHint(R.string.expiry_date_hint);
             expiryDate.setHintTextColor(mHintTextColor);
+
+            cvv.setHint(R.string.cvv_hint);
         }
 
         //For more granular control of the editable fields. Issue #7
@@ -320,6 +333,19 @@ public class CreditCardView extends RelativeLayout {
 
         // Set the appropriate text color to the validTill TextView
         validTill.setTextColor(mValidTillTextColor);
+
+        if(mCvvEditable != mIsEditable){
+
+            if(mCvvEditable){
+                cvv.setHint(R.string.cvv_hint);
+                cvv.setHintTextColor(mCvvHintColor);
+            } else {
+                cvv.setHint("");
+            }
+
+            cvv.setEnabled(mCvvEditable);
+
+        }
 
         mFlipBtn.setEnabled(mIsFlippable);
 
@@ -467,6 +493,21 @@ public class CreditCardView extends RelativeLayout {
         validTill.setVisibility(View.GONE);
         expiryDate.setVisibility(View.GONE);
     }
+
+    private void showBackView(){
+        stripe.setVisibility(View.VISIBLE);
+        authorized_sig_tv.setVisibility(View.VISIBLE);
+        signature.setVisibility(View.VISIBLE);
+        cvv.setVisibility(View.VISIBLE);
+    }
+
+    private void hideBackView(){
+        stripe.setVisibility(View.GONE);
+        authorized_sig_tv.setVisibility(View.GONE);
+        signature.setVisibility(View.GONE);
+        cvv.setVisibility(View.GONE);
+    }
+
     private void redrawViews() {
         invalidate();
         requestLayout();
@@ -812,8 +853,9 @@ public class CreditCardView extends RelativeLayout {
     @TargetApi(11)
     private void rotateOutToBack(){
         hideFrontView();
+        showBackView();
         CreditCardView.this.setRotationY(-90);
-        setBackgroundResource(R.drawable.cardbackgroundback_default);
+        setBackgroundResource(R.drawable.cardbackground_canvas);
         AnimatorSet set = new AnimatorSet();
         final ObjectAnimator flipView = ObjectAnimator.ofInt(CreditCardView.this, "rotationY", 90, -90);
         final ObjectAnimator rotateOut = ObjectAnimator.ofFloat(CreditCardView.this, "rotationY", -90, 0);
@@ -851,6 +893,7 @@ public class CreditCardView extends RelativeLayout {
     @TargetApi(11)
     private void rotateOutToFront(){
         showFrontView();
+        hideBackView();
         CreditCardView.this.setRotationY(-90);
         setBackgroundResource(R.drawable.cardbackground_sky);
         AnimatorSet set = new AnimatorSet();
@@ -952,7 +995,8 @@ public class CreditCardView extends RelativeLayout {
 
     private void rotateOutToBackBeforeEleven(){
         hideFrontView();
-        setBackgroundResource(R.drawable.cardbackgroundback_default);
+        showBackView();
+        setBackgroundResource(R.drawable.cardbackground_canvas);
         com.nineoldandroids.animation.AnimatorSet set = new com.nineoldandroids.animation.AnimatorSet();
         com.nineoldandroids.animation.ObjectAnimator flip = com.nineoldandroids.animation.ObjectAnimator.ofFloat(CreditCardView.this, "rotationY", 90, -90);
         com.nineoldandroids.animation.ObjectAnimator rotateOut = com.nineoldandroids.animation.ObjectAnimator.ofFloat(CreditCardView.this, "rotationY", -90, 0);
@@ -989,6 +1033,7 @@ public class CreditCardView extends RelativeLayout {
 
     private void rotateOutToFrontBeforeEleven(){
         showFrontView();
+        hideBackView();
         setBackgroundResource(R.drawable.cardbackground_sky);
         com.nineoldandroids.animation.AnimatorSet set = new com.nineoldandroids.animation.AnimatorSet();
         com.nineoldandroids.animation.ObjectAnimator flip = com.nineoldandroids.animation.ObjectAnimator.ofFloat(CreditCardView.this, "rotationY", 90, -90);
