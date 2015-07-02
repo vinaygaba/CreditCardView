@@ -622,6 +622,7 @@ public class CreditCardView extends RelativeLayout {
         return mIsCardNameEditable;
     }
 
+
     public void setIsCardNameEditable(boolean isCardNameEditable) {
         mIsCardNameEditable = isCardNameEditable;
         redrawViews();
@@ -676,6 +677,15 @@ public class CreditCardView extends RelativeLayout {
     public void putChip(boolean flag) {
         mPutChip = flag;
         redrawViews();
+    }
+
+    public void setIsCvvEditable(boolean editable){
+        mCvvEditable =editable;
+        redrawViews();
+    }
+
+    public boolean getIsCvvEditable(){
+        return mCvvEditable;
     }
 
     /**
