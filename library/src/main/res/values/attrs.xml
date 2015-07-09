@@ -39,6 +39,7 @@
 
         <attr name="validTillTextColor" format="color" />
         <attr name="hintTextColor" format="color" />
-
+        <attr name="isFlippable" format="boolean"/>
+        <attr name="cvv" format="string"/>
     </declare-styleable>
 </resources>
