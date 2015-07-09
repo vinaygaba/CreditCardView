@@ -16,7 +16,11 @@
 
 package com.vinaygaba.creditcardview;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -32,10 +36,14 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.vinaygaba.creditcardview.util.AndroidUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -67,6 +75,8 @@ public class CreditCardView extends RelativeLayout {
     public @interface CreditCardFormat {
     }
 
+    private static int CARD_FRONT = 0;
+    private static int CARD_BACK = 1;
     private static final boolean DEBUG = false;
     private Context mContext;
     private String mCardNumber = "";
@@ -79,20 +89,28 @@ public class CreditCardView extends RelativeLayout {
     private int mValidTillTextColor = Color.WHITE;
     private int mType = VISA;
     private int mBrandLogo;
+    private int cardSide = CARD_FRONT;
     private boolean mPutChip = false;
     private boolean mIsEditable = false;
     private boolean mIsCardNumberEditable = false;
     private boolean mIsCardNameEditable = false;
     private boolean mIsExpiryDateEditable = false;
+    private boolean mCvvEditable = false;
     private int mHintTextColor = Color.WHITE;
+    private int mCvvHintColor = Color.WHITE;
+    private boolean mIsFlippable = true;
+    private String mCvv = "";
     private Typeface creditCardTypeFace;
+    private ImageButton mFlipBtn;
     private EditText cardNumber;
     private EditText cardName;
     private EditText expiryDate;
+    private EditText cvv;
     private TextView validTill;
     private ImageView type;
     private ImageView brandLogo;
     private ImageView chip;
+    private View stripe, authorized_sig_tv, signature;
 
     public CreditCardView(Context context) {
         this(context, null);
@@ -136,6 +154,11 @@ public class CreditCardView extends RelativeLayout {
         chip = (ImageView) findViewById(R.id.chip);
         validTill = (TextView) findViewById(R.id.valid_till);
         expiryDate = (EditText) findViewById(R.id.expiry_date);
+        mFlipBtn = (ImageButton)findViewById(R.id.flip_btn);
+        stripe = findViewById(R.id.stripe);
+        authorized_sig_tv = findViewById(R.id.authorized_sig_tv);
+        signature = findViewById(R.id.signature);
+        cvv = (EditText)findViewById(R.id.cvv_et);
     }
 
     private void loadAttributes(@Nullable AttributeSet attrs) {
@@ -166,6 +189,8 @@ public class CreditCardView extends RelativeLayout {
             mIsCardNumberEditable = a.getBoolean(R.styleable.CreditCardView_isCardNumberEditable, mIsEditable);
             mIsExpiryDateEditable = a.getBoolean(R.styleable.CreditCardView_isExpiryDateEditable, mIsEditable);
             mHintTextColor = a.getColor(R.styleable.CreditCardView_hintTextColor, Color.WHITE);
+            mIsFlippable = a.getBoolean(R.styleable.CreditCardView_isFlippable, mIsFlippable);
+            mCvv = a.getString(R.styleable.CreditCardView_cvv);
         } finally {
             a.recycle();
         }
@@ -183,6 +208,7 @@ public class CreditCardView extends RelativeLayout {
             cardNumber.setEnabled(false);
             cardName.setEnabled(false);
             expiryDate.setEnabled(false);
+            cvv.setEnabled(false);
         } else {
             // If the card is editable, set the hint text and hint values which will be displayed
             // when the edit text is blank
@@ -194,6 +220,8 @@ public class CreditCardView extends RelativeLayout {
 
             expiryDate.setHint(R.string.expiry_date_hint);
             expiryDate.setHintTextColor(mHintTextColor);
+
+            cvv.setHint(R.string.cvv_hint);
         }
 
         //For more granular control of the editable fields. Issue #7
@@ -305,8 +333,23 @@ public class CreditCardView extends RelativeLayout {
 
         // Set the appropriate text color to the validTill TextView
         validTill.setTextColor(mValidTillTextColor);
-    }
 
+        if(mCvvEditable != mIsEditable){
+
+            if(mCvvEditable){
+                cvv.setHint(R.string.cvv_hint);
+                cvv.setHintTextColor(mCvvHintColor);
+            } else {
+                cvv.setHint("");
+            }
+
+            cvv.setEnabled(mCvvEditable);
+
+        }
+
+        mFlipBtn.setEnabled(mIsFlippable);
+
+    }
     private void addListeners() {
 
         // Add text change listener
@@ -389,6 +432,80 @@ public class CreditCardView extends RelativeLayout {
                 mExpiryDate = s.toString();
             }
         });
+
+        mFlipBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flip();
+            }
+        });
+    }
+
+    public boolean isFlippable(){
+        return mIsFlippable;
+    }
+
+    public void setIsFlippable(boolean flippable){
+        mIsFlippable = flippable;
+        if(mIsFlippable){
+            mFlipBtn.setVisibility(View.VISIBLE);
+        } else {
+            mFlipBtn.setVisibility(View.INVISIBLE);
+        }
+        mFlipBtn.setEnabled(mIsFlippable);
+    }
+
+    public void flip(){
+        if(mIsFlippable){
+            if(AndroidUtils.icsOrBetter()){
+                if(cardSide == CARD_FRONT){
+                    rotateInToBack();
+                } else if(cardSide == CARD_BACK){
+                    rotateInToFront();
+                }
+            } else {
+                if(cardSide == CARD_FRONT){
+                    rotateInToBackBeforeEleven();
+                } else if(cardSide == CARD_BACK){
+                    rotateInToFrontBeforeEleven();
+                }
+            }
+
+        }
+    }
+
+    private void showFrontView(){
+        cardNumber.setVisibility(View.VISIBLE);
+        cardName.setVisibility(View.VISIBLE);
+        type.setVisibility(View.VISIBLE);
+        brandLogo.setVisibility(View.VISIBLE);
+        chip.setVisibility(View.VISIBLE);
+        validTill.setVisibility(View.VISIBLE);
+        expiryDate.setVisibility(View.VISIBLE);
+    }
+
+    private void hideFrontView(){
+        cardNumber.setVisibility(View.GONE);
+        cardName.setVisibility(View.GONE);
+        type.setVisibility(View.GONE);
+        brandLogo.setVisibility(View.GONE);
+        chip.setVisibility(View.GONE);
+        validTill.setVisibility(View.GONE);
+        expiryDate.setVisibility(View.GONE);
+    }
+
+    private void showBackView(){
+        stripe.setVisibility(View.VISIBLE);
+        authorized_sig_tv.setVisibility(View.VISIBLE);
+        signature.setVisibility(View.VISIBLE);
+        cvv.setVisibility(View.VISIBLE);
+    }
+
+    private void hideBackView(){
+        stripe.setVisibility(View.GONE);
+        authorized_sig_tv.setVisibility(View.GONE);
+        signature.setVisibility(View.GONE);
+        cvv.setVisibility(View.GONE);
     }
 
     private void redrawViews() {
@@ -514,6 +631,7 @@ public class CreditCardView extends RelativeLayout {
         return mIsCardNameEditable;
     }
 
+
     public void setIsCardNameEditable(boolean isCardNameEditable) {
         mIsCardNameEditable = isCardNameEditable;
         redrawViews();
@@ -574,6 +692,15 @@ public class CreditCardView extends RelativeLayout {
         mPutChip = flag;
         chip.setVisibility(mPutChip?View.VISIBLE:View.GONE);
         redrawViews();
+    }
+
+    public void setIsCvvEditable(boolean editable){
+        mCvvEditable =editable;
+        redrawViews();
+    }
+
+    public boolean getIsCvvEditable(){
+        return mCvvEditable;
     }
 
     /**
@@ -682,4 +809,288 @@ public class CreditCardView extends RelativeLayout {
             return result.toString();
         }
     }
+
+    @TargetApi(11)
+    private void rotateInToBack(){
+        AnimatorSet set = new AnimatorSet();
+        final ObjectAnimator rotateIn = ObjectAnimator.ofFloat(this, "rotationY", 0, 90);
+        final ObjectAnimator hideFrontView = ObjectAnimator.ofFloat(this, "alpha", 1, 0);
+        rotateIn.setInterpolator(new AccelerateDecelerateInterpolator());
+        rotateIn.setDuration(300);
+        hideFrontView.setDuration(1);
+        set.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                rotateOutToBack();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        set.play(hideFrontView).after(rotateIn);
+        set.start();
+    }
+
+    @TargetApi(11)
+    private void rotateInToFront(){
+        AnimatorSet set = new AnimatorSet();
+        final ObjectAnimator rotateIn = ObjectAnimator.ofFloat(this, "rotationY", 0, 90);
+        final ObjectAnimator hideBackView = ObjectAnimator.ofFloat(this, "alpha", 1, 0);
+        rotateIn.setDuration(300);
+        hideBackView.setDuration(1);
+        set.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                rotateOutToFront();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        set.play(hideBackView).after(rotateIn);
+        set.start();
+    }
+
+    @TargetApi(11)
+    private void rotateOutToBack(){
+        hideFrontView();
+        showBackView();
+        CreditCardView.this.setRotationY(-90);
+        setBackgroundResource(R.drawable.cardbackground_canvas);
+        AnimatorSet set = new AnimatorSet();
+        final ObjectAnimator flipView = ObjectAnimator.ofInt(CreditCardView.this, "rotationY", 90, -90);
+        final ObjectAnimator rotateOut = ObjectAnimator.ofFloat(CreditCardView.this, "rotationY", -90, 0);
+        final ObjectAnimator showBackView = ObjectAnimator.ofFloat(CreditCardView.this, "alpha", 0, 1);
+        flipView.setDuration(0);
+        showBackView.setDuration(1);
+        rotateOut.setDuration(300);
+        showBackView.setStartDelay(150);
+        rotateOut.setInterpolator(new AccelerateDecelerateInterpolator());
+        set.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                //Do nothing
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                cardSide = CARD_BACK;
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+                //Do nothing
+            }
+        });
+        set.play(flipView).with(showBackView).before(rotateOut);
+        set.start();
+    }
+
+    @TargetApi(11)
+    private void rotateOutToFront(){
+        showFrontView();
+        hideBackView();
+        CreditCardView.this.setRotationY(-90);
+        setBackgroundResource(R.drawable.cardbackground_sky);
+        AnimatorSet set = new AnimatorSet();
+        final ObjectAnimator flipView = ObjectAnimator.ofInt(CreditCardView.this, "rotationY", 90, -90);
+        final ObjectAnimator rotateOut = ObjectAnimator.ofFloat(CreditCardView.this, "rotationY", -90, 0);
+        final ObjectAnimator showFrontView = ObjectAnimator.ofFloat(CreditCardView.this, "alpha", 0, 1);
+        showFrontView.setDuration(1);
+        rotateOut.setDuration(300);
+        showFrontView.setStartDelay(150);
+        rotateOut.setInterpolator(new AccelerateDecelerateInterpolator());
+        set.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                //Do nothing
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                cardSide = CARD_FRONT;
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+                //Do nothing
+            }
+        });
+        set.play(flipView).with(showFrontView).before(rotateOut);
+        set.start();
+    }
+
+    private void rotateInToBackBeforeEleven(){
+        com.nineoldandroids.animation.AnimatorSet set = new com.nineoldandroids.animation.AnimatorSet();
+        final com.nineoldandroids.animation.ObjectAnimator rotateIn = com.nineoldandroids.animation.ObjectAnimator.ofFloat(this, "rotationY", 0, 90);
+        final com.nineoldandroids.animation.ObjectAnimator hideFrontView = com.nineoldandroids.animation.ObjectAnimator.ofFloat(this, "alpha", 1, 0);
+        rotateIn.setInterpolator(new AccelerateDecelerateInterpolator());
+        rotateIn.setDuration(300);
+        hideFrontView.setDuration(1);
+        set.addListener(new com.nineoldandroids.animation.Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(com.nineoldandroids.animation.Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(com.nineoldandroids.animation.Animator animation) {
+                rotateOutToBackBeforeEleven();
+            }
+
+            @Override
+            public void onAnimationCancel(com.nineoldandroids.animation.Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(com.nineoldandroids.animation.Animator animation) {
+
+            }
+        });
+        set.play(hideFrontView).after(rotateIn);
+        set.start();
+    }
+
+    private void rotateInToFrontBeforeEleven(){
+        com.nineoldandroids.animation.AnimatorSet set = new com.nineoldandroids.animation.AnimatorSet();
+        final com.nineoldandroids.animation.ObjectAnimator rotateIn = com.nineoldandroids.animation.ObjectAnimator.ofFloat(this, "rotationY", 0, 90);
+        final com.nineoldandroids.animation.ObjectAnimator hideBackView = com.nineoldandroids.animation.ObjectAnimator.ofFloat(this, "alpha", 1, 0);
+        rotateIn.setInterpolator( new AccelerateDecelerateInterpolator());
+        rotateIn.setDuration(300);
+        hideBackView.setDuration(1);
+        set.addListener(new com.nineoldandroids.animation.Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(com.nineoldandroids.animation.Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(com.nineoldandroids.animation.Animator animation) {
+                rotateOutToFrontBeforeEleven();
+            }
+
+            @Override
+            public void onAnimationCancel(com.nineoldandroids.animation.Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(com.nineoldandroids.animation.Animator animation) {
+
+            }
+        });
+        set.play(hideBackView).after(rotateIn);
+        set.start();
+    }
+
+    private void rotateOutToBackBeforeEleven(){
+        hideFrontView();
+        showBackView();
+        setBackgroundResource(R.drawable.cardbackground_canvas);
+        com.nineoldandroids.animation.AnimatorSet set = new com.nineoldandroids.animation.AnimatorSet();
+        com.nineoldandroids.animation.ObjectAnimator flip = com.nineoldandroids.animation.ObjectAnimator.ofFloat(CreditCardView.this, "rotationY", 90, -90);
+        com.nineoldandroids.animation.ObjectAnimator rotateOut = com.nineoldandroids.animation.ObjectAnimator.ofFloat(CreditCardView.this, "rotationY", -90, 0);
+        com.nineoldandroids.animation.ObjectAnimator showBackView = com.nineoldandroids.animation.ObjectAnimator.ofFloat(CreditCardView.this, "alpha", 0, 1);
+        flip.setDuration(0);
+        showBackView.setDuration(1);
+        rotateOut.setDuration(300);
+        showBackView.setStartDelay(150);
+        rotateOut.setInterpolator(new AccelerateDecelerateInterpolator());
+        set.addListener(new com.nineoldandroids.animation.Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(com.nineoldandroids.animation.Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(com.nineoldandroids.animation.Animator animation) {
+                cardSide = CARD_BACK;
+            }
+
+            @Override
+            public void onAnimationCancel(com.nineoldandroids.animation.Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(com.nineoldandroids.animation.Animator animation) {
+
+            }
+        });
+        set.play(flip).with(showBackView).before(rotateOut);
+        set.start();
+    }
+
+    private void rotateOutToFrontBeforeEleven(){
+        showFrontView();
+        hideBackView();
+        setBackgroundResource(R.drawable.cardbackground_sky);
+        com.nineoldandroids.animation.AnimatorSet set = new com.nineoldandroids.animation.AnimatorSet();
+        com.nineoldandroids.animation.ObjectAnimator flip = com.nineoldandroids.animation.ObjectAnimator.ofFloat(CreditCardView.this, "rotationY", 90, -90);
+        com.nineoldandroids.animation.ObjectAnimator rotateOut = com.nineoldandroids.animation.ObjectAnimator.ofFloat(CreditCardView.this, "rotationY", -90, 0);
+        com.nineoldandroids.animation.ObjectAnimator showFrontView = com.nineoldandroids.animation.ObjectAnimator.ofFloat(CreditCardView.this, "alpha", 0, 1);
+        showFrontView.setDuration(1);
+        rotateOut.setDuration(300);
+        rotateOut.setInterpolator(new AccelerateDecelerateInterpolator());
+        showFrontView.setStartDelay(150);
+        set.addListener(new com.nineoldandroids.animation.Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(com.nineoldandroids.animation.Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(com.nineoldandroids.animation.Animator animation) {
+                cardSide = CARD_FRONT;
+            }
+
+            @Override
+            public void onAnimationCancel(com.nineoldandroids.animation.Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(com.nineoldandroids.animation.Animator animation) {
+
+            }
+        });
+        set.play(flip).with(showFrontView).with(rotateOut);
+        set.start();
+    }
 }
+
