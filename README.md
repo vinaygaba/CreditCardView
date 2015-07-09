@@ -158,6 +158,9 @@ creditCardView.setIsEditable(true/false);
 //Get Is Editable Value 
 boolean isEditable= crediCardView.getIsEditable();
 ```
+If you are using **v1.0.3 and above**, there are additional attributes that give you a more granular control over fields. They are: `app:isCardNumberEditable` , `app:isCardNameEditable` & `app:isExpiryDateEditable`
+
+They have precedence over the isEditable attribute i.e. If these attributes are present, the respective fields will take their value over the value present in isEditable attribute
 
 *Note: The card type auto detection and space after every 4 letters is added as soon as the focus is shifted from the edit field*
 
