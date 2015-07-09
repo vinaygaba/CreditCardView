@@ -8,6 +8,8 @@
     <string name="card_logo">Card Logo</string>
     <string name="brand_logo">Brand Logo</string>
     <string name="chip_visible">Chip Visible</string>
+    <string name="authorized_signature">Authorized Signature</string>
+    <string name="cvv_hint">cvv</string>
 
     <!-- Font Path starts after `assets/` -->
     <string name="font_path">fonts/halter.ttf</string>
