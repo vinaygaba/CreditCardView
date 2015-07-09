@@ -28,7 +28,7 @@ Setup
 The library is pushed to Maven Central as an AAR, so you just need to add the following to your build.gradle file:
 ```java
 dependencies {
-    compile ‘com.vinaygaba:creditcardview:1.0.2’
+    compile ‘com.vinaygaba:creditcardview:1.0.3’
 }
 ```
 
@@ -406,6 +406,7 @@ You can modify the dimensions of some of the attributes by adding these attribut
 <dimen name="card_number_text_size">size</dimen>        //Default value:16sp
 <dimen name="card_name_text_size">size</dimen>          //Default value:14sp
 <dimen name="expiry_date_text_size">size</dimen>        //Default value:14sp
+<dimen name="valid_till_text_size">size</dimen>         //Default value:10sp
 <dimen name="brand_logo_width">size</dimen>             //Default value:120dp
 <dimen name="brand_logo_height">size</dimen>            //Default value:40dp
 ```
