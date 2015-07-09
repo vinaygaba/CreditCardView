@@ -402,6 +402,7 @@ public class CreditCardView extends RelativeLayout {
 
     public void setCardNumber(String cardNumber) {
         mCardNumber = cardNumber.replaceAll("\\s+", "");
+        this.cardNumber.setText(addSpaceToCardNumber(mCardNumber));
         redrawViews();
     }
 
@@ -411,6 +412,7 @@ public class CreditCardView extends RelativeLayout {
 
     public void setCardName(String cardName) {
         mCardName = cardName.toUpperCase();
+        this.cardName.setText(mCardName);
         redrawViews();
     }
 
@@ -421,6 +423,7 @@ public class CreditCardView extends RelativeLayout {
 
     public void setCardNumberTextColor(@ColorInt int cardNumberTextColor) {
         mCardNumberTextColor = cardNumberTextColor;
+        this.cardNumber.setTextColor(mCardNumberTextColor);
         redrawViews();
     }
 
@@ -436,6 +439,7 @@ public class CreditCardView extends RelativeLayout {
                     "unknown");
         }
         mCardNumberFormat = cardNumberFormat;
+        this.cardNumber.setText(checkCardNumberFormat(mCardNumber));
         redrawViews();
     }
 
@@ -446,6 +450,7 @@ public class CreditCardView extends RelativeLayout {
 
     public void setCardNameTextColor(@ColorInt int cardNameTextColor) {
         mCardNameTextColor = cardNameTextColor;
+        this.cardName.setTextColor(mCardNameTextColor);
         redrawViews();
     }
 
@@ -455,6 +460,7 @@ public class CreditCardView extends RelativeLayout {
 
     public void setExpiryDate(String expiryDate) {
         mExpiryDate = expiryDate;
+        this.expiryDate.setText(mExpiryDate);
         redrawViews();
     }
 
@@ -465,6 +471,7 @@ public class CreditCardView extends RelativeLayout {
 
     public void setExpiryDateTextColor(@ColorInt int expiryDateTextColor) {
         mExpiryDateTextColor = expiryDateTextColor;
+        this.expiryDate.setTextColor(mExpiryDateTextColor);
         redrawViews();
     }
 
@@ -475,6 +482,7 @@ public class CreditCardView extends RelativeLayout {
 
     public void setValidTillTextColor(@ColorInt int validTillTextColor) {
         mValidTillTextColor = validTillTextColor;
+        this.validTill.setTextColor(mValidTillTextColor);
         redrawViews();
     }
 
@@ -489,6 +497,7 @@ public class CreditCardView extends RelativeLayout {
                     "Use `CardType.*` or `CardType.AUTO` if unknown");
         }
         mType = type;
+        this.type.setBackgroundResource(getLogo(mType));
         redrawViews();
     }
 
@@ -535,6 +544,10 @@ public class CreditCardView extends RelativeLayout {
 
     public void setHintTextColor(@ColorInt int hintTextColor) {
         mHintTextColor = hintTextColor;
+        this.cardName.setHintTextColor(mHintTextColor);
+        this.cardNumber.setHintTextColor(mHintTextColor);
+        this.expiryDate.setHintTextColor(mHintTextColor);
+
         redrawViews();
     }
 
@@ -545,6 +558,7 @@ public class CreditCardView extends RelativeLayout {
 
     public void setBrandLogo(@DrawableRes int brandLogo) {
         mBrandLogo = brandLogo;
+        this.brandLogo.setBackgroundResource(mBrandLogo);
         redrawViews();
     }
 
@@ -558,6 +572,7 @@ public class CreditCardView extends RelativeLayout {
 
     public void putChip(boolean flag) {
         mPutChip = flag;
+        chip.setVisibility(mPutChip?View.VISIBLE:View.GONE);
         redrawViews();
     }
 
