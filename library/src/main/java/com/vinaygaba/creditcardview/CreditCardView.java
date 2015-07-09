@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IntDef;
@@ -82,10 +83,12 @@ public class CreditCardView extends RelativeLayout {
     private String mCardNumber = "";
     private String mCardName = "";
     private String mExpiryDate = "";
+    private String mCvv = "";
     private int mCardNumberTextColor = Color.WHITE;
     private int mCardNumberFormat = ALL_DIGITS;
     private int mCardNameTextColor = Color.WHITE;
     private int mExpiryDateTextColor = Color.WHITE;
+    private int mCvvTextColor = Color.WHITE;
     private int mValidTillTextColor = Color.WHITE;
     private int mType = VISA;
     private int mBrandLogo;
@@ -95,11 +98,10 @@ public class CreditCardView extends RelativeLayout {
     private boolean mIsCardNumberEditable = false;
     private boolean mIsCardNameEditable = false;
     private boolean mIsExpiryDateEditable = false;
-    private boolean mCvvEditable = false;
+    private boolean mIsCvvEditable = false;
     private int mHintTextColor = Color.WHITE;
     private int mCvvHintColor = Color.WHITE;
     private boolean mIsFlippable = true;
-    private String mCvv = "";
     private Typeface creditCardTypeFace;
     private ImageButton mFlipBtn;
     private EditText cardNumber;
@@ -177,6 +179,8 @@ public class CreditCardView extends RelativeLayout {
                     Color.WHITE);
             mExpiryDateTextColor = a.getColor(R.styleable.CreditCardView_expiryDateTextColor,
                     Color.WHITE);
+            mCvvTextColor = a.getColor(R.styleable.CreditCardView_cvvTextColor,
+                    Color.WHITE);
             mValidTillTextColor = a.getColor(R.styleable.CreditCardView_validTillTextColor,
                     Color.WHITE);
             mType = a.getInt(R.styleable.CreditCardView_type, 0);
@@ -191,6 +195,7 @@ public class CreditCardView extends RelativeLayout {
             mHintTextColor = a.getColor(R.styleable.CreditCardView_hintTextColor, Color.WHITE);
             mIsFlippable = a.getBoolean(R.styleable.CreditCardView_isFlippable, mIsFlippable);
             mCvv = a.getString(R.styleable.CreditCardView_cvv);
+
         } finally {
             a.recycle();
         }
@@ -334,16 +339,30 @@ public class CreditCardView extends RelativeLayout {
         // Set the appropriate text color to the validTill TextView
         validTill.setTextColor(mValidTillTextColor);
 
-        if(mCvvEditable != mIsEditable){
+        // If CVV is not null, set it to the expiryDate TextView
+        if (mCvv != null) {
+            cvv.setText(mCvv);
+        }
 
-            if(mCvvEditable){
+        // Set the user entered card number color to card number field
+        cvv.setTextColor(mCvvTextColor);
+
+        // Added this check to fix the issue of custom view not rendering correctly in the layout
+        // preview.
+        if (!isInEditMode()) {
+            cvv.setTypeface(creditCardTypeFace);
+        }
+
+        if(mIsCvvEditable != mIsEditable){
+
+            if(mIsCvvEditable){
                 cvv.setHint(R.string.cvv_hint);
                 cvv.setHintTextColor(mCvvHintColor);
             } else {
                 cvv.setHint("");
             }
 
-            cvv.setEnabled(mCvvEditable);
+            cvv.setEnabled(mIsCvvEditable);
 
         }
 
@@ -479,7 +498,9 @@ public class CreditCardView extends RelativeLayout {
         cardName.setVisibility(View.VISIBLE);
         type.setVisibility(View.VISIBLE);
         brandLogo.setVisibility(View.VISIBLE);
-        chip.setVisibility(View.VISIBLE);
+        if(mPutChip) {
+            chip.setVisibility(View.VISIBLE);
+        }
         validTill.setVisibility(View.VISIBLE);
         expiryDate.setVisibility(View.VISIBLE);
     }
@@ -695,12 +716,12 @@ public class CreditCardView extends RelativeLayout {
     }
 
     public void setIsCvvEditable(boolean editable){
-        mCvvEditable =editable;
+        mIsCvvEditable =editable;
         redrawViews();
     }
 
     public boolean getIsCvvEditable(){
-        return mCvvEditable;
+        return mIsCvvEditable;
     }
 
     /**
