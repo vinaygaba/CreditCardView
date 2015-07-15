@@ -40,6 +40,7 @@
             android:layout_height="225dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/cardbackground_sky"
+            app:cardBackBackground="@drawable/cardbackground_plain"
             app:brandLogo="@mipmap/citibank"
             app:cardName="Vinay Gaba"
             app:cardNameTextColor="#ffffff"
@@ -49,7 +50,8 @@
             app:expiryDate="01/15"
             app:putChip="false"
             app:type="mastercard"
-            app:validTillTextColor="#ffffff" />
+            app:validTillTextColor="#ffffff"
+            app:isEditable="true"/>
 
         <com.vinaygaba.creditcardview.CreditCardView
             android:id="@+id/card3"
