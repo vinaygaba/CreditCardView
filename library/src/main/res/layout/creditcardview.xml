@@ -146,7 +146,12 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@id/signature"
         android:layout_alignTop="@id/signature"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:background="@color/card_text_background"
+        android:inputType="number"
+        android:maxLength="@integer/cvv_max_length"
+        android:singleLine="true"
+        android:textSize="@dimen/cvv_text_size"/>
 
     <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
 

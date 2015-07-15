@@ -22,6 +22,7 @@ import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -88,7 +89,7 @@ public class CreditCardView extends RelativeLayout {
     private int mCardNumberFormat = ALL_DIGITS;
     private int mCardNameTextColor = Color.WHITE;
     private int mExpiryDateTextColor = Color.WHITE;
-    private int mCvvTextColor = Color.WHITE;
+    private int mCvvTextColor = Color.BLACK;
     private int mValidTillTextColor = Color.WHITE;
     private int mType = VISA;
     private int mBrandLogo;
@@ -101,6 +102,7 @@ public class CreditCardView extends RelativeLayout {
     private boolean mIsCvvEditable = false;
     private int mHintTextColor = Color.WHITE;
     private int mCvvHintColor = Color.WHITE;
+    private int mCardBackBackground;
     private boolean mIsFlippable = true;
     private Typeface creditCardTypeFace;
     private ImageButton mFlipBtn;
@@ -180,7 +182,7 @@ public class CreditCardView extends RelativeLayout {
             mExpiryDateTextColor = a.getColor(R.styleable.CreditCardView_expiryDateTextColor,
                     Color.WHITE);
             mCvvTextColor = a.getColor(R.styleable.CreditCardView_cvvTextColor,
-                    Color.WHITE);
+                    Color.BLACK);
             mValidTillTextColor = a.getColor(R.styleable.CreditCardView_validTillTextColor,
                     Color.WHITE);
             mType = a.getInt(R.styleable.CreditCardView_type, 0);
@@ -192,9 +194,11 @@ public class CreditCardView extends RelativeLayout {
             mIsCardNameEditable = a.getBoolean(R.styleable.CreditCardView_isCardNameEditable, mIsEditable);
             mIsCardNumberEditable = a.getBoolean(R.styleable.CreditCardView_isCardNumberEditable, mIsEditable);
             mIsExpiryDateEditable = a.getBoolean(R.styleable.CreditCardView_isExpiryDateEditable, mIsEditable);
+            mIsCvvEditable = a.getBoolean(R.styleable.CreditCardView_isCvvEditable, mIsEditable);
             mHintTextColor = a.getColor(R.styleable.CreditCardView_hintTextColor, Color.WHITE);
             mIsFlippable = a.getBoolean(R.styleable.CreditCardView_isFlippable, mIsFlippable);
             mCvv = a.getString(R.styleable.CreditCardView_cvv);
+            mCardBackBackground = a.getResourceId(R.styleable.CreditCardView_cardBackBackground, R.drawable.cardbackground_canvas);
 
         } finally {
             a.recycle();
@@ -227,6 +231,7 @@ public class CreditCardView extends RelativeLayout {
             expiryDate.setHintTextColor(mHintTextColor);
 
             cvv.setHint(R.string.cvv_hint);
+            cvv.setHintTextColor(mCvvTextColor);
         }
 
         //For more granular control of the editable fields. Issue #7
@@ -724,6 +729,17 @@ public class CreditCardView extends RelativeLayout {
         return mIsCvvEditable;
     }
 
+    @DrawableRes
+    public int getCardBackBackground() {
+        return mCardBackBackground;
+    }
+
+    public void setCardBackBackground(@DrawableRes int cardBackBackground) {
+            mCardBackBackground = cardBackBackground;
+            setBackgroundResource(mCardBackBackground);
+        redrawViews();
+    }
+
     /**
      * Return the appropriate drawable resource based on the card type
      *
@@ -901,7 +917,7 @@ public class CreditCardView extends RelativeLayout {
         hideFrontView();
         showBackView();
         CreditCardView.this.setRotationY(-90);
-        setBackgroundResource(R.drawable.cardbackground_canvas);
+        setBackgroundResource(mCardBackBackground);
         AnimatorSet set = new AnimatorSet();
         final ObjectAnimator flipView = ObjectAnimator.ofInt(CreditCardView.this, "rotationY", 90, -90);
         final ObjectAnimator rotateOut = ObjectAnimator.ofFloat(CreditCardView.this, "rotationY", -90, 0);
@@ -1042,7 +1058,7 @@ public class CreditCardView extends RelativeLayout {
     private void rotateOutToBackBeforeEleven(){
         hideFrontView();
         showBackView();
-        setBackgroundResource(R.drawable.cardbackground_canvas);
+        setBackgroundResource(mCardBackBackground);
         com.nineoldandroids.animation.AnimatorSet set = new com.nineoldandroids.animation.AnimatorSet();
         com.nineoldandroids.animation.ObjectAnimator flip = com.nineoldandroids.animation.ObjectAnimator.ofFloat(CreditCardView.this, "rotationY", 90, -90);
         com.nineoldandroids.animation.ObjectAnimator rotateOut = com.nineoldandroids.animation.ObjectAnimator.ofFloat(CreditCardView.this, "rotationY", -90, 0);

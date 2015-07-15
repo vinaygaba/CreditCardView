@@ -36,6 +36,7 @@
         <attr name="isCardNumberEditable" format="boolean" />
         <attr name="isCardNameEditable" format="boolean" />
         <attr name="isExpiryDateEditable" format="boolean" />
+        <attr name="isCvvEditable" format="boolean" />
 
         <attr name="validTillTextColor" format="color" />
         <attr name="hintTextColor" format="color" />
@@ -43,5 +44,6 @@
 
         <attr name="cvv" format="string"/>
         <attr name="cvvTextColor" format="color" />
+        <attr name="cardBackBackground" format="reference" />
     </declare-styleable>
 </resources>

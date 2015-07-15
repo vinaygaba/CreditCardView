@@ -4,5 +4,6 @@
     <integer name="card_number_max_length">20</integer>
     <integer name="card_name_max_length">18</integer>
     <integer name="expiry_date_max_length">7</integer>
+    <integer name="cvv_max_length">3</integer>
 
 </resources>
