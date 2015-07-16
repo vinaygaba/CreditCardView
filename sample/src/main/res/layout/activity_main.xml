@@ -32,7 +32,8 @@
             app:isCardNumberEditable="true"
             app:putChip="true"
             app:type="visa"
-            app:validTillTextColor="#cccccc" />
+            app:validTillTextColor="#cccccc"
+            app:isFlippable="true"/>
 
         <com.vinaygaba.creditcardview.CreditCardView
             android:id="@+id/card2"

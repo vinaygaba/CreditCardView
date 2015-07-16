@@ -102,8 +102,9 @@ public class CreditCardView extends RelativeLayout {
     private boolean mIsCvvEditable = false;
     private int mHintTextColor = Color.WHITE;
     private int mCvvHintColor = Color.WHITE;
+    private int mCardFrontBackground;
     private int mCardBackBackground;
-    private boolean mIsFlippable = true;
+    private boolean mIsFlippable = false;
     private Typeface creditCardTypeFace;
     private ImageButton mFlipBtn;
     private EditText cardNumber;
@@ -209,8 +210,11 @@ public class CreditCardView extends RelativeLayout {
 
         // Set default background if background attribute was not entered in the xml
         if (getBackground() == null) {
-            setBackgroundResource(R.drawable.cardbackground_sky);
+            mCardFrontBackground = R.drawable.cardbackground_sky;
+            setBackgroundResource(mCardFrontBackground);
         }
+
+
 
         if (!mIsEditable) {
             // If card is not set to be editable, disable the edit texts
@@ -371,6 +375,9 @@ public class CreditCardView extends RelativeLayout {
 
         }
 
+        if(mIsFlippable){
+            mFlipBtn.setVisibility(View.VISIBLE);
+        }
         mFlipBtn.setEnabled(mIsFlippable);
 
     }
