@@ -106,7 +106,8 @@
         android:layout_marginTop="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/ic_flip"/>
+        android:src="@drawable/ic_flip"
+        android:visibility="gone"/>
 
     <View
         android:id="@+id/stripe"
