@@ -401,14 +401,14 @@ public class CreditCardView extends RelativeLayout {
                 if (!hasFocus) {
                     //Fix for NPE. Issue #6
                     if (mCardNumber != null && mCardNumber.length() > 12) {
-                        // If the length of card is >12, add space every 4 characters and format it
-                        // in the appropriate format
-                        mCardNumberView.setText(getFormattedCardNumber(addSpaceToCardNumber()));
-
                         // If card type is "auto",find the appropriate logo
                         if (mType == AUTO) {
                             mCardTypeView.setBackgroundResource(getLogo());
                         }
+
+                        // If the length of card is >12, add space every 4 characters and format it
+                        // in the appropriate format
+                        mCardNumberView.setText(getFormattedCardNumber(addSpaceToCardNumber()));
                     }
                 }
             }
