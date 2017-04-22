@@ -1,7 +1,7 @@
 CreditCard View ![Build](https://travis-ci.org/vinaygaba/CreditCardView.svg?branch=master) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.vinaygaba/creditcardview/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.vinaygaba/creditcardview) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CreditCardView-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/2005)
 ==================
 
-![Feature Image](images/Feature Image.png)
+![Feature Image](images/Feature%20Image.png)
 
 CreditCardView is an Android library that allows developers to create the UI which replicates an actual Credit Card.
 
