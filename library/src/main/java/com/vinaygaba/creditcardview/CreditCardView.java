@@ -31,6 +31,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -73,6 +74,7 @@ public class CreditCardView extends RelativeLayout {
     private String mCardName = "";
     private String mExpiryDate = "";
     private String mCvv = "";
+    private String mFontPath;
     private int mCardNumberTextColor = Color.WHITE;
     private int mCardNumberFormat = ALL_DIGITS;
     private int mCardNameTextColor = Color.WHITE;
@@ -94,7 +96,7 @@ public class CreditCardView extends RelativeLayout {
     private int mCvvHintColor = Color.WHITE;
     private int mCardFrontBackground;
     private int mCardBackBackground;
-    private Typeface creditCardTypeFace;
+    private Typeface mCreditCardTypeFace;
     private ImageButton mFlipBtn;
     private EditText mCardNumberView;
     private EditText mCardNameView;
@@ -132,15 +134,6 @@ public class CreditCardView extends RelativeLayout {
     private void init() {
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         inflater.inflate(R.layout.creditcardview, this, true);
-
-        // Added this check to fix the issue of custom view not rendering correctly in the layout
-        // preview.
-        if (!isInEditMode()) {
-            // Font path
-            final String fontPath = mContext.getString(R.string.font_path);
-            // Loading Font Face
-            creditCardTypeFace = Typeface.createFromAsset(mContext.getAssets(), fontPath);
-        }
 
         mCardNumberView = (EditText) findViewById(R.id.card_number);
         mCardNameView = (EditText) findViewById(R.id.card_name);
@@ -191,6 +184,7 @@ public class CreditCardView extends RelativeLayout {
             mIsFlippable = a.getBoolean(R.styleable.CreditCardView_isFlippable, mIsFlippable);
             mCvv = a.getString(R.styleable.CreditCardView_cvv);
             mCardBackBackground = a.getResourceId(R.styleable.CreditCardView_cardBackBackground, R.drawable.cardbackground_canvas);
+            mFontPath = a.getString(R.styleable.CreditCardView_fontPath);
 
         } finally {
             a.recycle();
@@ -203,6 +197,18 @@ public class CreditCardView extends RelativeLayout {
         if (getBackground() == null) {
             mCardFrontBackground = R.drawable.cardbackground_sky;
             setBackgroundResource(mCardFrontBackground);
+        }
+
+        if (TextUtils.isEmpty(mFontPath)) {
+            // Default Font path
+            mFontPath = mContext.getString(R.string.font_path);
+        }
+
+        // Added this check to fix the issue of custom view not rendering correctly in the layout
+        // preview.
+        if (!isInEditMode()) {
+            // Loading Font Face
+            mCreditCardTypeFace = Typeface.createFromAsset(mContext.getAssets(), mFontPath);
         }
 
         if (!mIsEditable) {
@@ -280,7 +286,7 @@ public class CreditCardView extends RelativeLayout {
         // Added this check to fix the issue of custom view not rendering correctly in the layout
         // preview.
         if (!isInEditMode()) {
-            mCardNumberView.setTypeface(creditCardTypeFace);
+            mCardNumberView.setTypeface(mCreditCardTypeFace);
         }
 
         // If card name is not null, convert the text to upper case
@@ -300,7 +306,7 @@ public class CreditCardView extends RelativeLayout {
         // Added this check to fix the issue of custom view not rendering correctly in the layout
         // preview.
         if (!isInEditMode()) {
-            mCardNameView.setTypeface(creditCardTypeFace);
+            mCardNameView.setTypeface(mCreditCardTypeFace);
         }
 
         // Set the appropriate logo based on the type of card
@@ -328,7 +334,7 @@ public class CreditCardView extends RelativeLayout {
         // Added this check to fix the issue of custom view not rendering correctly in the layout
         // preview.
         if (!isInEditMode()) {
-            mExpiryDateView.setTypeface(creditCardTypeFace);
+            mExpiryDateView.setTypeface(mCreditCardTypeFace);
         }
 
         // Set the appropriate text color to the validTill TextView
@@ -345,7 +351,7 @@ public class CreditCardView extends RelativeLayout {
         // Added this check to fix the issue of custom view not rendering correctly in the layout
         // preview.
         if (!isInEditMode()) {
-            mCvvView.setTypeface(creditCardTypeFace);
+            mCvvView.setTypeface(mCreditCardTypeFace);
         }
 
         if (mIsCvvEditable != mIsEditable) {
@@ -729,6 +735,23 @@ public class CreditCardView extends RelativeLayout {
     public void setCardBackBackground(@DrawableRes int cardBackBackground) {
         this.mCardBackBackground = cardBackBackground;
         setBackgroundResource(mCardBackBackground);
+        redrawViews();
+    }
+
+    public String getFontPath() {
+        return mFontPath;
+    }
+
+    public void setFontPath(String mFontPath) {
+        this.mFontPath = mFontPath;
+        if (!isInEditMode()) {
+            // Loading Font Face
+            mCreditCardTypeFace = Typeface.createFromAsset(mContext.getAssets(), mFontPath);
+            mCardNumberView.setTypeface(mCreditCardTypeFace);
+            mCardNameView.setTypeface(mCreditCardTypeFace);
+            mExpiryDateView.setTypeface(mCreditCardTypeFace);
+            mCvvView.setTypeface(mCreditCardTypeFace);
+        }
         redrawViews();
     }
 
