@@ -94,8 +94,8 @@ public class CreditCardView extends RelativeLayout {
     private boolean mIsFlippable;
     private int mHintTextColor = Color.WHITE;
     private int mCvvHintColor = Color.WHITE;
-    private int mCardFrontBackground;
-    private int mCardBackBackground;
+    @DrawableRes private int mCardFrontBackground;
+    @DrawableRes private int mCardBackBackground;
     private Typeface mCreditCardTypeFace;
     private ImageButton mFlipBtn;
     private EditText mCardNumberView;
@@ -176,14 +176,20 @@ public class CreditCardView extends RelativeLayout {
             mPutChip = a.getBoolean(R.styleable.CreditCardView_putChip, false);
             mIsEditable = a.getBoolean(R.styleable.CreditCardView_isEditable, false);
             //For more granular control to the fields. Issue #7
-            mIsCardNameEditable = a.getBoolean(R.styleable.CreditCardView_isCardNameEditable, mIsEditable);
-            mIsCardNumberEditable = a.getBoolean(R.styleable.CreditCardView_isCardNumberEditable, mIsEditable);
-            mIsExpiryDateEditable = a.getBoolean(R.styleable.CreditCardView_isExpiryDateEditable, mIsEditable);
+            mIsCardNameEditable = a.getBoolean(R.styleable.CreditCardView_isCardNameEditable,
+                    mIsEditable);
+            mIsCardNumberEditable = a.getBoolean(R.styleable.CreditCardView_isCardNumberEditable,
+                    mIsEditable);
+            mIsExpiryDateEditable = a.getBoolean(R.styleable.CreditCardView_isExpiryDateEditable,
+                    mIsEditable);
             mIsCvvEditable = a.getBoolean(R.styleable.CreditCardView_isCvvEditable, mIsEditable);
             mHintTextColor = a.getColor(R.styleable.CreditCardView_hintTextColor, Color.WHITE);
             mIsFlippable = a.getBoolean(R.styleable.CreditCardView_isFlippable, mIsFlippable);
             mCvv = a.getString(R.styleable.CreditCardView_cvv);
-            mCardBackBackground = a.getResourceId(R.styleable.CreditCardView_cardBackBackground, R.drawable.cardbackground_canvas);
+            mCardFrontBackground = a.getResourceId(R.styleable.CreditCardView_cardFrontBackground,
+                    R.drawable.cardbackground_sky);
+            mCardBackBackground = a.getResourceId(R.styleable.CreditCardView_cardBackBackground,
+                    R.drawable.cardbackground_canvas);
             mFontPath = a.getString(R.styleable.CreditCardView_fontPath);
 
         } finally {
@@ -193,11 +199,7 @@ public class CreditCardView extends RelativeLayout {
 
     private void initDefaults() {
 
-        // Set default background if background attribute was not entered in the xml
-        if (getBackground() == null) {
-            mCardFrontBackground = R.drawable.cardbackground_sky;
-            setBackgroundResource(mCardFrontBackground);
-        }
+        setBackgroundResource(mCardFrontBackground);
 
         if (TextUtils.isEmpty(mFontPath)) {
             // Default Font path
@@ -738,6 +740,16 @@ public class CreditCardView extends RelativeLayout {
         redrawViews();
     }
 
+    public int getCardFrontBackground() {
+        return mCardFrontBackground;
+    }
+
+    public void setCardFrontBackground(@DrawableRes int mCardFrontBackground) {
+        this.mCardFrontBackground = mCardFrontBackground;
+        setBackgroundResource(mCardFrontBackground);
+        redrawViews();
+    }
+
     public String getFontPath() {
         return mFontPath;
     }
@@ -970,7 +982,7 @@ public class CreditCardView extends RelativeLayout {
         showFrontView();
         hideBackView();
         CreditCardView.this.setRotationY(-90);
-        setBackgroundResource(R.drawable.cardbackground_sky);
+        setBackgroundResource(mCardFrontBackground);
         AnimatorSet set = new AnimatorSet();
         final ObjectAnimator flipView = ObjectAnimator.ofInt(CreditCardView.this, "rotationY", 90, -90);
         final ObjectAnimator rotateOut = ObjectAnimator.ofFloat(CreditCardView.this, "rotationY", -90, 0);
