@@ -70,10 +70,10 @@ public class CreditCardView extends RelativeLayout {
     private static final int CARD_BACK = 1;
     private static final boolean DEBUG = false;
     private final Context mContext;
-    private String mCardNumber = "";
-    private String mCardName = "";
-    private String mExpiryDate = "";
-    private String mCvv = "";
+    private String mCardNumber;
+    private String mCardName;
+    private String mExpiryDate;
+    private String mCvv;
     private String mFontPath;
     private int mCardNumberTextColor = Color.WHITE;
     private int mCardNumberFormat = ALL_DIGITS;
@@ -278,7 +278,7 @@ public class CreditCardView extends RelativeLayout {
 
         // If card number is not null, add space every 4 characters and format it in the appropriate
         // format
-        if (mCardNumber != null) {
+        if (!TextUtils.isEmpty(mCardNumber)) {
             mCardNumberView.setText(getFormattedCardNumber(addSpaceToCardNumber()));
         }
 
@@ -292,7 +292,7 @@ public class CreditCardView extends RelativeLayout {
         }
 
         // If card name is not null, convert the text to upper case
-        if (mCardName != null) {
+        if (!TextUtils.isEmpty(mCardName)) {
             mCardNameView.setText(mCardName.toUpperCase());
         }
 
@@ -326,7 +326,7 @@ public class CreditCardView extends RelativeLayout {
         }
 
         // If expiry date is not null, set it to the expiryDate TextView
-        if (mExpiryDate != null) {
+        if (!TextUtils.isEmpty(mExpiryDate)) {
             mExpiryDateView.setText(mExpiryDate);
         }
 
@@ -343,7 +343,7 @@ public class CreditCardView extends RelativeLayout {
         mValidTill.setTextColor(mValidTillTextColor);
 
         // If CVV is not null, set it to the expiryDate TextView
-        if (mCvv != null) {
+        if (!TextUtils.isEmpty(mCvv)) {
             mCvvView.setText(mCvv);
         }
 
@@ -408,7 +408,7 @@ public class CreditCardView extends RelativeLayout {
                 // If the field just lost focus
                 if (!hasFocus) {
                     //Fix for NPE. Issue #6
-                    if (mCardNumber != null && mCardNumber.length() > 12) {
+                    if (!TextUtils.isEmpty(mCardNumber) && mCardNumber.length() > 12) {
                         // If card type is "auto",find the appropriate logo
                         if (mType == AUTO) {
                             mCardTypeView.setBackgroundResource(getLogo());
@@ -834,7 +834,7 @@ public class CreditCardView extends RelativeLayout {
     @DrawableRes
     private int findCardType() {
         this.mType = VISA;
-        if (mCardNumber.length() > 0) {
+        if (!TextUtils.isEmpty(mCardNumber)) {
             final String cardNumber = mCardNumber.replaceAll("\\s+", "");
 
             if (Pattern.compile(PATTERN_MASTER_CARD).matcher(cardNumber).matches()) {
@@ -845,7 +845,6 @@ public class CreditCardView extends RelativeLayout {
                 this.mType = DISCOVER;
             }
         }
-
         return getLogo();
     }
 
