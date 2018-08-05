@@ -213,6 +213,18 @@ public class CreditCardView extends RelativeLayout {
             mCreditCardTypeFace = Typeface.createFromAsset(mContext.getAssets(), mFontPath);
         }
 
+        if (TextUtils.isEmpty(mFontPath)) {
+            // Default Font path
+            mFontPath = mContext.getString(R.string.font_path);
+        }
+
+        // Added this check to fix the issue of custom view not rendering correctly in the layout
+        // preview.
+        if (!isInEditMode()) {
+            // Loading Font Face
+            mCreditCardTypeFace = Typeface.createFromAsset(mContext.getAssets(), mFontPath);
+        }
+
         if (!mIsEditable) {
             // If card is not set to be editable, disable the edit texts
             mCardNumberView.setEnabled(false);
