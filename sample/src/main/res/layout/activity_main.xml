@@ -60,6 +60,7 @@
             android:layout_height="225dp"
             android:layout_marginTop="16dp"
             app:brandLogo="@mipmap/standard_chartered"
+            app:cardName="John Doe"
             app:cardNameTextColor="#ffffff"
             app:cardNumber="6011111111111117"
             app:cardNumberFormat="masked_all_but_last_four"
