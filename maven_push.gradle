@@ -17,11 +17,15 @@ if (true) {
 }
 
 def getRepositoryUsername() {
-    return hasProperty('nexusUsername') ? nexusUsername : ""
+    project.logger.debug('******************** User Name *********************')
+    project.logger.debug(NEXUS_USERNAME)
+    return hasProperty('NEXUS_USERNAME') ? NEXUS_USERNAME : ""
 }
 
 def getRepositoryPassword() {
-    return hasProperty('nexusPassword') ? nexusPassword : ""
+    project.logger.debug('******************** PassWord *********************')
+    project.logger.debug(NEXUS_PASSWORD)
+    return hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : ""
 }
 
 afterEvaluate { project ->
