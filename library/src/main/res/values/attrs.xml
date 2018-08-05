@@ -45,6 +45,7 @@
         <attr name="cvv" format="string"/>
         <attr name="cvvTextColor" format="color" />
         <attr name="cardBackBackground" format="reference" />
+        <attr name="cardFrontBackground" format="reference" />
         <attr name="fontPath" format="string" />
     </declare-styleable>
 </resources>
