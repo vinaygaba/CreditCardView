@@ -28,7 +28,7 @@ Setup
 The library is pushed to Maven Central as an AAR, so you just need to add the following to your build.gradle file:
 ```java
 dependencies {
-    compile ‘com.vinaygaba:creditcardview:1.0.3’
+    compile ‘com.vinaygaba:creditcardview:1.0.4’
 }
 ```
 
