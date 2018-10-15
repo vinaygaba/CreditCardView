@@ -25,10 +25,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.IntDef;
-import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -49,6 +45,11 @@ import com.vinaygaba.creditcardview.util.AndroidUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.regex.Pattern;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IntDef;
+import androidx.annotation.Nullable;
 
 import static com.vinaygaba.creditcardview.CardNumberFormat.ALL_DIGITS;
 import static com.vinaygaba.creditcardview.CardNumberFormat.MASKED_ALL;
@@ -135,15 +136,15 @@ public class CreditCardView extends RelativeLayout {
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         inflater.inflate(R.layout.creditcardview, this, true);
 
-        mCardNumberView = (EditText) findViewById(R.id.card_number);
-        mCardNameView = (EditText) findViewById(R.id.card_name);
-        mCardTypeView = (ImageView) findViewById(R.id.card_logo);
-        mBrandLogoView = (ImageView) findViewById(R.id.brand_logo);
-        mChipView = (ImageView) findViewById(R.id.chip);
-        mValidTill = (TextView) findViewById(R.id.valid_till);
-        mExpiryDateView = (EditText) findViewById(R.id.expiry_date);
-        mFlipBtn = (ImageButton) findViewById(R.id.flip_btn);
-        mCvvView = (EditText) findViewById(R.id.cvv_et);
+        mCardNumberView = findViewById(R.id.card_number);
+        mCardNameView = findViewById(R.id.card_name);
+        mCardTypeView = findViewById(R.id.card_logo);
+        mBrandLogoView = findViewById(R.id.brand_logo);
+        mChipView = findViewById(R.id.chip);
+        mValidTill = findViewById(R.id.valid_till);
+        mExpiryDateView = findViewById(R.id.expiry_date);
+        mFlipBtn = findViewById(R.id.flip_btn);
+        mCvvView = findViewById(R.id.cvv_et);
         mStripe = findViewById(R.id.stripe);
         mAuthorizedSig = findViewById(R.id.authorized_sig_tv);
         mSignature = findViewById(R.id.signature);
