@@ -354,7 +354,7 @@ public class CreditCardView extends RelativeLayout {
         // Set the appropriate text color to the validTill TextView
         mValidTill.setTextColor(mValidTillTextColor);
 
-        // If CVV is not null, set it to the expiryDate TextView
+        // If CVV is not null, set it to the cvv EditText
         if (!TextUtils.isEmpty(mCvv)) {
             mCvvView.setText(mCvv);
         }
