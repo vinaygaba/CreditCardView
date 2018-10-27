@@ -559,6 +559,18 @@ public class CreditCardView extends RelativeLayout {
         redrawViews();
     }
 
+    public String getCvv() {
+        return mCvv;
+    }
+
+    public void setCvv(String mCvv) {
+        // If CVV is not null and it is editable, set it to the cvv EditText
+        if (!TextUtils.isEmpty(mCvv) && mIsCvvEditable) {
+            this.mCvv = mCvv;
+            mCvvView.setText(mCvv);
+        }
+    }
+
     public String getCardName() {
         return mCardName;
     }
