@@ -56,11 +56,19 @@ import static com.vinaygaba.creditcardview.CardNumberFormat.MASKED_ALL_BUT_LAST_
 import static com.vinaygaba.creditcardview.CardNumberFormat.ONLY_LAST_FOUR;
 import static com.vinaygaba.creditcardview.CardType.AMERICAN_EXPRESS;
 import static com.vinaygaba.creditcardview.CardType.AUTO;
+import static com.vinaygaba.creditcardview.CardType.DINNERSCLUB;
 import static com.vinaygaba.creditcardview.CardType.DISCOVER;
+import static com.vinaygaba.creditcardview.CardType.JCB;
+import static com.vinaygaba.creditcardview.CardType.MAESTRO;
 import static com.vinaygaba.creditcardview.CardType.MASTERCARD;
 import static com.vinaygaba.creditcardview.CardType.PATTERN_AMERICAN_EXPRESS;
+import static com.vinaygaba.creditcardview.CardType.PATTERN_DINNERS_CLUB;
 import static com.vinaygaba.creditcardview.CardType.PATTERN_DISCOVER;
+import static com.vinaygaba.creditcardview.CardType.PATTERN_JCB;
+import static com.vinaygaba.creditcardview.CardType.PATTERN_MAESTRO;
 import static com.vinaygaba.creditcardview.CardType.PATTERN_MASTER_CARD;
+import static com.vinaygaba.creditcardview.CardType.PATTERN_UNIONPAY;
+import static com.vinaygaba.creditcardview.CardType.UNIONPAY;
 import static com.vinaygaba.creditcardview.CardType.VISA;
 
 @SuppressLint("DefaultLocale")
@@ -559,6 +567,18 @@ public class CreditCardView extends RelativeLayout {
         redrawViews();
     }
 
+    public String getCvv() {
+        return mCvv;
+    }
+
+    public void setCvv(String mCvv) {
+        // If CVV is not null and it is editable, set it to the cvv EditText
+        if (!TextUtils.isEmpty(mCvv)) {
+            this.mCvv = mCvv;
+            mCvvView.setText(mCvv);
+        }
+    }
+
     public String getCardName() {
         return mCardName;
     }
@@ -782,6 +802,7 @@ public class CreditCardView extends RelativeLayout {
     /**
      * Return the appropriate drawable resource based on the card type
      */
+    @SuppressLint("SwitchIntDef")
     @DrawableRes
     private int getLogo() {
 
@@ -797,6 +818,18 @@ public class CreditCardView extends RelativeLayout {
 
             case DISCOVER:
                 return R.drawable.discover;
+
+            case DINNERSCLUB:
+                return R.drawable.dinnersclub;
+
+            case JCB:
+                return R.drawable.jcb;
+
+            case MAESTRO:
+                return R.drawable.maestro;
+
+            case UNIONPAY:
+                return R.drawable.unionpay;
 
             case AUTO:
                 return findCardType();
@@ -855,6 +888,14 @@ public class CreditCardView extends RelativeLayout {
                 this.mType = AMERICAN_EXPRESS;
             } else if (Pattern.compile(PATTERN_DISCOVER).matcher(cardNumber).matches()) {
                 this.mType = DISCOVER;
+            } else if (Pattern.compile(PATTERN_JCB).matcher(cardNumber).matches()){
+                this.mType = JCB;
+            } else if (Pattern.compile(PATTERN_MAESTRO).matcher(cardNumber).matches()){
+                this.mType = MAESTRO;
+            } else if (Pattern.compile(PATTERN_UNIONPAY).matcher(cardNumber).matches()){
+                this.mType = UNIONPAY;
+            } else if (Pattern.compile(PATTERN_DINNERS_CLUB).matcher(cardNumber).matches()){
+                this.mType = DINNERSCLUB;
             }
         }
         return getLogo();
@@ -955,7 +996,7 @@ public class CreditCardView extends RelativeLayout {
         CreditCardView.this.setRotationY(-90);
         setBackgroundResource(mCardBackBackground);
         AnimatorSet set = new AnimatorSet();
-        final ObjectAnimator flipView = ObjectAnimator.ofInt(CreditCardView.this, "rotationY", 90, -90);
+        @SuppressLint("ObjectAnimatorBinding") final ObjectAnimator flipView = ObjectAnimator.ofInt(CreditCardView.this, "rotationY", 90, -90);
         final ObjectAnimator rotateOut = ObjectAnimator.ofFloat(CreditCardView.this, "rotationY", -90, 0);
         final ObjectAnimator showBackView = ObjectAnimator.ofFloat(CreditCardView.this, "alpha", 0, 1);
         flipView.setDuration(0);
@@ -995,7 +1036,7 @@ public class CreditCardView extends RelativeLayout {
         CreditCardView.this.setRotationY(-90);
         setBackgroundResource(mCardFrontBackground);
         AnimatorSet set = new AnimatorSet();
-        final ObjectAnimator flipView = ObjectAnimator.ofInt(CreditCardView.this, "rotationY", 90, -90);
+        @SuppressLint("ObjectAnimatorBinding") final ObjectAnimator flipView = ObjectAnimator.ofInt(CreditCardView.this, "rotationY", 90, -90);
         final ObjectAnimator rotateOut = ObjectAnimator.ofFloat(CreditCardView.this, "rotationY", -90, 0);
         final ObjectAnimator showFrontView = ObjectAnimator.ofFloat(CreditCardView.this, "alpha", 0, 1);
         showFrontView.setDuration(1);
